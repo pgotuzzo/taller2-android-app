@@ -1,0 +1,12 @@
+# Android Studio - Jet Brains
+/.idea
+*.iml
+
+# Build
+/build
+
+# Gradle
+.gradle
+
+# Local Configuration
+local.properties
