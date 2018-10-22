@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- ========================================================= -->
+    <!--                         Auth                              -->
+    <!-- ========================================================= -->
+    <!--                       Register                            -->
+    <dimen name="auth_register_option_width">100dp</dimen>
+    <dimen name="auth_register_option_margin_top">20dp</dimen>
+    <dimen name="auth_register_option_label">15sp</dimen>
+    <dimen name="auth_register_form_separator_font">15sp</dimen>
+    <dimen name="auth_register_form_input_width_percentage">0.75</dimen>
+
+</resources>

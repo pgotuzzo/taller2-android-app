@@ -18,8 +18,6 @@ class SplashActivity : BaseActivity(), SplashContract.View {
     lateinit var mPresenter: SplashContract.Presenter
 
     private val mComponent by lazy { app.component.plus(SplashModule()) }
-    private val mRootLayoutListener: View.OnLayoutChangeListener =
-            View.OnLayoutChangeListener { _, _, _, _, _, _, _, _, _ -> onRootLayoutChange() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         Timber.d("Created")
@@ -28,7 +26,14 @@ class SplashActivity : BaseActivity(), SplashContract.View {
         mComponent.inject(this)
         mPresenter.attachView(this)
         // Notify when layout is laid out
-        root.addOnLayoutChangeListener(mRootLayoutListener)
+        root.addOnLayoutChangeListener(object : View.OnLayoutChangeListener {
+            override fun onLayoutChange(v: View?, left: Int, top: Int, right: Int, bottom: Int, oldLeft: Int, oldTop: Int, oldRight: Int, oldBottom: Int) {
+                if (root.width > 0 && root.height > 0) {
+                    root.removeOnLayoutChangeListener(this)
+                    mPresenter.onLayoutInit()
+                }
+            }
+        })
     }
 
     override fun onDestroy() {
@@ -57,13 +62,6 @@ class SplashActivity : BaseActivity(), SplashContract.View {
 
     override fun goDashboard() {
         Toast.makeText(this, "Not implemented yet!", Toast.LENGTH_SHORT).show()
-    }
-
-    private fun onRootLayoutChange() {
-        if (root.width > 0 && root.height > 0) {
-            root.removeOnLayoutChangeListener(mRootLayoutListener)
-            mPresenter.onLayoutInit()
-        }
     }
 
 }

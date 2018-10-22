@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:animateLayoutChanges="true"
+    android:background="#FFFFFF">
+
+    <TextView
+        android:id="@+id/title1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="@string/auth_register_title1"
+        android:textColor="@color/colorPrimary"
+        android:textSize="28sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/title2"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="packed" />
+
+    <TextView
+        android:id="@+id/title2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="@string/auth_register_title2"
+        android:textColor="@color/colorPrimary"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/mailBtn"
+        app:layout_constraintTop_toBottomOf="@+id/title1" />
+
+    <ImageView
+        android:id="@+id/mailBtn"
+        android:layout_width="@dimen/auth_register_option_width"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/auth_register_option_margin_top"
+        android:adjustViewBounds="true"
+        android:src="@drawable/ic_mail"
+        app:layout_constraintBottom_toTopOf="@+id/mailLabel"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/facebookBtn"
+        app:layout_constraintTop_toBottomOf="@+id/title2" />
+
+    <TextView
+        android:id="@+id/mailLabel"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="@string/auth_register_mail"
+        android:textColor="#000000"
+        android:textSize="@dimen/auth_register_option_label"
+        app:layout_constraintBottom_toTopOf="@+id/mailFormScroll"
+        app:layout_constraintLeft_toLeftOf="@+id/mailBtn"
+        app:layout_constraintRight_toRightOf="@+id/mailBtn"
+        app:layout_constraintTop_toBottomOf="@+id/mailBtn" />
+
+    <ImageView
+        android:id="@+id/facebookBtn"
+        android:layout_width="@dimen/auth_register_option_width"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        android:src="@drawable/ic_facebook"
+        app:layout_constraintLeft_toRightOf="@+id/mailBtn"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/mailBtn" />
+
+    <TextView
+        android:id="@+id/facebookLabel"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="@string/auth_register_facebook"
+        android:textColor="#000000"
+        android:textSize="@dimen/auth_register_option_label"
+        app:layout_constraintLeft_toLeftOf="@+id/facebookBtn"
+        app:layout_constraintRight_toRightOf="@+id/facebookBtn"
+        app:layout_constraintTop_toBottomOf="@+id/facebookBtn" />
+
+    <!-- ===================================================== -->
+    <!--                    Mail Form                          -->
+    <!-- ===================================================== -->
+    <ScrollView
+        android:id="@+id/mailFormScroll"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="20dp"
+        android:animateLayoutChanges="true"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/facebookLabel">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <comprameli.tallerii.fi.uba.ar.comprameli.presentation.auth.register.FormView
+                android:id="@+id/mailForm"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/createBtn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@color/colorPrimary"
+                android:gravity="center"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                android:text="@string/auth_register_create"
+                android:textColor="#FFFFFF"
+                android:textSize="20sp" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</android.support.constraint.ConstraintLayout>

@@ -13,11 +13,10 @@
 
     <ImageView
         android:id="@+id/logo"
-        android:layout_width="100dp"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
-        android:layout_marginTop="20dp"
         android:layout_marginRight="20dp"
         android:adjustViewBounds="true"
         android:src="@drawable/app_logo" />

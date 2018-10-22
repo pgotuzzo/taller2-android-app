@@ -1,3 +1,26 @@
 <resources>
     <string name="app_name">Compra Meli</string>
+    <!-- ========================================== -->
+    <!--                  Auth                      -->
+    <!-- ========================================== -->
+    <!--                  Register                  -->
+    <string name="auth_register_title1">Registrate</string>
+    <string name="auth_register_title2">usando la opcion que mas te guste</string>
+    <string name="auth_register_mail">Correo</string>
+    <string name="auth_register_facebook">Facebook</string>
+    <string name="auth_register_create">CREAR</string>
+    <string name="auth_register_form_account">Cuenta</string>
+    <string name="auth_register_form_user">Usuario</string>
+    <string name="auth_register_form_pass">Contraseña</string>
+    <string name="auth_register_form_confirm_pass">Contraseña</string>
+    <string name="auth_register_form_personal_data">Datos del usuario</string>
+    <string name="auth_register_form_name">Nombre</string>
+    <string name="auth_register_form_last_name">Apellido</string>
+    <!--                 Sign in                    -->
+    <string name="auth_sign_in_title_1">Ya tenes una cuenta?</string>
+    <string name="auth_sign_in_title_2">Inicia Session</string>
+    <string name="auth_sign_in_user">Usuario</string>
+    <string name="auth_sign_in_pass">Contraseña</string>
+    <string name="auth_sign_in_create_account">CREAR UNA CUENTA</string>
+
 </resources>

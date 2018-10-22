@@ -10,3 +10,6 @@
 
 # Local Configuration
 local.properties
+
+# Fire Base
+google-services.json

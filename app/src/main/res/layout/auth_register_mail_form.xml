@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="2dp"
+    tools:parentTag="android.support.constraint.ConstraintLayout">
+
+    <!-- ================================================= -->
+    <!--                 Account Data                      -->
+    <!-- ================================================= -->
+    <TextView
+        android:id="@+id/accountLabel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/auth_register_form_account"
+        android:textColor="@color/colorPrimary"
+        android:textSize="@dimen/auth_register_form_separator_font"
+        app:layout_constraintBottom_toTopOf="@+id/userInput"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="packed" />
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/userInput"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/passInput"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/accountLabel"
+        app:layout_constraintVertical_chainStyle="packed"
+        app:layout_constraintWidth_percent="@dimen/auth_register_form_input_width_percentage">
+
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/userInputEdit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/auth_register_form_user" />
+
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/passInput"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/passConfirmInput"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/userInput"
+        app:layout_constraintWidth_percent="@dimen/auth_register_form_input_width_percentage">
+
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/passInputEdit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/auth_register_form_pass" />
+
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/passConfirmInput"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/userDataLabel"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/passInput"
+        app:layout_constraintWidth_percent="@dimen/auth_register_form_input_width_percentage">
+
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/passConfirmInputEdit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/auth_register_form_confirm_pass" />
+
+    </android.support.design.widget.TextInputLayout>
+
+    <!-- ================================================= -->
+    <!--                 User Data                         -->
+    <!-- ================================================= -->
+    <TextView
+        android:id="@+id/userDataLabel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="@string/auth_register_form_personal_data"
+        android:textColor="@color/colorPrimary"
+        android:textSize="@dimen/auth_register_form_separator_font"
+        app:layout_constraintBottom_toTopOf="@+id/nameInput"
+        app:layout_constraintTop_toBottomOf="@+id/passConfirmInput" />
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/nameInput"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@id/lastNameInput"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/userDataLabel"
+        app:layout_constraintWidth_percent="@dimen/auth_register_form_input_width_percentage">
+
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/nameInputEdit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/auth_register_form_name" />
+
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/lastNameInput"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/nameInput"
+        app:layout_constraintWidth_percent="@dimen/auth_register_form_input_width_percentage">
+
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/lastNameInputEdit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/auth_register_form_last_name" />
+
+    </android.support.design.widget.TextInputLayout>
+
+
+</merge>
