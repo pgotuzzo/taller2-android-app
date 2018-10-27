@@ -97,7 +97,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <comprameli.tallerii.fi.uba.ar.comprameli.presentation.auth.register.FormView
+            <ar.uba.fi.tallerii.comprameli.presentation.auth.register.FormView
                 android:id="@+id/mailForm"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />

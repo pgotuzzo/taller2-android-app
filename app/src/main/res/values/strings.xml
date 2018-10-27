@@ -1,6 +1,11 @@
 <resources>
     <string name="app_name">Compra Meli</string>
     <!-- ========================================== -->
+    <!--                 Splash                     -->
+    <!-- ========================================== -->
+    <string name="splash_error_session_check_title">Error!</string>
+    <string name="splash_error_session_check_message">Hubieron problemas para validar la session!\nVuelva a intentarlo mas tarde</string>
+    <!-- ========================================== -->
     <!--                  Auth                      -->
     <!-- ========================================== -->
     <!--                  Register                  -->

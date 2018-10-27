@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="comprameli.tallerii.fi.uba.ar.comprameli">
+    package="ar.uba.fi.tallerii.comprameli">
 
     <application
         android:name=".presentation.ComprameliApp"
@@ -22,6 +22,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".presentation.auth.AuthActivity" />
+        <activity android:name=".presentation.dashboard.DashboardActivity" />
 
     </application>
 
