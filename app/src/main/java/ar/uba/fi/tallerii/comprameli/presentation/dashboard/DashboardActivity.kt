@@ -6,6 +6,7 @@ import ar.uba.fi.tallerii.comprameli.R
 import ar.uba.fi.tallerii.comprameli.presentation.auth.AuthActivity
 import ar.uba.fi.tallerii.comprameli.presentation.base.BaseActivity
 import ar.uba.fi.tallerii.comprameli.presentation.dashboard.di.DashboardModule
+import ar.uba.fi.tallerii.comprameli.presentation.search.SearchActivity
 import kotlinx.android.synthetic.main.dashboad_activity.*
 import javax.inject.Inject
 
@@ -29,7 +30,8 @@ class DashboardActivity : BaseActivity(), DashboardContract.View {
             when (menuItem.itemId) {
                 R.id.home -> mPresenter.onNavigationHomeClick()
                 R.id.myAccount -> mPresenter.onNavigationAccountSettingsClick()
-                R.id.closeSession -> mPresenter.closeSession()
+                R.id.search -> mPresenter.onNavigationSearchClick()
+                R.id.closeSession -> mPresenter.onNavigationCloseSessionClick()
             }
 
             true
@@ -47,5 +49,8 @@ class DashboardActivity : BaseActivity(), DashboardContract.View {
         finish()
     }
 
+    override fun goSearch() {
+        startActivity(Intent(this, SearchActivity::class.java))
+    }
 
 }

@@ -25,7 +25,11 @@ class DashboardPresenter(private val mSessionService: SessionService) :
         getView()?.showMyAccount()
     }
 
-    override fun closeSession() {
+    override fun onNavigationSearchClick() {
+        getView()?.goSearch()
+    }
+
+    override fun onNavigationCloseSessionClick() {
         Timber.d("Cerrando session")
         val disposable = mSessionService
                 .logOut()

@@ -32,8 +32,10 @@
     <!-- ========================================== -->
     <!--                Dashboard                   -->
     <!-- ========================================== -->
+    <!--                Nav Menu                    -->
     <string name="dashboard_nav_home">Inicio</string>
     <string name="dashboard_nav_account">Cuenta</string>
+    <string name="dashboard_nav_search">Buscar productos</string>
     <string name="dashboard_nav_log_out">Cerrar Session</string>
 
 </resources>

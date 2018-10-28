@@ -7,11 +7,13 @@ interface DashboardContract {
         fun showHome()
         fun showMyAccount()
         fun goAuth()
+        fun goSearch()
     }
 
     interface Presenter : MvpPresenter<View> {
         fun onNavigationHomeClick()
         fun onNavigationAccountSettingsClick()
-        fun closeSession()
+        fun onNavigationSearchClick()
+        fun onNavigationCloseSessionClick()
     }
 }
