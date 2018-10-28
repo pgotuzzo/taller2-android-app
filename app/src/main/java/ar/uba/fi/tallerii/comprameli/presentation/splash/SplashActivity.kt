@@ -4,10 +4,10 @@ import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import ar.uba.fi.tallerii.comprameli.R
 import ar.uba.fi.tallerii.comprameli.presentation.auth.AuthActivity
 import ar.uba.fi.tallerii.comprameli.presentation.base.BaseActivity
+import ar.uba.fi.tallerii.comprameli.presentation.dashboard.DashboardActivity
 import ar.uba.fi.tallerii.comprameli.presentation.splash.SplashContract.Companion.Error
 import ar.uba.fi.tallerii.comprameli.presentation.splash.SplashContract.Companion.SESSION_CHECK
 import ar.uba.fi.tallerii.comprameli.presentation.splash.di.SplashModule
@@ -64,7 +64,8 @@ class SplashActivity : BaseActivity(), SplashContract.View {
     }
 
     override fun goDashboard() {
-        Toast.makeText(this, "Not implemented yet!", Toast.LENGTH_SHORT).show()
+        startActivity(Intent(this, DashboardActivity::class.java))
+        finish()
     }
 
     override fun showError(@Error error: Int) {

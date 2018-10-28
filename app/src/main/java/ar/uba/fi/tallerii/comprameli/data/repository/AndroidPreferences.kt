@@ -84,4 +84,15 @@ class AndroidPreferences(private val mContext: Context) : PreferencesMap {
                 null
             }
 
+    override fun clear(ownerId: String, key: String): Completable =
+            Completable.fromCallable {
+                val preferences = mContext.getSharedPreferences(ownerId, MODE_PRIVATE)
+                if (preferences.contains(key)) {
+                    preferences.edit().remove(key).apply()
+                    Completable.complete()
+                } else {
+                    throw NonexistentException()
+                }
+            }
+
 }

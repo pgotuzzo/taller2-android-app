@@ -1,12 +1,12 @@
 package ar.uba.fi.tallerii.comprameli.presentation.auth.signin
 
+import android.app.AlertDialog
 import android.content.Context
 import android.os.Bundle
 import android.text.Editable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import ar.uba.fi.tallerii.comprameli.R
 import ar.uba.fi.tallerii.comprameli.presentation.auth.AuthEventsHandler
 import ar.uba.fi.tallerii.comprameli.presentation.auth.signin.di.SignInModule
@@ -17,12 +17,6 @@ import timber.log.Timber
 import javax.inject.Inject
 
 class SignInFragment : BaseFragment(), SignInContract.View {
-
-    // FIXME - Remove - BEGIN
-    override fun showMessage(message: String) {
-        Toast.makeText(context, message, Toast.LENGTH_LONG).show()
-    }
-    // FIXME - Remove - END
 
     @Inject
     lateinit var mPresenter: SignInContract.Presenter
@@ -80,6 +74,18 @@ class SignInFragment : BaseFragment(), SignInContract.View {
 
     override fun showNextButton(show: Boolean) {
         nextBtn.visibility = if (show) View.VISIBLE else View.GONE
+    }
+
+    override fun showInvalidCredentialsAlert() {
+        AlertDialog.Builder(context)
+                .setTitle(R.string.auth_sign_in_error_title)
+                .setMessage(R.string.auth_sign_in_error_message)
+                .create()
+                .show()
+    }
+
+    override fun notifyUserSigned() {
+        mAuthEventsHandler?.onAuthComplete()
     }
 
 }

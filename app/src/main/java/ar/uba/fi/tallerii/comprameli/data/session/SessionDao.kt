@@ -18,4 +18,6 @@ interface SessionDao {
      */
     fun getSession(): Observable<Session>
 
+    fun clearSession(): Completable
+
 }

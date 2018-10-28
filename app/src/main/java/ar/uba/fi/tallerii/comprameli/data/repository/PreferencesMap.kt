@@ -35,4 +35,6 @@ interface PreferencesMap {
 
     fun getBoolean(@OwnerId ownerId: String, key: String): Observable<Boolean>
 
+    fun clear(@OwnerId ownerId: String, key: String): Completable
+
 }

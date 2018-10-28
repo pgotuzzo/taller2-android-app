@@ -33,18 +33,17 @@ class SignInPresenter(private val mSessionService: SessionService) :
     }
 
     override fun onNextButtonClick() {
-        val subscription =
+        val disposable =
                 mSessionService
                         .logIn(mUser!!, mPass!!)
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
-                        .doOnError {
-                            getView()?.showMessage("Fallo el sign in!")
-                        }
-                        .subscribe {
-                            getView()?.showMessage("Dashboard no implementado aun!")
-                        }
-        mCompositeDisposable.add(subscription)
+                        .subscribe(
+                                { getView()?.notifyUserSigned() },
+                                { getView()?.showInvalidCredentialsAlert() }
+                        )
+
+        mCompositeDisposable.add(disposable)
     }
 
 }

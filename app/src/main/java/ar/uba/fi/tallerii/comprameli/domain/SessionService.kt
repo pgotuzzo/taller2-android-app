@@ -14,12 +14,14 @@ interface SessionService {
     fun isSessionActive(): Observable<Boolean>
 
     /**
-     * Logs the user by the usage of the credentials passed through param.
+     * Tries to log the user by the usage of the credentials passed through param.
      * Session is created as part of the process
-     * @throws RuntimeException
-     * @throws ar.uba.fi.tallerii.comprameli.domain.exception.InvalidUserCredentialsException
-     * if user name and password are not valid
      */
     fun logIn(userName: String, password: String): Completable
+
+    /**
+     * Logs out the user. Session is deleted as part of the process
+     */
+    fun logOut(): Completable
 
 }

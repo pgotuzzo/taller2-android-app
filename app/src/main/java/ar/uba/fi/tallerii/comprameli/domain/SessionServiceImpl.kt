@@ -14,8 +14,12 @@ class SessionServiceImpl(private val mSessionDao: SessionDao) : SessionService {
 
     override fun logIn(userName: String, password: String): Completable =
             mSessionDao.getAuthToken(userName, password)
-                    .concatMapCompletable { token ->
+                    .flatMapCompletable { token ->
                         mSessionDao.storeSession(Session(authToken = token, userName = userName))
                     }
+
+    override fun logOut(): Completable {
+        return mSessionDao.clearSession()
+    }
 
 }

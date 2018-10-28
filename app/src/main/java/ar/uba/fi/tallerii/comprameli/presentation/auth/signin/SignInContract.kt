@@ -5,8 +5,8 @@ import ar.uba.fi.tallerii.comprameli.presentation.MvpPresenter
 interface SignInContract {
     interface View {
         fun showNextButton(show: Boolean)
-
-        fun showMessage(message: String)
+        fun notifyUserSigned()
+        fun showInvalidCredentialsAlert()
     }
 
     interface Presenter : MvpPresenter<View> {

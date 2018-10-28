@@ -1,11 +1,13 @@
 package ar.uba.fi.tallerii.comprameli.presentation.auth
 
+import android.content.Intent
 import android.os.Bundle
 import ar.uba.fi.tallerii.comprameli.R
 import ar.uba.fi.tallerii.comprameli.presentation.auth.di.AuthModule
 import ar.uba.fi.tallerii.comprameli.presentation.auth.register.RegisterFragment
 import ar.uba.fi.tallerii.comprameli.presentation.auth.signin.SignInFragment
 import ar.uba.fi.tallerii.comprameli.presentation.base.BaseActivity
+import ar.uba.fi.tallerii.comprameli.presentation.dashboard.DashboardActivity
 import kotlinx.android.synthetic.main.auth_activity.*
 import javax.inject.Inject
 
@@ -20,7 +22,7 @@ class AuthActivity : BaseActivity(), AuthContract.View, AuthEventsHandler {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.auth_activity)
         mComponent.inject(this)
-        mPresenter
+        mPresenter.attachView(this)
 
         if (savedInstanceState == null) {
             // Sign In
@@ -43,6 +45,11 @@ class AuthActivity : BaseActivity(), AuthContract.View, AuthEventsHandler {
                 .replace(root.id, RegisterFragment.getInstance())
                 .addToBackStack("From Sign in to Register")
                 .commit()
+    }
+
+    override fun onAuthComplete() {
+        startActivity(Intent(this, DashboardActivity::class.java))
+        finish()
     }
 
 }

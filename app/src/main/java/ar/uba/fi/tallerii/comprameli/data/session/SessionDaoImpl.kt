@@ -55,14 +55,20 @@ class SessionDaoImpl(private val mAppServerApi: AppServerRestApi,
                                     // Success
                                     task.result.user.getIdToken(true).addOnCompleteListener { idTokenResult ->
                                         it.onNext(idTokenResult.result.token!!)
-                                        it.onComplete()
                                     }
                                 } else {
                                     // Failure
                                     it.onError(InvalidUserCredentialsException())
                                 }
+                                it.onComplete()
                             }
                         }
             }
+
+    override fun clearSession(): Completable =
+            Completable.merge(listOf(
+                    mPreferencesMap.clear(SESSION, KEY_SESSION_AUTH_TOKEN),
+                    mPreferencesMap.clear(SESSION, KEY_SESSION_USER_NAME)
+            ))
 
 }

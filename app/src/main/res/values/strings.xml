@@ -27,5 +27,13 @@
     <string name="auth_sign_in_user">Usuario</string>
     <string name="auth_sign_in_pass">Contraseña</string>
     <string name="auth_sign_in_create_account">CREAR UNA CUENTA</string>
+    <string name="auth_sign_in_error_title">Escribiste bien?</string>
+    <string name="auth_sign_in_error_message">Chequea que el usuario y la contraseña sean correctos\nY volve a intentar</string>
+    <!-- ========================================== -->
+    <!--                Dashboard                   -->
+    <!-- ========================================== -->
+    <string name="dashboard_nav_home">Inicio</string>
+    <string name="dashboard_nav_account">Cuenta</string>
+    <string name="dashboard_nav_log_out">Cerrar Session</string>
 
 </resources>
