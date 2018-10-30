@@ -1,5 +1,6 @@
 package ar.uba.fi.tallerii.comprameli.presentation.search
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.support.v7.widget.StaggeredGridLayoutManager
 import android.support.v7.widget.StaggeredGridLayoutManager.VERTICAL
@@ -37,6 +38,14 @@ class SearchActivity : BaseActivity(), SearchContract.View {
 
     override fun refreshList(items: List<SearchContract.SearchItem>) {
         listAdapter.setItems(items)
+    }
+
+    override fun showError(error: Int) {
+        AlertDialog.Builder(this)
+                .setTitle(R.string.search_error_products_fetch_title)
+                .setMessage(R.string.search_error_products_fetch_message)
+                .create()
+                .show()
     }
 
 }

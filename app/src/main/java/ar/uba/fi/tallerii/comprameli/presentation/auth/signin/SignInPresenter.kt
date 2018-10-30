@@ -5,6 +5,7 @@ import ar.uba.fi.tallerii.comprameli.presentation.base.BasePresenter
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
+import timber.log.Timber
 
 class SignInPresenter(private val mSessionService: SessionService) :
         BasePresenter<SignInContract.View>(), SignInContract.Presenter {
@@ -40,7 +41,10 @@ class SignInPresenter(private val mSessionService: SessionService) :
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe(
                                 { getView()?.notifyUserSigned() },
-                                { getView()?.showInvalidCredentialsAlert() }
+                                {
+                                    Timber.e(it)
+                                    getView()?.showInvalidCredentialsAlert()
+                                }
                         )
 
         mCompositeDisposable.add(disposable)

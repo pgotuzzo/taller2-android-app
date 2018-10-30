@@ -37,5 +37,10 @@
     <string name="dashboard_nav_account">Cuenta</string>
     <string name="dashboard_nav_search">Buscar productos</string>
     <string name="dashboard_nav_log_out">Cerrar Session</string>
+    <!-- ========================================== -->
+    <!--                 Search                     -->
+    <!-- ========================================== -->
+    <string name="search_error_products_fetch_title">Tenes conexion a internet?</string>
+    <string name="search_error_products_fetch_message">No se pudo cargar el listado de productos.\nChequea que tengas conexion y volve a intentar!</string>
 
 </resources>

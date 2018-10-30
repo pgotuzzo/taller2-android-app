@@ -6,7 +6,6 @@ import ar.uba.fi.tallerii.comprameli.presentation.splash.SplashContract.Companio
 import ar.uba.fi.tallerii.comprameli.presentation.splash.SplashContract.Companion.SESSION_CHECK
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
 import timber.log.Timber
 

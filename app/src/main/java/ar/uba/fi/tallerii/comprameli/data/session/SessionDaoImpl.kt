@@ -7,8 +7,8 @@ import ar.uba.fi.tallerii.comprameli.data.session.exception.InvalidUserCredentia
 import ar.uba.fi.tallerii.comprameli.data.session.exception.NonexistentSessionException
 import com.google.firebase.auth.FirebaseAuth
 import io.reactivex.Completable
-import io.reactivex.Observable
-import io.reactivex.rxkotlin.Observables
+import io.reactivex.Single
+import io.reactivex.rxkotlin.Singles
 import io.reactivex.schedulers.Schedulers
 
 
@@ -20,15 +20,15 @@ class SessionDaoImpl(private val mAppServerApi: AppServerRestApi,
         const val KEY_SESSION_USER_NAME = "user_name"
     }
 
-    override fun getAuthToken(userName: String, password: String): Observable<String> =
+    override fun getAuthToken(userName: String, password: String): Single<String> =
     // Fetch FireBase Token
             getFireBaseAuthToken(userName, password).observeOn(Schedulers.io())
                     // Fetch App Server Token
                     .flatMap { fireBaseToken -> mAppServerApi.logIn(LogInBody(fireBaseToken)) }
                     .map { token: Token -> token.token }
 
-    override fun getSession(): Observable<Session> =
-            Observables.zip(
+    override fun getSession(): Single<Session> =
+            Singles.zip(
                     mPreferencesMap.getString(SESSION, KEY_SESSION_AUTH_TOKEN).onErrorReturn { "" },
                     mPreferencesMap.getString(SESSION, KEY_SESSION_USER_NAME).onErrorReturn { "" }
             ) { authToken: String, userName: String ->
@@ -44,8 +44,8 @@ class SessionDaoImpl(private val mAppServerApi: AppServerRestApi,
                     mPreferencesMap.store(SESSION, KEY_SESSION_USER_NAME, session.userName)
             ))
 
-    private fun getFireBaseAuthToken(userName: String, password: String): Observable<String> =
-            Observable.create {
+    private fun getFireBaseAuthToken(userName: String, password: String): Single<String> =
+            Single.create {
                 FirebaseAuth
                         .getInstance()
                         .signInWithEmailAndPassword(userName, password)
@@ -54,13 +54,11 @@ class SessionDaoImpl(private val mAppServerApi: AppServerRestApi,
                                 if (task.isSuccessful) {
                                     // Success
                                     task.result.user.getIdToken(true).addOnCompleteListener { idTokenResult ->
-                                        it.onNext(idTokenResult.result.token!!)
-                                        it.onComplete()
+                                        it.onSuccess(idTokenResult.result.token!!)
                                     }
                                 } else {
                                     // Failure
                                     it.onError(InvalidUserCredentialsException())
-                                    it.onComplete()
                                 }
                             }
                         }
@@ -71,5 +69,4 @@ class SessionDaoImpl(private val mAppServerApi: AppServerRestApi,
                     mPreferencesMap.clear(SESSION, KEY_SESSION_AUTH_TOKEN),
                     mPreferencesMap.clear(SESSION, KEY_SESSION_USER_NAME)
             ))
-
 }

@@ -1,7 +1,7 @@
 package ar.uba.fi.tallerii.comprameli.domain
 
 import io.reactivex.Completable
-import io.reactivex.Observable
+import io.reactivex.Single
 
 
 interface SessionService {
@@ -11,7 +11,7 @@ interface SessionService {
      *
      * @return true if the user is already signed, false otherwise
      */
-    fun isSessionActive(): Observable<Boolean>
+    fun isSessionActive(): Single<Boolean>
 
     /**
      * Tries to log the user by the usage of the credentials passed through param.

@@ -1,5 +1,6 @@
 package ar.uba.fi.tallerii.comprameli.data.repository
 
+import io.reactivex.Single
 import okhttp3.Interceptor
 import okhttp3.Response
 import okio.Buffer
@@ -7,36 +8,28 @@ import timber.log.Timber
 import java.io.IOException
 
 /**
- * Logs request to make it traceable and potentially auto-generates access tokens for header
- * authentication
+ * In charge of:
+ * <ul>
+ *     <li>Logging HTTP requests</li>
+ *     <li>Adding Authentication headers to the requests</li>
+ * </ul>
  */
-class RetrofitOkhttpInterceptor : Interceptor {
+class RetrofitOkhttpInterceptor(private val mTokenProvider: AuthTokenProvider) : Interceptor {
 
     override fun intercept(chain: Interceptor.Chain): Response {
-        val request = chain.request()
+        var request = chain.request()
 
-        /* TODO - Decide if it is going to be necessary to add token handling for header authentication
-        Snippet of an example: https://github.com/r7v/Tweetz/blob/master/app/src/main/java/com/rahulrv/tweetz/api/RetrofitInterceptor.java
-        ///////////////////////////////////////////////////////////////////////////////////////////
-            Token request!
-                if (token == null) {
-                    val body = chain.proceed(getToken()).body()
-
-                    try {
-                        val jsonObject = JSONObject(body.string())
-                        token = "Bearer " + jsonObject.optString("access_token")
-                    } catch (e: JSONException) {
-                        e.printStackTrace()
-                        Log.d(RetrofitInterceptor::class.java!!.getName(), "Error fetching token")
-                    }
-
+        val singleRequest = mTokenProvider.existAuthToken().flatMap { exists: Boolean ->
+            if (!exists) Single.just(request) else {
+                mTokenProvider.getAuthToken().map {
+                    request.newBuilder()
+                            .addHeader("Authorization", "Bearer $it")
+                            .build()
                 }
+            }
+        }
 
-                request = request.newBuilder()
-                        .addHeader("Authorization", token)
-                        .build()
-        ///////////////////////////////////////////////////////////////////////////////////////////
-        */
+        request = singleRequest.blockingGet()
 
         val body = try {
             val copy = request.newBuilder().build()
@@ -47,9 +40,11 @@ class RetrofitOkhttpInterceptor : Interceptor {
             "I/O exception"
         }
 
-        Timber.d("\nRequest:\nurl: %s\nbody: %s\n",
+        Timber.d("\nRequest:\nurl: %s\nheader: %s\nbody: %s\n",
                 request.url().toString(),
-                body)
+                request.header("Authorization"),
+                body
+        )
 
         return chain.proceed(request)
     }

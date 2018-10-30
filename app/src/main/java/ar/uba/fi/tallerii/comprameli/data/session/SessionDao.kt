@@ -2,11 +2,11 @@ package ar.uba.fi.tallerii.comprameli.data.session
 
 import ar.uba.fi.tallerii.comprameli.data.session.exception.NonexistentSessionException
 import io.reactivex.Completable
-import io.reactivex.Observable
+import io.reactivex.Single
 
 interface SessionDao {
 
-    fun getAuthToken(userName: String, password: String): Observable<String>
+    fun getAuthToken(userName: String, password: String): Single<String>
 
     fun storeSession(session: Session): Completable
 
@@ -16,7 +16,7 @@ interface SessionDao {
      * @return previously stored session
      * @exception NonexistentSessionException if there no session
      */
-    fun getSession(): Observable<Session>
+    fun getSession(): Single<Session>
 
     fun clearSession(): Completable
 

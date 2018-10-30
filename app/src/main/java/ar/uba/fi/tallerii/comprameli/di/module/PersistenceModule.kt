@@ -2,9 +2,9 @@ package ar.uba.fi.tallerii.comprameli.di.module
 
 import android.content.Context
 import ar.uba.fi.tallerii.comprameli.BuildConfig
-import ar.uba.fi.tallerii.comprameli.data.repository.AndroidPreferences
-import ar.uba.fi.tallerii.comprameli.data.repository.AppServerRestApi
-import ar.uba.fi.tallerii.comprameli.data.repository.RetrofitOkhttpInterceptor
+import ar.uba.fi.tallerii.comprameli.data.products.ProductsDao
+import ar.uba.fi.tallerii.comprameli.data.products.ProductsDaoImpl
+import ar.uba.fi.tallerii.comprameli.data.repository.*
 import ar.uba.fi.tallerii.comprameli.data.session.SessionDao
 import ar.uba.fi.tallerii.comprameli.data.session.SessionDaoImpl
 import ar.uba.fi.tallerii.comprameli.di.scope.PerApplication
@@ -19,25 +19,39 @@ import retrofit2.converter.gson.GsonConverterFactory
 @Module
 class PersistenceModule {
 
-    private val mAppServerRestApi: AppServerRestApi
-        get() {
-            val okHttpClient = OkHttpClient.Builder()
-                    .addInterceptor(RetrofitOkhttpInterceptor())
-                    .build()
-            return Retrofit.Builder()
-                    .baseUrl(BuildConfig.APP_SERVER_URL)
-                    .client(okHttpClient)
-                    .addConverterFactory(GsonConverterFactory.create())
-                    .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                    .build()
-                    .create(AppServerRestApi::class.java)
-        }
-
-    private fun getAndroidPreferences(context: Context) = AndroidPreferences(context)
+    @Provides
+    @PerApplication
+    fun providePreferencesMap(context: Context): PreferencesMap = AndroidPreferences(context)
 
     @Provides
     @PerApplication
-    fun provideSessionDao(context: Context): SessionDao =
-            SessionDaoImpl(mAppServerRestApi, getAndroidPreferences(context))
+    fun provideAuthTokenProvider(preferences: PreferencesMap): AuthTokenProvider =
+            AuthTokenProviderImpl(preferences)
+
+    @Provides
+    @PerApplication
+    fun provideAppServerRestApi(authTokenProvider: AuthTokenProvider): AppServerRestApi {
+        val okHttpClient = OkHttpClient.Builder()
+                .addInterceptor(RetrofitOkhttpInterceptor(authTokenProvider))
+                .build()
+        return Retrofit.Builder()
+                .baseUrl(BuildConfig.APP_SERVER_URL)
+                .client(okHttpClient)
+                .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .build()
+                .create(AppServerRestApi::class.java)
+    }
+
+    @Provides
+    @PerApplication
+    fun provideSessionDao(appServerRestApi: AppServerRestApi,
+                          preferences: PreferencesMap): SessionDao =
+            SessionDaoImpl(appServerRestApi, preferences)
+
+    @Provides
+    @PerApplication
+    fun provideProductsDao(appServerRestApi: AppServerRestApi): ProductsDao =
+            ProductsDaoImpl(appServerRestApi)
 
 }
