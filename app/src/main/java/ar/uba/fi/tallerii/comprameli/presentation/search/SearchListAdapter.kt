@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import ar.uba.fi.tallerii.comprameli.R
 import ar.uba.fi.tallerii.comprameli.presentation.GlideApp
 import kotlinx.android.synthetic.main.search_list_item.view.*
+import java.text.NumberFormat
 
 class SearchListAdapter : RecyclerView.Adapter<SearchListAdapter.SearchItemViewHolder>() {
 
@@ -14,7 +15,7 @@ class SearchListAdapter : RecyclerView.Adapter<SearchListAdapter.SearchItemViewH
         fun bind(item: SearchContract.SearchItem) {
             with(itemView) {
                 title.text = item.title
-                price.text = item.price.toString()
+                price.text = NumberFormat.getCurrencyInstance().format(item.price)
                 GlideApp
                         .with(context)
                         .load(item.images[0])

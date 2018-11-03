@@ -7,6 +7,7 @@ import io.reactivex.Single
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
+import retrofit2.http.Query
 
 
 interface AppServerRestApi {
@@ -15,6 +16,14 @@ interface AppServerRestApi {
     fun logIn(@Body body: LogInBody): Single<Token>
 
     @GET("products")
-    fun products(): Single<Products>
+    fun products(@Query("name") name: String?,
+                 @Query("description") description: String?,
+                 @Query("seller") seller: String?,
+                 @Query("units") units: Int?,
+                 @Query("price") price: Float?,
+                 @Query("x") x: Float?,
+                 @Query("y") y: Float?,
+                 @Query("categories") categories: String?,
+                 @Query("payment_methods") paymentMethods: String?): Single<Products>
 
 }

@@ -32,7 +32,10 @@
     <!-- ========================================== -->
     <!--                Dashboard                   -->
     <!-- ========================================== -->
-    <!--                Nav Menu                    -->
+    <!--              Toolbar Menu                  -->
+    <string name="dashboard_toolbar_drawer_open">Nav Menu abierto</string>
+    <string name="dashboard_toolbar_drawer_close">Nav Menu cerrado</string>
+    <!--              Drawer Menu                   -->
     <string name="dashboard_nav_home">Inicio</string>
     <string name="dashboard_nav_account">Cuenta</string>
     <string name="dashboard_nav_search">Buscar productos</string>
@@ -42,5 +45,11 @@
     <!-- ========================================== -->
     <string name="search_error_products_fetch_title">Tenes conexion a internet?</string>
     <string name="search_error_products_fetch_message">No se pudo cargar el listado de productos.\nChequea que tengas conexion y volve a intentar!</string>
+    <string name="search_products_not_found">No hay productos!</string>
+    <!--                  Menu                      -->
+    <string name="search_menu_search">Buscar</string>
+    <string name="search_menu_filter">Filtrar</string>
+    <!--                 Filters                    -->
+    <string name="search_filters_title">Filtrar</string>
 
 </resources>

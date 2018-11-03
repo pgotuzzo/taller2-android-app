@@ -21,10 +21,13 @@ interface SearchContract {
 
     interface View {
         fun refreshList(items: List<SearchItem>)
+        fun showEmptyListMessage()
         fun showError(@Error error: Int)
     }
 
     interface Presenter : MvpPresenter<View> {
         fun onInit()
+        fun onEmptySearch()
+        fun onSearchSubmit(query: String?)
     }
 }

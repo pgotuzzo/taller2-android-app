@@ -12,6 +12,8 @@ import ar.uba.fi.tallerii.comprameli.presentation.dashboard.di.DashboardComponen
 import ar.uba.fi.tallerii.comprameli.presentation.dashboard.di.DashboardModule
 import ar.uba.fi.tallerii.comprameli.presentation.search.di.SearchComponent
 import ar.uba.fi.tallerii.comprameli.presentation.search.di.SearchModule
+import ar.uba.fi.tallerii.comprameli.presentation.search.filter.di.SearchFiltersComponent
+import ar.uba.fi.tallerii.comprameli.presentation.search.filter.di.SearchFiltersModule
 import ar.uba.fi.tallerii.comprameli.presentation.splash.di.SplashComponent
 import ar.uba.fi.tallerii.comprameli.presentation.splash.di.SplashModule
 import dagger.Component
@@ -24,4 +26,5 @@ interface ApplicationComponent {
     fun plus(module: SignInModule): SignInComponent
     fun plus(module: DashboardModule): DashboardComponent
     fun plus(module: SearchModule): SearchComponent
+    fun plus(module: SearchFiltersModule): SearchFiltersComponent
 }

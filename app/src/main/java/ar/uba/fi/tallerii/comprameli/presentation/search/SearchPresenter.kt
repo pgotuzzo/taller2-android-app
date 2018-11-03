@@ -11,6 +11,7 @@ class SearchPresenter(private val mProductsService: ProductsService) :
         BasePresenter<SearchContract.View>(), SearchContract.Presenter {
 
     private val mCompositeDisposable = CompositeDisposable()
+    private var mIsListFiltered = false
 
     override fun onViewDetached() {
         super.onViewDetached()
@@ -18,20 +19,63 @@ class SearchPresenter(private val mProductsService: ProductsService) :
     }
 
     override fun onInit() {
-        val disposable =
-                mProductsService
-                        .getProducts()
-                        .map { products ->
-                            products.map {
-                                SearchContract.SearchItem(it.productId, it.images, it.title, it.price)
+        fetchFullProductList()
+    }
+
+    override fun onEmptySearch() {
+        // Check if the full list was already fetched
+        if (mIsListFiltered) {
+            fetchFullProductList()
+        }
+    }
+
+    override fun onSearchSubmit(query: String?) {
+        var querySingle = mProductsService.getProducts()
+        query?.apply { querySingle = mProductsService.getProductsByName(this) }
+        val disposable = querySingle
+                .map { products ->
+                    products.map {
+                        SearchContract.SearchItem(it.productId, it.images, it.title, it.price)
+                    }
+                }
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                        {
+                            getView()?.apply {
+                                mIsListFiltered = true
+                                if (it.isEmpty())
+                                    this.showEmptyListMessage()
+                                else
+                                    this.refreshList(it)
                             }
-                        }
-                        .subscribeOn(Schedulers.io())
-                        .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe(
-                                { getView()?.refreshList(it) },
-                                { getView()?.showError(PRODUCTS_FETCH) }
-                        )
+                        },
+                        { getView()?.showError(PRODUCTS_FETCH) }
+                )
+        mCompositeDisposable.add(disposable)
+    }
+
+    private fun fetchFullProductList() {
+        val disposable = mProductsService.getProducts()
+                .map { products ->
+                    products.map {
+                        SearchContract.SearchItem(it.productId, it.images, it.title, it.price)
+                    }
+                }
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                        {
+                            mIsListFiltered = false
+                            getView()?.apply {
+                                if (it.isEmpty())
+                                    this.showEmptyListMessage()
+                                else
+                                    this.refreshList(it)
+                            }
+                        },
+                        { getView()?.showError(PRODUCTS_FETCH) }
+                )
         mCompositeDisposable.add(disposable)
     }
 
