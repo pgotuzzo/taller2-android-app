@@ -28,6 +28,7 @@ interface SearchContract {
 
     interface Presenter : MvpPresenter<View> {
         fun onInit()
+        fun onInit(category: String)
         fun onEmptySearch()
         fun onSearchSubmit(query: String?)
         fun onItemClicked(productId: String)

@@ -46,8 +46,20 @@ class DashboardActivity : BaseActivity(), DashboardContract.View {
             }
             true
         }
+        // Categories
+        categoriesCarousel.setUp(
+                listOf(
+                        CategoriesCarousel.Category("Tecnologia", R.drawable.category_technology),
+                        CategoriesCarousel.Category("Auto", R.drawable.category_cars),
+                        CategoriesCarousel.Category("Ropa", R.drawable.category_clothes)
+                )
+        ) { mPresenter.onCategorySelected(it) }
     }
 
+    override fun onDestroy() {
+        mPresenter.detachView()
+        super.onDestroy()
+    }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
@@ -58,7 +70,6 @@ class DashboardActivity : BaseActivity(), DashboardContract.View {
         }
         return super.onOptionsItemSelected(item)
     }
-
 
     override fun showHome() {
     }
@@ -73,6 +84,12 @@ class DashboardActivity : BaseActivity(), DashboardContract.View {
 
     override fun goSearch() {
         startActivity(Intent(this, SearchActivity::class.java))
+    }
+
+    override fun goSearchCategory(category: String) {
+        val intent = Intent(this, SearchActivity::class.java)
+        intent.putExtra(SearchActivity.INTENT_EXTRA_CATEGORY, category)
+        startActivity(intent)
     }
 
 }

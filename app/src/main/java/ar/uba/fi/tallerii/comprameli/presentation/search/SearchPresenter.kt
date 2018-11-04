@@ -1,6 +1,7 @@
 package ar.uba.fi.tallerii.comprameli.presentation.search
 
 import ar.uba.fi.tallerii.comprameli.domain.products.ProductsService
+import ar.uba.fi.tallerii.comprameli.model.ProductFilter
 import ar.uba.fi.tallerii.comprameli.presentation.base.BasePresenter
 import ar.uba.fi.tallerii.comprameli.presentation.search.SearchContract.Companion.PRODUCTS_FETCH
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -22,6 +23,28 @@ class SearchPresenter(private val mProductsService: ProductsService) :
         fetchFullProductList()
     }
 
+    override fun onInit(category: String) {
+        val disposable = mProductsService.getProductsByFilter(ProductFilter(categories = category))
+                .map { products ->
+                    products.map { SearchContract.SearchItem(it.productId, it.images, it.title, it.price) }
+                }
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                        {
+                            getView()?.apply {
+                                mIsListFiltered = true
+                                if (it.isEmpty())
+                                    this.showEmptyListMessage()
+                                else
+                                    this.refreshList(it)
+                            }
+                        },
+                        { getView()?.showError(PRODUCTS_FETCH) }
+                )
+        mCompositeDisposable.add(disposable)
+    }
+
     override fun onEmptySearch() {
         // Check if the full list was already fetched
         if (mIsListFiltered) {
@@ -30,8 +53,11 @@ class SearchPresenter(private val mProductsService: ProductsService) :
     }
 
     override fun onSearchSubmit(query: String?) {
-        var querySingle = mProductsService.getProducts()
-        query?.apply { querySingle = mProductsService.getProductsByName(this) }
+        val querySingle = if (query == null) {
+            mProductsService.getProducts()
+        } else {
+            mProductsService.getProductsByName(query)
+        }
         val disposable = querySingle
                 .map { products ->
                     products.map {

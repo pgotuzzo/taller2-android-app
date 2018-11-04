@@ -42,4 +42,8 @@ class DashboardPresenter(private val mSessionService: SessionService) :
         mCompositeDisposable.add(disposable)
     }
 
+    override fun onCategorySelected(category: String) {
+        getView()?.goSearchCategory(category.toLowerCase())
+    }
+
 }

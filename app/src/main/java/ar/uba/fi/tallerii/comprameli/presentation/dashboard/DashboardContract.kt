@@ -8,6 +8,7 @@ interface DashboardContract {
         fun showMyAccount()
         fun goAuth()
         fun goSearch()
+        fun goSearchCategory(category: String)
     }
 
     interface Presenter : MvpPresenter<View> {
@@ -15,5 +16,6 @@ interface DashboardContract {
         fun onNavigationAccountSettingsClick()
         fun onNavigationSearchClick()
         fun onNavigationCloseSessionClick()
+        fun onCategorySelected(category: String)
     }
 }

@@ -22,6 +22,7 @@ import javax.inject.Inject
 class SearchActivity : BaseActivity(), SearchContract.View {
 
     companion object {
+        const val INTENT_EXTRA_CATEGORY = "Category"
         const val SPAN_COUNT = 2
         const val TAG_FRAGMENT_FILTERS = "FragmentFilters"
     }
@@ -36,6 +37,7 @@ class SearchActivity : BaseActivity(), SearchContract.View {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.search_activity)
         mComponent.inject(this)
+        mPresenter.attachView(this)
 
         // Toolbar
         toolbar.title = getString(R.string.app_name)
@@ -45,9 +47,15 @@ class SearchActivity : BaseActivity(), SearchContract.View {
         itemList.layoutManager = StaggeredGridLayoutManager(SPAN_COUNT, VERTICAL)
         itemList.adapter = listAdapter
         itemList.setHasFixedSize(true)
-
-        mPresenter.attachView(this)
-        mPresenter.onInit()
+        if (intent.hasExtra(INTENT_EXTRA_CATEGORY) &&
+                !intent.getStringExtra(INTENT_EXTRA_CATEGORY).isNullOrEmpty()) {
+            // Initialize with filter received through intent
+            val category = intent.getStringExtra(INTENT_EXTRA_CATEGORY)
+            mPresenter.onInit(category)
+        } else {
+            // Initialize with NO filter
+            mPresenter.onInit()
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -85,6 +93,11 @@ class SearchActivity : BaseActivity(), SearchContract.View {
             true
         }
         return true
+    }
+
+    override fun onDestroy() {
+        mPresenter.detachView()
+        super.onDestroy()
     }
 
     override fun refreshList(items: List<SearchContract.SearchItem>) {
