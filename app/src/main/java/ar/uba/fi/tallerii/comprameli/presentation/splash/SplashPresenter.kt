@@ -1,6 +1,6 @@
 package ar.uba.fi.tallerii.comprameli.presentation.splash
 
-import ar.uba.fi.tallerii.comprameli.domain.SessionService
+import ar.uba.fi.tallerii.comprameli.domain.session.SessionService
 import ar.uba.fi.tallerii.comprameli.presentation.base.BasePresenter
 import ar.uba.fi.tallerii.comprameli.presentation.splash.SplashContract.Companion.Error
 import ar.uba.fi.tallerii.comprameli.presentation.splash.SplashContract.Companion.SESSION_CHECK

@@ -1,13 +1,15 @@
 package ar.uba.fi.tallerii.comprameli.presentation.dashboard
 
-import ar.uba.fi.tallerii.comprameli.domain.SessionService
+import ar.uba.fi.tallerii.comprameli.domain.profile.ProfileService
+import ar.uba.fi.tallerii.comprameli.domain.session.SessionService
 import ar.uba.fi.tallerii.comprameli.presentation.base.BasePresenter
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import timber.log.Timber
 
-class DashboardPresenter(private val mSessionService: SessionService) :
+class DashboardPresenter(private val mSessionService: SessionService,
+                         private val mProfileService: ProfileService) :
         BasePresenter<DashboardContract.View>(), DashboardContract.Presenter {
 
     private val mCompositeDisposable = CompositeDisposable()
@@ -15,6 +17,24 @@ class DashboardPresenter(private val mSessionService: SessionService) :
     override fun onViewDetached() {
         super.onViewDetached()
         mCompositeDisposable.clear()
+    }
+
+    override fun onInit() {
+        val disposable = mProfileService.getProfile()
+                .map {
+                    DashboardContract.NavMenuHeader(
+                            name = String.format("%s %s", it.name, it.surname),
+                            email = it.email,
+                            avatar = it.avatar
+                    )
+                }
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                        { getView()?.refreshNavMenuHeader(it) },
+                        { getView()?.showError() }
+                )
+        mCompositeDisposable.add(disposable)
     }
 
     override fun onNavigationHomeClick() {

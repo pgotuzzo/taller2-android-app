@@ -1,4 +1,4 @@
-package ar.uba.fi.tallerii.comprameli.domain
+package ar.uba.fi.tallerii.comprameli.domain.session
 
 import ar.uba.fi.tallerii.comprameli.data.repository.AuthTokenProvider
 import ar.uba.fi.tallerii.comprameli.data.session.Session

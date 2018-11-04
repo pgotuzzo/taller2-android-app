@@ -1,6 +1,6 @@
 package ar.uba.fi.tallerii.comprameli.presentation.auth.signin
 
-import ar.uba.fi.tallerii.comprameli.domain.SessionService
+import ar.uba.fi.tallerii.comprameli.domain.session.SessionService
 import ar.uba.fi.tallerii.comprameli.presentation.base.BasePresenter
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable

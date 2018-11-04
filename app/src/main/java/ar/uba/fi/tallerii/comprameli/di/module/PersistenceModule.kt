@@ -4,6 +4,8 @@ import android.content.Context
 import ar.uba.fi.tallerii.comprameli.BuildConfig
 import ar.uba.fi.tallerii.comprameli.data.products.ProductsDao
 import ar.uba.fi.tallerii.comprameli.data.products.ProductsDaoImpl
+import ar.uba.fi.tallerii.comprameli.data.profile.ProfileDao
+import ar.uba.fi.tallerii.comprameli.data.profile.ProfileDaoImpl
 import ar.uba.fi.tallerii.comprameli.data.repository.*
 import ar.uba.fi.tallerii.comprameli.data.session.SessionDao
 import ar.uba.fi.tallerii.comprameli.data.session.SessionDaoImpl
@@ -53,5 +55,10 @@ class PersistenceModule {
     @PerApplication
     fun provideProductsDao(appServerRestApi: AppServerRestApi): ProductsDao =
             ProductsDaoImpl(appServerRestApi)
+
+    @Provides
+    @PerApplication
+    fun provideProfileDao(appServerRestApi: AppServerRestApi): ProfileDao =
+            ProfileDaoImpl(appServerRestApi)
 
 }

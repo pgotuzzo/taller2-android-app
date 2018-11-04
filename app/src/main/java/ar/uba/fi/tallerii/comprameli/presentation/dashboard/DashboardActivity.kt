@@ -6,11 +6,13 @@ import android.support.v4.content.ContextCompat
 import android.support.v4.view.GravityCompat
 import android.view.MenuItem
 import ar.uba.fi.tallerii.comprameli.R
+import ar.uba.fi.tallerii.comprameli.presentation.GlideApp
 import ar.uba.fi.tallerii.comprameli.presentation.auth.AuthActivity
 import ar.uba.fi.tallerii.comprameli.presentation.base.BaseActivity
 import ar.uba.fi.tallerii.comprameli.presentation.dashboard.di.DashboardModule
 import ar.uba.fi.tallerii.comprameli.presentation.search.SearchActivity
 import kotlinx.android.synthetic.main.dashboad_activity.*
+import kotlinx.android.synthetic.main.dashboard_nav_header.view.*
 import javax.inject.Inject
 
 
@@ -54,6 +56,8 @@ class DashboardActivity : BaseActivity(), DashboardContract.View {
                         CategoriesCarousel.Category("Ropa", R.drawable.category_clothes)
                 )
         ) { mPresenter.onCategorySelected(it) }
+
+        mPresenter.onInit()
     }
 
     override fun onDestroy() {
@@ -69,6 +73,18 @@ class DashboardActivity : BaseActivity(), DashboardContract.View {
             }
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    override fun refreshNavMenuHeader(navMenuHeader: DashboardContract.NavMenuHeader) {
+        with(navMenu.getHeaderView(0)) {
+            GlideApp.with(this)
+                    .load(navMenuHeader.avatar)
+                    .placeholder(R.drawable.ic_user)
+                    .circleCrop()
+                    .into(avatar)
+            name.text = navMenuHeader.name
+            email.text = navMenuHeader.email
+        }
     }
 
     override fun showHome() {
@@ -90,6 +106,9 @@ class DashboardActivity : BaseActivity(), DashboardContract.View {
         val intent = Intent(this, SearchActivity::class.java)
         intent.putExtra(SearchActivity.INTENT_EXTRA_CATEGORY, category)
         startActivity(intent)
+    }
+
+    override fun showError() {
     }
 
 }

@@ -2,6 +2,7 @@ package ar.uba.fi.tallerii.comprameli.data.repository
 
 import ar.uba.fi.tallerii.comprameli.data.products.Product
 import ar.uba.fi.tallerii.comprameli.data.products.Products
+import ar.uba.fi.tallerii.comprameli.data.profile.Profile
 import ar.uba.fi.tallerii.comprameli.data.session.LogInBody
 import ar.uba.fi.tallerii.comprameli.data.session.Token
 import io.reactivex.Single
@@ -26,5 +27,8 @@ interface AppServerRestApi {
 
     @GET("products/{id}")
     fun productById(@Path("id") productId: String): Single<Product>
+
+    @GET("/user/profile")
+    fun userProfile(): Single<Profile>
 
 }

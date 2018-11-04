@@ -1,7 +1,8 @@
 package ar.uba.fi.tallerii.comprameli.presentation.dashboard.di
 
 import ar.uba.fi.tallerii.comprameli.di.scope.PerActivity
-import ar.uba.fi.tallerii.comprameli.domain.SessionService
+import ar.uba.fi.tallerii.comprameli.domain.profile.ProfileService
+import ar.uba.fi.tallerii.comprameli.domain.session.SessionService
 import ar.uba.fi.tallerii.comprameli.presentation.dashboard.DashboardContract
 import ar.uba.fi.tallerii.comprameli.presentation.dashboard.DashboardPresenter
 import dagger.Module
@@ -12,7 +13,8 @@ class DashboardModule {
 
     @Provides
     @PerActivity
-    fun providePresenter(sessionService: SessionService): DashboardContract.Presenter =
-            DashboardPresenter(sessionService)
+    fun providePresenter(sessionService: SessionService,
+                         profileService: ProfileService): DashboardContract.Presenter =
+            DashboardPresenter(sessionService, profileService)
 
 }

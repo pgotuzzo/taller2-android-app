@@ -54,6 +54,7 @@ dependencies {
     implementation "com.google.firebase:firebase-database:$firebase_version"
     implementation "com.google.firebase:firebase-auth:$firebase_version"
     implementation "com.google.firebase:firebase-core:$firebase_version"
+    implementation "com.google.firebase:firebase-storage:$firebase_version"
     // Retrofit
     implementation 'com.squareup.retrofit2:converter-gson:2.4.0'
     // Reactive X - RxJava/RxKotlin

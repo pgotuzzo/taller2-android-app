@@ -1,7 +1,7 @@
 package ar.uba.fi.tallerii.comprameli.presentation.splash.di
 
 import ar.uba.fi.tallerii.comprameli.di.scope.PerActivity
-import ar.uba.fi.tallerii.comprameli.domain.SessionService
+import ar.uba.fi.tallerii.comprameli.domain.session.SessionService
 import ar.uba.fi.tallerii.comprameli.presentation.splash.SplashContract
 import ar.uba.fi.tallerii.comprameli.presentation.splash.SplashPresenter
 import dagger.Module

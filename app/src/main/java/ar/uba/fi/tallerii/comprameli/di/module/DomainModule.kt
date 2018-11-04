@@ -1,13 +1,16 @@
 package ar.uba.fi.tallerii.comprameli.di.module
 
 import ar.uba.fi.tallerii.comprameli.data.products.ProductsDao
+import ar.uba.fi.tallerii.comprameli.data.profile.ProfileDao
 import ar.uba.fi.tallerii.comprameli.data.repository.AuthTokenProvider
 import ar.uba.fi.tallerii.comprameli.data.session.SessionDao
 import ar.uba.fi.tallerii.comprameli.di.scope.PerApplication
-import ar.uba.fi.tallerii.comprameli.domain.SessionService
-import ar.uba.fi.tallerii.comprameli.domain.SessionServiceImpl
 import ar.uba.fi.tallerii.comprameli.domain.products.ProductsService
 import ar.uba.fi.tallerii.comprameli.domain.products.ProductsServiceImpl
+import ar.uba.fi.tallerii.comprameli.domain.profile.ProfileService
+import ar.uba.fi.tallerii.comprameli.domain.profile.ProfileServiceImpl
+import ar.uba.fi.tallerii.comprameli.domain.session.SessionService
+import ar.uba.fi.tallerii.comprameli.domain.session.SessionServiceImpl
 import dagger.Module
 import dagger.Provides
 
@@ -24,6 +27,11 @@ class DomainModule {
     @PerApplication
     fun provideProductsService(productsDao: ProductsDao): ProductsService =
             ProductsServiceImpl(productsDao)
+
+    @Provides
+    @PerApplication
+    fun provideProfileService(profileDao: ProfileDao): ProfileService =
+            ProfileServiceImpl(profileDao)
 
 
 }

@@ -1,4 +1,4 @@
-package ar.uba.fi.tallerii.comprameli.domain
+package ar.uba.fi.tallerii.comprameli.domain.session
 
 import io.reactivex.Completable
 import io.reactivex.Single
