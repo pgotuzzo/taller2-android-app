@@ -10,6 +10,8 @@ import ar.uba.fi.tallerii.comprameli.presentation.auth.signin.di.SignInComponent
 import ar.uba.fi.tallerii.comprameli.presentation.auth.signin.di.SignInModule
 import ar.uba.fi.tallerii.comprameli.presentation.dashboard.di.DashboardComponent
 import ar.uba.fi.tallerii.comprameli.presentation.dashboard.di.DashboardModule
+import ar.uba.fi.tallerii.comprameli.presentation.productdetails.di.ProductDetailsComponent
+import ar.uba.fi.tallerii.comprameli.presentation.productdetails.di.ProductDetailsModule
 import ar.uba.fi.tallerii.comprameli.presentation.search.di.SearchComponent
 import ar.uba.fi.tallerii.comprameli.presentation.search.di.SearchModule
 import ar.uba.fi.tallerii.comprameli.presentation.search.filter.di.SearchFiltersComponent
@@ -27,4 +29,5 @@ interface ApplicationComponent {
     fun plus(module: DashboardModule): DashboardComponent
     fun plus(module: SearchModule): SearchComponent
     fun plus(module: SearchFiltersModule): SearchFiltersComponent
+    fun plus(module: ProductDetailsModule): ProductDetailsComponent
 }

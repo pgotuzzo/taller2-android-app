@@ -29,4 +29,6 @@ class ProductsDaoImpl(private val AppServerApi: AppServerRestApi) : ProductsDao 
                         }
                     }
 
+    override fun getProductById(productId: String): Single<Product> = AppServerApi.productById(productId)
+
 }

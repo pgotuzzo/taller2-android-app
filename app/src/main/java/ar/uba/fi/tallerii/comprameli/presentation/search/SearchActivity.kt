@@ -1,6 +1,7 @@
 package ar.uba.fi.tallerii.comprameli.presentation.search
 
 import android.app.AlertDialog
+import android.content.Intent
 import android.os.Bundle
 import android.support.v4.content.ContextCompat
 import android.support.v7.widget.SearchView
@@ -11,6 +12,7 @@ import android.view.View.GONE
 import android.view.View.VISIBLE
 import ar.uba.fi.tallerii.comprameli.R
 import ar.uba.fi.tallerii.comprameli.presentation.base.BaseActivity
+import ar.uba.fi.tallerii.comprameli.presentation.productdetails.ProductDetailsActivity
 import ar.uba.fi.tallerii.comprameli.presentation.search.di.SearchModule
 import ar.uba.fi.tallerii.comprameli.presentation.search.filter.SearchFiltersFragment
 import kotlinx.android.synthetic.main.search_activity.*
@@ -87,11 +89,17 @@ class SearchActivity : BaseActivity(), SearchContract.View {
 
     override fun refreshList(items: List<SearchContract.SearchItem>) {
         showListOfProducts(true)
-        listAdapter.setItems(items)
+        listAdapter.setItems(items) { mPresenter.onItemClicked(it) }
     }
 
     override fun showEmptyListMessage() {
         showListOfProducts(false)
+    }
+
+    override fun goProductDetails(productId: String) {
+        val intent = Intent(this, ProductDetailsActivity::class.java)
+        intent.putExtra(ProductDetailsActivity.INTENT_BUNDLE_EXTRA_PRODUCT_ID, productId)
+        startActivity(intent)
     }
 
     override fun showError(error: Int) {

@@ -11,7 +11,7 @@ import java.text.NumberFormat
 
 class SearchListAdapter : RecyclerView.Adapter<SearchListAdapter.SearchItemViewHolder>() {
 
-    class SearchItemViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+    inner class SearchItemViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         fun bind(item: SearchContract.SearchItem) {
             with(itemView) {
                 title.text = item.title
@@ -21,11 +21,13 @@ class SearchListAdapter : RecyclerView.Adapter<SearchListAdapter.SearchItemViewH
                         .load(item.images[0])
                         .placeholder(R.drawable.search_product_placeholder)
                         .into(image)
+                setOnClickListener { mItemClickListener(item.id) }
             }
         }
     }
 
     private var mItems: List<SearchContract.SearchItem> = ArrayList()
+    private var mItemClickListener: (String) -> Unit = {}
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SearchItemViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.search_list_item, parent, false)
@@ -37,8 +39,9 @@ class SearchListAdapter : RecyclerView.Adapter<SearchListAdapter.SearchItemViewH
     override fun onBindViewHolder(holder: SearchItemViewHolder, position: Int) =
             holder.bind(mItems[position])
 
-    fun setItems(items: List<SearchContract.SearchItem>) {
+    fun setItems(items: List<SearchContract.SearchItem>, itemClickListener: (String) -> Unit) {
         mItems = items.subList(0, items.lastIndex + 1)
+        mItemClickListener = itemClickListener
         notifyDataSetChanged()
     }
 

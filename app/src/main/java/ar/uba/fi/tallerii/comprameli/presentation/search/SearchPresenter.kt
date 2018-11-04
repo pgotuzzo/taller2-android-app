@@ -55,6 +55,10 @@ class SearchPresenter(private val mProductsService: ProductsService) :
         mCompositeDisposable.add(disposable)
     }
 
+    override fun onItemClicked(productId: String) {
+        getView()?.goProductDetails(productId)
+    }
+
     private fun fetchFullProductList() {
         val disposable = mProductsService.getProducts()
                 .map { products ->

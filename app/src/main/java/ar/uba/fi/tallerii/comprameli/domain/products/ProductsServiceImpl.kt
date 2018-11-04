@@ -20,7 +20,27 @@ class ProductsServiceImpl(private val mProductsDao: ProductsDao) : ProductsServi
                     .getProducts(filter = filter)
                     .map { list ->
                         list.map {
-                            Product(it.id, it.name, it.description, it.images, it.price, it.ownerId)
+                            Product(productId = it.id,
+                                    title = it.name,
+                                    description = it.description,
+                                    images = it.images,
+                                    price = it.price,
+                                    seller = it.seller,
+                                    units = it.units)
                         }
                     }
+
+    override fun getProductById(productId: String): Single<Product> =
+            mProductsDao
+                    .getProductById(productId)
+                    .map {
+                        Product(productId = it.id,
+                                title = it.name,
+                                description = it.description,
+                                images = it.images,
+                                price = it.price,
+                                seller = it.seller,
+                                units = it.units)
+                    }
+
 }

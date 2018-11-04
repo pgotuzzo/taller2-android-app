@@ -14,5 +14,7 @@ data class Product(@SerializedName("_id")
                    val price: Float,
                    @SerializedName("published")
                    val publishedDate: String,
+                   @SerializedName("units")
+                   val units: Int,
                    @SerializedName("seller")
-                   val ownerId: String)
+                   val seller: String)

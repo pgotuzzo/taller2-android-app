@@ -7,4 +7,6 @@ interface ProductsDao {
 
     fun getProducts(filter: ProductFilter): Single<List<Product>>
 
+    fun getProductById(productId: String): Single<Product>
+
 }

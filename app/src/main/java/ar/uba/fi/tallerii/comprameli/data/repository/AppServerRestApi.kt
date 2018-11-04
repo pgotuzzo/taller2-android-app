@@ -1,13 +1,11 @@
 package ar.uba.fi.tallerii.comprameli.data.repository
 
+import ar.uba.fi.tallerii.comprameli.data.products.Product
 import ar.uba.fi.tallerii.comprameli.data.products.Products
 import ar.uba.fi.tallerii.comprameli.data.session.LogInBody
 import ar.uba.fi.tallerii.comprameli.data.session.Token
 import io.reactivex.Single
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.POST
-import retrofit2.http.Query
+import retrofit2.http.*
 
 
 interface AppServerRestApi {
@@ -25,5 +23,8 @@ interface AppServerRestApi {
                  @Query("y") y: Float?,
                  @Query("categories") categories: String?,
                  @Query("payment_methods") paymentMethods: String?): Single<Products>
+
+    @GET("products/{id}")
+    fun productById(@Path("id") productId: String): Single<Product>
 
 }

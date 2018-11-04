@@ -26,5 +26,7 @@ interface ProductsService {
      */
     fun getProductsByFilter(filter: ProductFilter): Single<List<Product>>
 
+    fun getProductById(productId: String): Single<Product>
+
 }
 

@@ -22,6 +22,7 @@ interface SearchContract {
     interface View {
         fun refreshList(items: List<SearchItem>)
         fun showEmptyListMessage()
+        fun goProductDetails(productId: String)
         fun showError(@Error error: Int)
     }
 
@@ -29,5 +30,6 @@ interface SearchContract {
         fun onInit()
         fun onEmptySearch()
         fun onSearchSubmit(query: String?)
+        fun onItemClicked(productId: String)
     }
 }

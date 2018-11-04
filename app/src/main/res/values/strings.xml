@@ -51,5 +51,11 @@
     <string name="search_menu_filter">Filtrar</string>
     <!--                 Filters                    -->
     <string name="search_filters_title">Filtrar</string>
+    <!-- ========================================== -->
+    <!--             Product Details                -->
+    <!-- ========================================== -->
+    <string name="product_details_units">Stock: %1$s unidades</string>
+    <string name="product_details_questions">Preguntas y Respuestas</string>
+    <string name="product_details_question_answer">Respuesta</string>
 
 </resources>

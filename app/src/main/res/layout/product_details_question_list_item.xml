@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/inquirer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#ffd0fd"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:textColor="@color/black"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        tools:text="Pablo Gotuzzo:" />
+
+    <TextView
+        android:id="@+id/question"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#ffd0fd"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:textColor="#292319"
+        android:textSize="14sp"
+        tools:text="Tenes en stock aun?" />
+
+    <TextView
+        android:id="@+id/answerLabel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:text="@string/product_details_question_answer"
+        android:textColor="@color/black"
+        android:textSize="12sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/answer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:textColor="#292319"
+        android:textSize="14sp"
+        tools:text="Si! Oferta tranquilo. Saludos y gracias por preguntar" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="2dp"
+        android:background="#292319" />
+
+</LinearLayout>
