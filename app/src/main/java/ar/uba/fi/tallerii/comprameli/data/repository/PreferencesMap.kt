@@ -8,7 +8,7 @@ interface PreferencesMap {
 
     companion object {
 
-        @StringDef(SESSION)
+        @StringDef(SESSION, AUTH)
         @Retention(AnnotationRetention.SOURCE)
         annotation class OwnerId
 

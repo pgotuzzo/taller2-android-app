@@ -1,4 +1,4 @@
-package ar.uba.fi.tallerii.comprameli.presentation.dashboard
+package ar.uba.fi.tallerii.comprameli.presentation.dashboard.home
 
 import android.content.Context
 import android.support.annotation.DrawableRes

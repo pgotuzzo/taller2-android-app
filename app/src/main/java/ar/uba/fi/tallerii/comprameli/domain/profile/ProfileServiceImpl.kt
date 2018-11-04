@@ -10,6 +10,7 @@ class ProfileServiceImpl(private val mProfileDao: ProfileDao) : ProfileService {
             .map {
                 Profile(name = it.name,
                         surname = it.surname,
+                        sellerId = it.id,
                         facebook = it.facebook,
                         google = it.google,
                         avatar = it.avatar,

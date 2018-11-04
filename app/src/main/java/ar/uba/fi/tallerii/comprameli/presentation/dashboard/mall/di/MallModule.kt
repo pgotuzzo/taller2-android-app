@@ -1,7 +1,6 @@
-package ar.uba.fi.tallerii.comprameli.presentation.search.di
+package ar.uba.fi.tallerii.comprameli.presentation.dashboard.mall.di
 
-
-import ar.uba.fi.tallerii.comprameli.di.scope.PerActivity
+import ar.uba.fi.tallerii.comprameli.di.scope.PerFragment
 import ar.uba.fi.tallerii.comprameli.domain.products.ProductsService
 import ar.uba.fi.tallerii.comprameli.domain.profile.ProfileService
 import ar.uba.fi.tallerii.comprameli.presentation.search.SearchContract
@@ -10,10 +9,10 @@ import dagger.Module
 import dagger.Provides
 
 @Module
-class SearchModule {
+class MallModule {
 
     @Provides
-    @PerActivity
+    @PerFragment
     fun providePresenter(productsService: ProductsService,
                          profileService: ProfileService): SearchContract.Presenter =
             SearchPresenter(productsService, profileService)

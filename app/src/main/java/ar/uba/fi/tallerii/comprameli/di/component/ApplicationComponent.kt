@@ -10,6 +10,10 @@ import ar.uba.fi.tallerii.comprameli.presentation.auth.signin.di.SignInComponent
 import ar.uba.fi.tallerii.comprameli.presentation.auth.signin.di.SignInModule
 import ar.uba.fi.tallerii.comprameli.presentation.dashboard.di.DashboardComponent
 import ar.uba.fi.tallerii.comprameli.presentation.dashboard.di.DashboardModule
+import ar.uba.fi.tallerii.comprameli.presentation.dashboard.home.di.HomeComponent
+import ar.uba.fi.tallerii.comprameli.presentation.dashboard.home.di.HomeModule
+import ar.uba.fi.tallerii.comprameli.presentation.dashboard.mall.di.MallComponent
+import ar.uba.fi.tallerii.comprameli.presentation.dashboard.mall.di.MallModule
 import ar.uba.fi.tallerii.comprameli.presentation.productdetails.di.ProductDetailsComponent
 import ar.uba.fi.tallerii.comprameli.presentation.productdetails.di.ProductDetailsModule
 import ar.uba.fi.tallerii.comprameli.presentation.search.di.SearchComponent
@@ -27,6 +31,8 @@ interface ApplicationComponent {
     fun plus(module: AuthModule): AuthComponent
     fun plus(module: SignInModule): SignInComponent
     fun plus(module: DashboardModule): DashboardComponent
+    fun plus(module: HomeModule): HomeComponent
+    fun plus(module: MallModule): MallComponent
     fun plus(module: SearchModule): SearchComponent
     fun plus(module: SearchFiltersModule): SearchFiltersComponent
     fun plus(module: ProductDetailsModule): ProductDetailsComponent

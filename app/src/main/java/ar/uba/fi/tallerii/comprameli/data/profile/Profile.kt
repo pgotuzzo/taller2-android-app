@@ -2,7 +2,7 @@ package ar.uba.fi.tallerii.comprameli.data.profile
 
 import com.google.gson.annotations.SerializedName
 
-data class Profile(@SerializedName("_id")
+data class Profile(@SerializedName("uid")
                    val id: String,
                    @SerializedName("email")
                    val email: String,

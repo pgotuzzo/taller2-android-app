@@ -39,7 +39,11 @@
     <string name="dashboard_nav_home">Inicio</string>
     <string name="dashboard_nav_account">Cuenta</string>
     <string name="dashboard_nav_search">Buscar productos</string>
+    <string name="dashboard_nav_my_products">Mis productos</string>
     <string name="dashboard_nav_log_out">Cerrar Session</string>
+    <!--                  Home                      -->
+    <string name="dashboard_home_earn_money">Queres ganar algo de dinero?</string>
+    <string name="dashboard_home_sell">Publica algo</string>
     <!-- ========================================== -->
     <!--                 Search                     -->
     <!-- ========================================== -->

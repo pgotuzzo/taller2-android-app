@@ -12,6 +12,7 @@ interface DashboardContract {
         fun refreshNavMenuHeader(navMenuHeader: NavMenuHeader)
         fun showHome()
         fun showMyAccount()
+        fun showMyProducts()
         fun goAuth()
         fun goSearch()
         fun goSearchCategory(category: String)
@@ -22,8 +23,8 @@ interface DashboardContract {
         fun onInit()
         fun onNavigationHomeClick()
         fun onNavigationAccountSettingsClick()
+        fun onNavigationMyProductsClick()
         fun onNavigationSearchClick()
         fun onNavigationCloseSessionClick()
-        fun onCategorySelected(category: String)
     }
 }

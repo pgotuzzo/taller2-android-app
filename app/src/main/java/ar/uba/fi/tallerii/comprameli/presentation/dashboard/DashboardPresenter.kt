@@ -31,7 +31,12 @@ class DashboardPresenter(private val mSessionService: SessionService,
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
-                        { getView()?.refreshNavMenuHeader(it) },
+                        {
+                            getView()?.apply {
+                                refreshNavMenuHeader(it)
+                                showHome()
+                            }
+                        },
                         { getView()?.showError() }
                 )
         mCompositeDisposable.add(disposable)
@@ -43,6 +48,10 @@ class DashboardPresenter(private val mSessionService: SessionService,
 
     override fun onNavigationAccountSettingsClick() {
         getView()?.showMyAccount()
+    }
+
+    override fun onNavigationMyProductsClick() {
+        getView()?.showMyProducts()
     }
 
     override fun onNavigationSearchClick() {
@@ -60,10 +69,6 @@ class DashboardPresenter(private val mSessionService: SessionService,
                     getView()?.goAuth()
                 }
         mCompositeDisposable.add(disposable)
-    }
-
-    override fun onCategorySelected(category: String) {
-        getView()?.goSearchCategory(category.toLowerCase())
     }
 
 }

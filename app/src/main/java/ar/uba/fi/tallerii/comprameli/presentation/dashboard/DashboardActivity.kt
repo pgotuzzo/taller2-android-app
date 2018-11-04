@@ -10,13 +10,20 @@ import ar.uba.fi.tallerii.comprameli.presentation.GlideApp
 import ar.uba.fi.tallerii.comprameli.presentation.auth.AuthActivity
 import ar.uba.fi.tallerii.comprameli.presentation.base.BaseActivity
 import ar.uba.fi.tallerii.comprameli.presentation.dashboard.di.DashboardModule
+import ar.uba.fi.tallerii.comprameli.presentation.dashboard.home.HomeFragment
+import ar.uba.fi.tallerii.comprameli.presentation.dashboard.mall.MallFragment
 import ar.uba.fi.tallerii.comprameli.presentation.search.SearchActivity
 import kotlinx.android.synthetic.main.dashboad_activity.*
 import kotlinx.android.synthetic.main.dashboard_nav_header.view.*
 import javax.inject.Inject
 
 
-class DashboardActivity : BaseActivity(), DashboardContract.View {
+class DashboardActivity : BaseActivity(), DashboardContract.View, HomeEventHandler {
+
+    companion object {
+        const val TAG_FRAGMENT_HOME = "FragmentHome"
+        const val TAG_FRAGMENT_MALL = "FragmentMall"
+    }
 
     @Inject
     lateinit var mPresenter: DashboardContract.Presenter
@@ -43,19 +50,12 @@ class DashboardActivity : BaseActivity(), DashboardContract.View {
             when (menuItem.itemId) {
                 R.id.home -> mPresenter.onNavigationHomeClick()
                 R.id.myAccount -> mPresenter.onNavigationAccountSettingsClick()
+                R.id.myProducts -> mPresenter.onNavigationMyProductsClick()
                 R.id.search -> mPresenter.onNavigationSearchClick()
                 R.id.closeSession -> mPresenter.onNavigationCloseSessionClick()
             }
             true
         }
-        // Categories
-        categoriesCarousel.setUp(
-                listOf(
-                        CategoriesCarousel.Category("Tecnologia", R.drawable.category_technology),
-                        CategoriesCarousel.Category("Auto", R.drawable.category_cars),
-                        CategoriesCarousel.Category("Ropa", R.drawable.category_clothes)
-                )
-        ) { mPresenter.onCategorySelected(it) }
 
         mPresenter.onInit()
     }
@@ -88,9 +88,24 @@ class DashboardActivity : BaseActivity(), DashboardContract.View {
     }
 
     override fun showHome() {
+        if (supportFragmentManager.findFragmentByTag(TAG_FRAGMENT_HOME) == null) {
+            supportFragmentManager
+                    .beginTransaction()
+                    .replace(mainContainer.id, HomeFragment.getInstance(), TAG_FRAGMENT_HOME)
+                    .commit()
+        }
     }
 
     override fun showMyAccount() {
+    }
+
+    override fun showMyProducts() {
+        if (supportFragmentManager.findFragmentByTag(TAG_FRAGMENT_MALL) == null) {
+            supportFragmentManager
+                    .beginTransaction()
+                    .replace(mainContainer.id, MallFragment.getInstance(), TAG_FRAGMENT_MALL)
+                    .commit()
+        }
     }
 
     override fun goAuth() {
@@ -109,6 +124,10 @@ class DashboardActivity : BaseActivity(), DashboardContract.View {
     }
 
     override fun showError() {
+    }
+
+    override fun onCategorySelected(category: String) {
+        goSearchCategory(category.toLowerCase())
     }
 
 }
