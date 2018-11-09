@@ -18,22 +18,17 @@ import javax.inject.Inject
 
 class SignInFragment : BaseFragment(), SignInContract.View {
 
-    @Inject
-    lateinit var mPresenter: SignInContract.Presenter
-
-    private val mComponent by lazy { app()!!.component.plus(SignInModule()) }
-    private var mAuthEventsHandler: AuthEventsHandler? = null
-
     companion object {
         fun getInstance(): SignInFragment {
             return SignInFragment()
         }
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        mComponent.inject(this)
-    }
+    @Inject
+    lateinit var mPresenter: SignInContract.Presenter
+
+    private val mComponent by lazy { app()!!.component.plus(SignInModule()) }
+    private var mAuthEventsHandler: AuthEventsHandler? = null
 
     override fun onAttach(context: Context?) {
         super.onAttach(context)
@@ -42,6 +37,11 @@ class SignInFragment : BaseFragment(), SignInContract.View {
         } catch (e: Exception) {
             Timber.e(e, "Activity must implement AuthEventsHandler interface")
         }
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        mComponent.inject(this)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {

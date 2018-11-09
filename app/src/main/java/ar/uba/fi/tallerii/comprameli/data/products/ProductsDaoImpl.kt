@@ -10,8 +10,7 @@ class ProductsDaoImpl(private val AppServerApi: AppServerRestApi) : ProductsDao 
     override fun getProducts(filter: ProductFilter): Single<List<Product>> =
             AppServerApi
                     .products(
-                            name = filter.name,
-                            description = filter.description,
+                            text = filter.text,
                             categories = filter.categories,
                             units = filter.units,
                             x = filter.x,

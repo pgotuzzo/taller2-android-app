@@ -14,6 +14,8 @@ import ar.uba.fi.tallerii.comprameli.presentation.dashboard.home.di.HomeComponen
 import ar.uba.fi.tallerii.comprameli.presentation.dashboard.home.di.HomeModule
 import ar.uba.fi.tallerii.comprameli.presentation.dashboard.mall.di.MallComponent
 import ar.uba.fi.tallerii.comprameli.presentation.dashboard.mall.di.MallModule
+import ar.uba.fi.tallerii.comprameli.presentation.dashboard.profile.di.ProfileComponent
+import ar.uba.fi.tallerii.comprameli.presentation.dashboard.profile.di.ProfileModule
 import ar.uba.fi.tallerii.comprameli.presentation.productdetails.di.ProductDetailsComponent
 import ar.uba.fi.tallerii.comprameli.presentation.productdetails.di.ProductDetailsModule
 import ar.uba.fi.tallerii.comprameli.presentation.search.di.SearchComponent
@@ -33,6 +35,7 @@ interface ApplicationComponent {
     fun plus(module: DashboardModule): DashboardComponent
     fun plus(module: HomeModule): HomeComponent
     fun plus(module: MallModule): MallComponent
+    fun plus(module: ProfileModule): ProfileComponent
     fun plus(module: SearchModule): SearchComponent
     fun plus(module: SearchFiltersModule): SearchFiltersComponent
     fun plus(module: ProductDetailsModule): ProductDetailsComponent

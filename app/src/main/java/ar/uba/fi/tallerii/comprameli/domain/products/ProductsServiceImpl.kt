@@ -9,7 +9,7 @@ class ProductsServiceImpl(private val mProductsDao: ProductsDao) : ProductsServi
     override fun getProducts(): Single<List<Product>> = getProducts(filter = ProductFilter())
 
     override fun getProductsByName(productName: String): Single<List<Product>> =
-            getProducts(filter = ProductFilter(name = productName))
+            getProducts(filter = ProductFilter(text = productName))
 
 
     override fun getProductsByFilter(filter: ProductFilter): Single<List<Product>> =

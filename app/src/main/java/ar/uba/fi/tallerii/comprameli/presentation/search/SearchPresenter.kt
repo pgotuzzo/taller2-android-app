@@ -42,7 +42,7 @@ class SearchPresenter(private val mProductsService: ProductsService,
                     mProfileService
                             .getProfile()
                             .flatMap {
-                                fetchFilteredProductList(ProductFilter(seller = it.sellerId))
+                                fetchFilteredProductList(ProductFilter(seller = it.userId))
                             }.subscribeOn(Schedulers.io())
                             .observeOn(AndroidSchedulers.mainThread())
                 }
@@ -56,7 +56,9 @@ class SearchPresenter(private val mProductsService: ProductsService,
     override fun onEmptySearch() {
         // Check if the full list was already fetched
         if (mIsListFiltered) {
-            fetchFullProductList()
+            val disposable = fetchFullProductList()
+                    .subscribe({ processSearch(it, false) }, { processSearchError() })
+            mCompositeDisposable.add(disposable)
         }
     }
 

@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import ar.uba.fi.tallerii.comprameli.R
 import ar.uba.fi.tallerii.comprameli.presentation.base.BaseFragment
-import ar.uba.fi.tallerii.comprameli.presentation.dashboard.HomeEventHandler
 import ar.uba.fi.tallerii.comprameli.presentation.dashboard.home.di.HomeModule
 import kotlinx.android.synthetic.main.dashboard_home_fragment.*
 import timber.log.Timber

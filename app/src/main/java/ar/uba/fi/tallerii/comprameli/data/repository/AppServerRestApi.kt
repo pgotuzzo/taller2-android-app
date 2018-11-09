@@ -5,6 +5,7 @@ import ar.uba.fi.tallerii.comprameli.data.products.Products
 import ar.uba.fi.tallerii.comprameli.data.profile.Profile
 import ar.uba.fi.tallerii.comprameli.data.session.LogInBody
 import ar.uba.fi.tallerii.comprameli.data.session.Token
+import io.reactivex.Completable
 import io.reactivex.Single
 import retrofit2.http.*
 
@@ -15,8 +16,7 @@ interface AppServerRestApi {
     fun logIn(@Body body: LogInBody): Single<Token>
 
     @GET("products")
-    fun products(@Query("name") name: String?,
-                 @Query("description") description: String?,
+    fun products(@Query("text") text: String?,
                  @Query("seller") seller: String?,
                  @Query("units") units: Int?,
                  @Query("price") price: Float?,
@@ -30,5 +30,8 @@ interface AppServerRestApi {
 
     @GET("/user/profile")
     fun userProfile(): Single<Profile>
+
+    @PUT("/user/profile")
+    fun updateUserProfile(@Body body: Profile): Completable
 
 }

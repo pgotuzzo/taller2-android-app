@@ -2,6 +2,8 @@ package ar.uba.fi.tallerii.comprameli.di.module
 
 import android.content.Context
 import ar.uba.fi.tallerii.comprameli.BuildConfig
+import ar.uba.fi.tallerii.comprameli.data.files.FilesDao
+import ar.uba.fi.tallerii.comprameli.data.files.FilesDaoImpl
 import ar.uba.fi.tallerii.comprameli.data.products.ProductsDao
 import ar.uba.fi.tallerii.comprameli.data.products.ProductsDaoImpl
 import ar.uba.fi.tallerii.comprameli.data.profile.ProfileDao
@@ -60,5 +62,9 @@ class PersistenceModule {
     @PerApplication
     fun provideProfileDao(appServerRestApi: AppServerRestApi): ProfileDao =
             ProfileDaoImpl(appServerRestApi)
+
+    @Provides
+    @PerApplication
+    fun provideFilesDao(): FilesDao = FilesDaoImpl()
 
 }

@@ -71,4 +71,22 @@ class DashboardPresenter(private val mSessionService: SessionService,
         mCompositeDisposable.add(disposable)
     }
 
+    override fun onProfileChanged() {
+        val disposable = mProfileService.getProfile()
+                .map {
+                    DashboardContract.NavMenuHeader(
+                            name = String.format("%s %s", it.name, it.surname),
+                            email = it.email,
+                            avatar = it.avatar
+                    )
+                }
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                        { getView()?.apply { refreshNavMenuHeader(it) } },
+                        { getView()?.showError() }
+                )
+        mCompositeDisposable.add(disposable)
+    }
+
 }

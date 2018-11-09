@@ -44,6 +44,12 @@
     <!--                  Home                      -->
     <string name="dashboard_home_earn_money">Queres ganar algo de dinero?</string>
     <string name="dashboard_home_sell">Publica algo</string>
+    <!--                 Profile                    -->
+    <string name="dashboard_profile_name">Nombre</string>
+    <string name="dashboard_profile_surname">Apellido</string>
+    <string name="dashboard_profile_email">Correo electronico</string>
+    <string name="dashboard_profile_name_error">"Debe ingresar un nombre"</string>
+    <string name="dashboard_profile_surname_error">"Debe ingresar un apellido"</string>
     <!-- ========================================== -->
     <!--                 Search                     -->
     <!-- ========================================== -->

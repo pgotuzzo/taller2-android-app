@@ -10,25 +10,30 @@ import ar.uba.fi.tallerii.comprameli.presentation.GlideApp
 import ar.uba.fi.tallerii.comprameli.presentation.auth.AuthActivity
 import ar.uba.fi.tallerii.comprameli.presentation.base.BaseActivity
 import ar.uba.fi.tallerii.comprameli.presentation.dashboard.di.DashboardModule
+import ar.uba.fi.tallerii.comprameli.presentation.dashboard.home.HomeEventHandler
 import ar.uba.fi.tallerii.comprameli.presentation.dashboard.home.HomeFragment
 import ar.uba.fi.tallerii.comprameli.presentation.dashboard.mall.MallFragment
+import ar.uba.fi.tallerii.comprameli.presentation.dashboard.profile.ProfileEventsHandler
+import ar.uba.fi.tallerii.comprameli.presentation.dashboard.profile.ProfileFragment
 import ar.uba.fi.tallerii.comprameli.presentation.search.SearchActivity
 import kotlinx.android.synthetic.main.dashboad_activity.*
 import kotlinx.android.synthetic.main.dashboard_nav_header.view.*
 import javax.inject.Inject
 
 
-class DashboardActivity : BaseActivity(), DashboardContract.View, HomeEventHandler {
+class DashboardActivity : BaseActivity(), DashboardContract.View, HomeEventHandler,
+        ProfileEventsHandler {
 
     companion object {
         const val TAG_FRAGMENT_HOME = "FragmentHome"
         const val TAG_FRAGMENT_MALL = "FragmentMall"
+        const val TAG_FRAGMENT_PROFILE = "FragmentProfile"
     }
+
+    private val mComponent by lazy { app.component.plus((DashboardModule())) }
 
     @Inject
     lateinit var mPresenter: DashboardContract.Presenter
-
-    private val mComponent by lazy { app.component.plus((DashboardModule())) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -97,6 +102,12 @@ class DashboardActivity : BaseActivity(), DashboardContract.View, HomeEventHandl
     }
 
     override fun showMyAccount() {
+        if (supportFragmentManager.findFragmentByTag(TAG_FRAGMENT_PROFILE) == null) {
+            supportFragmentManager
+                    .beginTransaction()
+                    .replace(mainContainer.id, ProfileFragment.getInstance(), TAG_FRAGMENT_PROFILE)
+                    .commit()
+        }
     }
 
     override fun showMyProducts() {
@@ -128,6 +139,10 @@ class DashboardActivity : BaseActivity(), DashboardContract.View, HomeEventHandl
 
     override fun onCategorySelected(category: String) {
         goSearchCategory(category.toLowerCase())
+    }
+
+    override fun onProfileChanged() {
+        mPresenter.onProfileChanged()
     }
 
 }

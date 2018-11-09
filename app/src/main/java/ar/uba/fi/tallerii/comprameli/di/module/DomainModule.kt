@@ -1,5 +1,6 @@
 package ar.uba.fi.tallerii.comprameli.di.module
 
+import ar.uba.fi.tallerii.comprameli.data.files.FilesDao
 import ar.uba.fi.tallerii.comprameli.data.products.ProductsDao
 import ar.uba.fi.tallerii.comprameli.data.profile.ProfileDao
 import ar.uba.fi.tallerii.comprameli.data.repository.AuthTokenProvider
@@ -30,8 +31,7 @@ class DomainModule {
 
     @Provides
     @PerApplication
-    fun provideProfileService(profileDao: ProfileDao): ProfileService =
-            ProfileServiceImpl(profileDao)
-
+    fun provideProfileService(profileDao: ProfileDao, filesDao: FilesDao): ProfileService =
+            ProfileServiceImpl(profileDao, filesDao)
 
 }

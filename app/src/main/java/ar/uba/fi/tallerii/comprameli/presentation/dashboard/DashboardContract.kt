@@ -26,5 +26,6 @@ interface DashboardContract {
         fun onNavigationMyProductsClick()
         fun onNavigationSearchClick()
         fun onNavigationCloseSessionClick()
+        fun onProfileChanged()
     }
 }
