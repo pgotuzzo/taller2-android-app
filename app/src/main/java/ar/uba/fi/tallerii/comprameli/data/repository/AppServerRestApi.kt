@@ -1,6 +1,7 @@
 package ar.uba.fi.tallerii.comprameli.data.repository
 
 import ar.uba.fi.tallerii.comprameli.data.products.Category
+import ar.uba.fi.tallerii.comprameli.data.products.PaymentMethod
 import ar.uba.fi.tallerii.comprameli.data.products.Product
 import ar.uba.fi.tallerii.comprameli.data.products.Products
 import ar.uba.fi.tallerii.comprameli.data.profile.Profile
@@ -45,5 +46,10 @@ interface AppServerRestApi {
     @GET("/products/categories")
     fun categories(): Single<List<Category>>
 
+    /**
+     * PAYMENTS
+     */
+    @GET("/payments")
+    fun paymentMethods(): Single<List<PaymentMethod>>
 
 }
