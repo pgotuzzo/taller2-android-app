@@ -6,6 +6,8 @@ import ar.uba.fi.tallerii.comprameli.di.module.PersistenceModule
 import ar.uba.fi.tallerii.comprameli.di.scope.PerApplication
 import ar.uba.fi.tallerii.comprameli.presentation.auth.di.AuthComponent
 import ar.uba.fi.tallerii.comprameli.presentation.auth.di.AuthModule
+import ar.uba.fi.tallerii.comprameli.presentation.auth.register.di.RegisterComponent
+import ar.uba.fi.tallerii.comprameli.presentation.auth.register.di.RegisterModule
 import ar.uba.fi.tallerii.comprameli.presentation.auth.signin.di.SignInComponent
 import ar.uba.fi.tallerii.comprameli.presentation.auth.signin.di.SignInModule
 import ar.uba.fi.tallerii.comprameli.presentation.dashboard.di.DashboardComponent
@@ -32,6 +34,7 @@ interface ApplicationComponent {
     fun plus(module: SplashModule): SplashComponent
     fun plus(module: AuthModule): AuthComponent
     fun plus(module: SignInModule): SignInComponent
+    fun plus(module: RegisterModule): RegisterComponent
     fun plus(module: DashboardModule): DashboardComponent
     fun plus(module: HomeModule): HomeComponent
     fun plus(module: MallModule): MallComponent

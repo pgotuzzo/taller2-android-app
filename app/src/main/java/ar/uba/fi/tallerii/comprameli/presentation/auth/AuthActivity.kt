@@ -2,11 +2,13 @@ package ar.uba.fi.tallerii.comprameli.presentation.auth
 
 import android.content.Intent
 import android.os.Bundle
+import android.support.v4.app.Fragment
 import ar.uba.fi.tallerii.comprameli.R
 import ar.uba.fi.tallerii.comprameli.presentation.auth.di.AuthModule
 import ar.uba.fi.tallerii.comprameli.presentation.auth.register.RegisterFragment
 import ar.uba.fi.tallerii.comprameli.presentation.auth.signin.SignInFragment
 import ar.uba.fi.tallerii.comprameli.presentation.base.BaseActivity
+import ar.uba.fi.tallerii.comprameli.presentation.base.BaseFragment
 import ar.uba.fi.tallerii.comprameli.presentation.dashboard.DashboardActivity
 import kotlinx.android.synthetic.main.auth_activity.*
 import javax.inject.Inject
@@ -50,6 +52,12 @@ class AuthActivity : BaseActivity(), AuthContract.View, AuthEventsHandler {
     override fun onAuthComplete() {
         startActivity(Intent(this, DashboardActivity::class.java))
         finish()
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        val fragment : MutableList<Fragment> = supportFragmentManager.fragments
+        fragment[0].onActivityResult(requestCode, resultCode, data)
     }
 
 }

@@ -5,6 +5,7 @@ import ar.uba.fi.tallerii.comprameli.data.repository.PreferencesMap
 import ar.uba.fi.tallerii.comprameli.data.repository.PreferencesMap.Companion.SESSION
 import ar.uba.fi.tallerii.comprameli.data.session.exception.InvalidUserCredentialsException
 import ar.uba.fi.tallerii.comprameli.data.session.exception.NonexistentSessionException
+import com.google.firebase.auth.AuthCredential
 import com.google.firebase.auth.FirebaseAuth
 import io.reactivex.Completable
 import io.reactivex.Single
@@ -15,17 +16,30 @@ import io.reactivex.schedulers.Schedulers
 class SessionDaoImpl(private val mAppServerApi: AppServerRestApi,
                      private val mPreferencesMap: PreferencesMap) : SessionDao {
 
+
     companion object {
         const val KEY_SESSION_AUTH_TOKEN = "auth_token"
         const val KEY_SESSION_USER_NAME = "user_name"
     }
 
     override fun getAuthToken(userName: String, password: String): Single<String> =
-    // Fetch FireBase Token
+            // Fetch FireBase Token
             getFireBaseAuthToken(userName, password).observeOn(Schedulers.io())
                     // Fetch App Server Token
                     .flatMap { fireBaseToken -> mAppServerApi.logIn(LogInBody(fireBaseToken)) }
                     .map { token: Token -> token.token }
+
+
+    override fun getAuthTokenFromFacebookLogin(credential: AuthCredential): Single<Session> =
+            getFireBaseAuthToken(credential).observeOn(Schedulers.io())
+                    .flatMap { fireBaseCredentials: FirebaseFacebookCredentials ->
+                        run {
+                            mAppServerApi.logIn(LogInBody(fireBaseCredentials.authToken)).map { token: Token ->
+                                Session(token.token, fireBaseCredentials.userName)
+                            }
+                        }
+                    }
+
 
     override fun getSession(): Single<Session> =
             Singles.zip(
@@ -55,6 +69,26 @@ class SessionDaoImpl(private val mAppServerApi: AppServerRestApi,
                                     // Success
                                     task.result.user.getIdToken(true).addOnCompleteListener { idTokenResult ->
                                         it.onSuccess(idTokenResult.result.token!!)
+                                    }
+                                } else {
+                                    // Failure
+                                    it.onError(InvalidUserCredentialsException())
+                                }
+                            }
+                        }
+            }
+
+    private fun getFireBaseAuthToken(credential: AuthCredential): Single<FirebaseFacebookCredentials> =
+            Single.create {
+                FirebaseAuth
+                        .getInstance()
+                        .signInWithCredential(credential)
+                        .addOnCompleteListener { task ->
+                            run {
+                                if (task.isSuccessful) {
+                                    val user = task.result.user
+                                    user.getIdToken(true).addOnCompleteListener { idTokenResult ->
+                                        it.onSuccess(FirebaseFacebookCredentials(idTokenResult.result.token!!, user.email!!))
                                     }
                                 } else {
                                     // Failure

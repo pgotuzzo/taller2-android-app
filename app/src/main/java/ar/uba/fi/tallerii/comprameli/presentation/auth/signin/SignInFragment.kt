@@ -15,6 +15,9 @@ import ar.uba.fi.tallerii.comprameli.presentation.utils.SimpleTextWatcher
 import kotlinx.android.synthetic.main.auth_sign_in_fragment.*
 import timber.log.Timber
 import javax.inject.Inject
+import android.content.Intent
+
+
 
 class SignInFragment : BaseFragment(), SignInContract.View {
 
@@ -65,6 +68,9 @@ class SignInFragment : BaseFragment(), SignInContract.View {
         nextBtn.setOnClickListener {
             mPresenter.onNextButtonClick()
         }
+
+        mPresenter.setFacebookLoginBtnBehavior(facebookLoginBtn)
+
     }
 
     override fun onDestroyView() {
@@ -84,8 +90,24 @@ class SignInFragment : BaseFragment(), SignInContract.View {
                 .show()
     }
 
+    override fun showFacebookAuthenticateFailed() {
+        AlertDialog.Builder(context)
+                .setTitle(R.string.auth_sign_in_error_facebook_title)
+                .setMessage(R.string.auth_sign_in_error_facebook_message)
+                .create()
+                .show()
+    }
+
     override fun notifyUserSigned() {
         mAuthEventsHandler?.onAuthComplete()
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        // Pass the activity result back to the Facebook SDK
+        mPresenter.onActivityResult(requestCode, resultCode, data)
+
     }
 
 }

@@ -3,6 +3,7 @@ package ar.uba.fi.tallerii.comprameli.domain.session
 import ar.uba.fi.tallerii.comprameli.data.repository.AuthTokenProvider
 import ar.uba.fi.tallerii.comprameli.data.session.Session
 import ar.uba.fi.tallerii.comprameli.data.session.SessionDao
+import com.google.firebase.auth.AuthCredential
 import io.reactivex.Completable
 import io.reactivex.Single
 
@@ -32,5 +33,15 @@ class SessionServiceImpl(private val mSessionDao: SessionDao,
                     // Invalidate token provider
                     mAuthTokenProvider.invalidateToken()
             ))
+
+    override fun logInWithFacebook(credential: AuthCredential): Completable =
+        mSessionDao.getAuthTokenFromFacebookLogin(credential)
+                    .flatMapCompletable { session ->
+                        Completable.merge(listOf(
+                                mSessionDao.storeSession(session),
+                                mAuthTokenProvider.setAuthToken(session.authToken)
+                        ))
+                    }
+
 
 }

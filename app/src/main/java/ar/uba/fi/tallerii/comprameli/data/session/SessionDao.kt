@@ -1,7 +1,9 @@
 package ar.uba.fi.tallerii.comprameli.data.session
 
 import ar.uba.fi.tallerii.comprameli.data.session.exception.NonexistentSessionException
+import com.google.firebase.auth.AuthCredential
 import io.reactivex.Completable
+import io.reactivex.Observable
 import io.reactivex.Single
 
 interface SessionDao {
@@ -19,5 +21,7 @@ interface SessionDao {
     fun getSession(): Single<Session>
 
     fun clearSession(): Completable
+
+    fun getAuthTokenFromFacebookLogin(credential: AuthCredential): Single<Session>
 
 }
