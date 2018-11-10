@@ -17,7 +17,8 @@ class ProductsDaoImpl(private val AppServerApi: AppServerRestApi) : ProductsDao 
                             y = filter.y,
                             seller = filter.seller,
                             paymentMethods = filter.paymentMethods,
-                            price = filter.price
+                            priceMin = filter.priceMin,
+                            priceMax = filter.priceMax
                     )
                     .map { products -> products.productsList }
                     .onErrorReturn { error: Throwable ->
@@ -29,5 +30,17 @@ class ProductsDaoImpl(private val AppServerApi: AppServerRestApi) : ProductsDao 
                     }
 
     override fun getProductById(productId: String): Single<Product> = AppServerApi.productById(productId)
+
+    override fun getCategories(): Single<List<Category>> = AppServerApi.categories()
+
+    override fun getPaymentMethods(): Single<List<PaymentMethod>> =
+    // FIXME - Missing end point
+            Single.fromCallable {
+                listOf(
+                        PaymentMethod("Efectivo"),
+                        PaymentMethod("Master Card"),
+                        PaymentMethod("Visa")
+                )
+            }
 
 }

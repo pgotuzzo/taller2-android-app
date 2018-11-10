@@ -61,6 +61,13 @@
     <string name="search_menu_filter">Filtrar</string>
     <!--                 Filters                    -->
     <string name="search_filters_title">Filtrar</string>
+    <string name="search_filters_price">Precio</string>
+    <string name="search_filters_price_min">Min</string>
+    <string name="search_filters_price_max">Max</string>
+    <string name="search_filters_units">Unidades</string>
+    <string name="search_filters_units_min">Min</string>
+    <string name="search_filters_categories">Categorias</string>
+    <string name="search_filters_payment_methods">Metodos de pago</string>
     <!-- ========================================== -->
     <!--             Product Details                -->
     <!-- ========================================== -->

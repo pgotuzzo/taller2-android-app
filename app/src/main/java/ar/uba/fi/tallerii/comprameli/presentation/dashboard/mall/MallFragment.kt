@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import ar.uba.fi.tallerii.comprameli.R
+import ar.uba.fi.tallerii.comprameli.model.ProductFilter
 import ar.uba.fi.tallerii.comprameli.presentation.base.BaseFragment
 import ar.uba.fi.tallerii.comprameli.presentation.dashboard.mall.di.MallModule
 import ar.uba.fi.tallerii.comprameli.presentation.search.SearchContract
@@ -64,7 +65,11 @@ class MallFragment : BaseFragment(), SearchContract.View {
     }
 
     override fun goProductDetails(productId: String) {
+        // TODO - Add
+    }
 
+    override fun goFilters(productFilter: ProductFilter) {
+        // No op yet
     }
 
     override fun showError(error: Int) {

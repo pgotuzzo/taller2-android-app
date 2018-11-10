@@ -2,7 +2,6 @@ package ar.uba.fi.tallerii.comprameli.domain.profile
 
 import ar.uba.fi.tallerii.comprameli.data.files.FilesDao
 import ar.uba.fi.tallerii.comprameli.data.profile.ProfileDao
-import ar.uba.fi.tallerii.comprameli.model.Profile
 import io.reactivex.Completable
 import io.reactivex.Single
 

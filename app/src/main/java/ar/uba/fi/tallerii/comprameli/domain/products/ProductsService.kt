@@ -6,20 +6,6 @@ import io.reactivex.Single
 interface ProductsService {
 
     /**
-     * Fetches all the available products
-     *
-     * @return list of products (could be empty)
-     */
-    fun getProducts(): Single<List<Product>>
-
-    /**
-     * Fetches all the available products, filtering them by product name
-     *
-     * @return list of products (could be empty)
-     */
-    fun getProductsByName(productName: String): Single<List<Product>>
-
-    /**
      * Fetches all the available products, filtering them by customize filter
      *
      * @return list of products (could be empty)
@@ -27,6 +13,10 @@ interface ProductsService {
     fun getProductsByFilter(filter: ProductFilter): Single<List<Product>>
 
     fun getProductById(productId: String): Single<Product>
+
+    fun getCategories(): Single<List<Category>>
+
+    fun getPaymentMethods(): Single<List<PaymentMethod>>
 
 }
 

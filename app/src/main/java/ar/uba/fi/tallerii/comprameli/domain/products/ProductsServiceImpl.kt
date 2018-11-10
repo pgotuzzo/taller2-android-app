@@ -6,16 +6,7 @@ import io.reactivex.Single
 
 class ProductsServiceImpl(private val mProductsDao: ProductsDao) : ProductsService {
 
-    override fun getProducts(): Single<List<Product>> = getProducts(filter = ProductFilter())
-
-    override fun getProductsByName(productName: String): Single<List<Product>> =
-            getProducts(filter = ProductFilter(text = productName))
-
-
     override fun getProductsByFilter(filter: ProductFilter): Single<List<Product>> =
-            getProducts(filter = filter)
-
-    private fun getProducts(filter: ProductFilter): Single<List<Product>> =
             mProductsDao
                     .getProducts(filter = filter)
                     .map { list ->
@@ -42,5 +33,15 @@ class ProductsServiceImpl(private val mProductsDao: ProductsDao) : ProductsServi
                                 seller = it.seller,
                                 units = it.units)
                     }
+
+    override fun getCategories(): Single<List<Category>> =
+            mProductsDao.getCategories().map { categoriesList ->
+                categoriesList.map { category -> Category(name = category.name, image = category.image) }
+            }
+
+    override fun getPaymentMethods(): Single<List<PaymentMethod>> =
+            mProductsDao.getPaymentMethods().map { methodsList ->
+                methodsList.map { method -> PaymentMethod(name = method.name) }
+            }
 
 }

@@ -9,5 +9,9 @@
     <dimen name="auth_register_option_label">15sp</dimen>
     <dimen name="auth_register_form_separator_font">15sp</dimen>
     <dimen name="auth_register_form_input_width_percentage">0.75</dimen>
-
+    <!-- ========================================================= -->
+    <!--                       Search                              -->
+    <!-- ========================================================= -->
+    <!--                       Filters                             -->
+    <dimen name="search_filters_section_font">18sp</dimen>
 </resources>

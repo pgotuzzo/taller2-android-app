@@ -1,4 +1,4 @@
-package ar.uba.fi.tallerii.comprameli.model
+package ar.uba.fi.tallerii.comprameli.domain.profile
 
 data class Profile(val email: String,
                    val name: String,

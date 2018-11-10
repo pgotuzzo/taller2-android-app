@@ -1,6 +1,7 @@
 package ar.uba.fi.tallerii.comprameli.presentation.search
 
 import android.support.annotation.IntDef
+import ar.uba.fi.tallerii.comprameli.model.ProductFilter
 import ar.uba.fi.tallerii.comprameli.presentation.MvpPresenter
 
 interface SearchContract {
@@ -23,6 +24,7 @@ interface SearchContract {
         fun refreshList(items: List<SearchItem>)
         fun showEmptyListMessage()
         fun goProductDetails(productId: String)
+        fun goFilters(productFilter: ProductFilter)
         fun showError(@Error error: Int)
     }
 
@@ -32,6 +34,8 @@ interface SearchContract {
         fun onInit(showOnlyOwnerProducts: Boolean)
         fun onEmptySearch()
         fun onSearchSubmit(query: String?)
+        fun onSearchSubmit(productFilter: ProductFilter)
         fun onItemClicked(productId: String)
+        fun onFiltersClick()
     }
 }

@@ -11,15 +11,17 @@ import android.view.Menu
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import ar.uba.fi.tallerii.comprameli.R
+import ar.uba.fi.tallerii.comprameli.model.ProductFilter
 import ar.uba.fi.tallerii.comprameli.presentation.base.BaseActivity
 import ar.uba.fi.tallerii.comprameli.presentation.productdetails.ProductDetailsActivity
 import ar.uba.fi.tallerii.comprameli.presentation.search.di.SearchModule
+import ar.uba.fi.tallerii.comprameli.presentation.search.filter.SearchFiltersEventHandler
 import ar.uba.fi.tallerii.comprameli.presentation.search.filter.SearchFiltersFragment
 import kotlinx.android.synthetic.main.search_activity.*
 import javax.inject.Inject
 
 
-class SearchActivity : BaseActivity(), SearchContract.View {
+class SearchActivity : BaseActivity(), SearchContract.View, SearchFiltersEventHandler {
 
     companion object {
         const val INTENT_EXTRA_CATEGORY = "Category"
@@ -80,15 +82,7 @@ class SearchActivity : BaseActivity(), SearchContract.View {
             if (supportFragmentManager.findFragmentByTag(TAG_FRAGMENT_FILTERS) != null) {
                 supportFragmentManager.popBackStack()
             } else {
-                supportFragmentManager
-                        .beginTransaction()
-                        .setCustomAnimations(
-                                R.animator.frg_transaction_vertical_enter, 0,
-                                0, R.animator.frg_transaction_vertical_exit
-                        )
-                        .add(filterContainer.id, SearchFiltersFragment.getInstance(), TAG_FRAGMENT_FILTERS)
-                        .addToBackStack("Show Filters")
-                        .commit()
+                mPresenter.onFiltersClick()
             }
             true
         }
@@ -115,12 +109,29 @@ class SearchActivity : BaseActivity(), SearchContract.View {
         startActivity(intent)
     }
 
+    override fun goFilters(productFilter: ProductFilter) {
+        supportFragmentManager
+                .beginTransaction()
+                .setCustomAnimations(
+                        R.animator.frg_transaction_vertical_enter, 0,
+                        0, R.animator.frg_transaction_vertical_exit
+                )
+                .add(filterContainer.id, SearchFiltersFragment.getInstance(productFilter), TAG_FRAGMENT_FILTERS)
+                .addToBackStack("Show Filters")
+                .commit()
+    }
+
     override fun showError(error: Int) {
         AlertDialog.Builder(this)
                 .setTitle(R.string.search_error_products_fetch_title)
                 .setMessage(R.string.search_error_products_fetch_message)
                 .create()
                 .show()
+    }
+
+    override fun onFilterChanged(filter: ProductFilter) {
+        supportFragmentManager.popBackStack()
+        mPresenter.onSearchSubmit(filter)
     }
 
     private fun showListOfProducts(show: Boolean) {
