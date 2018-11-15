@@ -6,4 +6,5 @@ data class Product(val productId: String,
                    val images: List<String>,
                    val price: Float,
                    val units: Int,
+                   val question: List<Question>,
                    val seller: String)

@@ -5,7 +5,6 @@ import ar.uba.fi.tallerii.comprameli.presentation.MvpPresenter
 interface ProductDetailsContract {
 
     data class Question(val question: String,
-                        val inquirer: String,
                         val answer: String?)
 
     data class ProductDetails(val title: String,

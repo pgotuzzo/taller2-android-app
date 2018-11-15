@@ -17,4 +17,6 @@ data class Product(@SerializedName("_id")
                    @SerializedName("units")
                    val units: Int,
                    @SerializedName("seller")
-                   val seller: String)
+                   val seller: String,
+                   @SerializedName("questions")
+                   val questions: List<Question>)
