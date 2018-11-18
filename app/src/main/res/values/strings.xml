@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">Compra Meli</string>
+    <string name="facebook_app_id">514087719361269</string>
+    <string name="fb_login_protocol_scheme">fb514087719361269</string>
     <!-- ========================================== -->
     <!--                 Splash                     -->
     <!-- ========================================== -->
@@ -15,12 +17,14 @@
     <string name="auth_register_facebook">Facebook</string>
     <string name="auth_register_create">CREAR</string>
     <string name="auth_register_form_account">Cuenta</string>
-    <string name="auth_register_form_user">Usuario</string>
+    <string name="auth_register_form_user">Email</string>
     <string name="auth_register_form_pass">Contraseña</string>
-    <string name="auth_register_form_confirm_pass">Contraseña</string>
+    <string name="auth_register_form_confirm_pass">Confirmar Contraseña</string>
     <string name="auth_register_form_personal_data">Datos del usuario</string>
     <string name="auth_register_form_name">Nombre</string>
     <string name="auth_register_form_last_name">Apellido</string>
+    <string name="auth_register_error_title">Escribiste bien?</string>
+    <string name="auth_register_error_message">Por favor, completa todos tus datos antes de continuar</string>
     <!--                 Sign in                    -->
     <string name="auth_sign_in_title_1">Ya tenes una cuenta?</string>
     <string name="auth_sign_in_title_2">Inicia Session</string>
@@ -29,6 +33,9 @@
     <string name="auth_sign_in_create_account">CREAR UNA CUENTA</string>
     <string name="auth_sign_in_error_title">Escribiste bien?</string>
     <string name="auth_sign_in_error_message">Chequea que el usuario y la contraseña sean correctos\nY volve a intentar</string>
+    <string name="auth_sign_in_error_facebook_title">Ups!</string>
+    <string name="auth_sign_in_error_facebook_message">El inicio de sesión con Facebook ha fallado.\nIntenta nuevamente mas tarde</string>
+
     <!-- ========================================== -->
     <!--                Dashboard                   -->
     <!-- ========================================== -->
@@ -74,5 +81,6 @@
     <string name="product_details_units">Stock: %1$s unidades</string>
     <string name="product_details_questions">Preguntas y Respuestas</string>
     <string name="product_details_question_answer">Respuesta</string>
+
 
 </resources>

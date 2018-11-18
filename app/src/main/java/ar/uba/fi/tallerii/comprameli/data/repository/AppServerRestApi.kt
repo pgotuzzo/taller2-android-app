@@ -52,4 +52,7 @@ interface AppServerRestApi {
     @GET("/payments")
     fun paymentMethods(): Single<List<PaymentMethod>>
 
+    @POST("/user/register")
+    fun registerUser(@Body body: Profile): Completable
+
 }

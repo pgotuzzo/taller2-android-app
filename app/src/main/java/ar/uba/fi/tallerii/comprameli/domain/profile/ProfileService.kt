@@ -11,5 +11,7 @@ interface ProfileService {
 
     fun updateProfile(profile: Profile, avatarUri: String): Single<Profile>
 
+    fun registerUser(profile: Profile): Completable
+
 }
 

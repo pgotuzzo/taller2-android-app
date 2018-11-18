@@ -5,6 +5,7 @@ import ar.uba.fi.tallerii.comprameli.data.profile.ProfileDao
 import io.reactivex.Completable
 import io.reactivex.Single
 
+
 class ProfileServiceImpl(private val mProfileDao: ProfileDao,
                          private val mFilesDao: FilesDao) : ProfileService {
 
@@ -38,5 +39,17 @@ class ProfileServiceImpl(private val mProfileDao: ProfileDao,
                 val profileUpdated = profile.copy(avatar = it)
                 updateProfile(profileUpdated).toSingleDefault(profileUpdated)
             }
+
+    override fun registerUser(profile: Profile) : Completable =
+            mProfileDao.registerProfile(
+                    ar.uba.fi.tallerii.comprameli.data.profile.Profile(
+                            name = profile.name,
+                            surname = profile.surname,
+                            id = profile.userId,
+                            facebook = profile.facebook,
+                            google = profile.google,
+                            avatar = profile.avatar,
+                            email = profile.email)
+            )
 
 }
