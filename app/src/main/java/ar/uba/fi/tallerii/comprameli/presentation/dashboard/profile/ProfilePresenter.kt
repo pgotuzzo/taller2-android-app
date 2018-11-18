@@ -1,7 +1,7 @@
 package ar.uba.fi.tallerii.comprameli.presentation.dashboard.profile
 
+import ar.uba.fi.tallerii.comprameli.domain.profile.Profile
 import ar.uba.fi.tallerii.comprameli.domain.profile.ProfileService
-import ar.uba.fi.tallerii.comprameli.model.Profile
 import ar.uba.fi.tallerii.comprameli.presentation.base.BasePresenter
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable

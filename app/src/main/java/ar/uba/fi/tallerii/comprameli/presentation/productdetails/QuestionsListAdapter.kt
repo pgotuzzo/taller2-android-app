@@ -16,12 +16,9 @@ class QuestionsListAdapter : RecyclerView.Adapter<QuestionsListAdapter.QuestionI
         fun bind(item: Question) {
             with(itemView) {
                 question.text = item.question
-                inquirer.text = item.inquirer
                 if (item.answer.isNullOrEmpty()) {
-                    answerLabel.visibility = GONE
                     answer.visibility = GONE
                 } else {
-                    answerLabel.visibility = VISIBLE
                     answer.visibility = VISIBLE
                     answer.text = item.answer
                 }

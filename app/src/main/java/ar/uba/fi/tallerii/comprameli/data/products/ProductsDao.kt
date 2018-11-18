@@ -9,4 +9,8 @@ interface ProductsDao {
 
     fun getProductById(productId: String): Single<Product>
 
+    fun getCategories(): Single<List<Category>>
+
+    fun getPaymentMethods(): Single<List<PaymentMethod>>
+
 }
