@@ -8,7 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import ar.uba.fi.tallerii.comprameli.R
 import ar.uba.fi.tallerii.comprameli.data.session.FirebaseCredentials
-import ar.uba.fi.tallerii.comprameli.model.Profile
+import ar.uba.fi.tallerii.comprameli.domain.profile.Profile
 import ar.uba.fi.tallerii.comprameli.presentation.auth.AuthEventsHandler
 import ar.uba.fi.tallerii.comprameli.presentation.auth.register.di.RegisterModule
 import ar.uba.fi.tallerii.comprameli.presentation.base.BaseFragment

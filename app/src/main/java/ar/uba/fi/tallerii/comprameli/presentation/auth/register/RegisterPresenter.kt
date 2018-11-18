@@ -7,7 +7,7 @@ import ar.uba.fi.tallerii.comprameli.presentation.base.BasePresenter
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
-import ar.uba.fi.tallerii.comprameli.model.Profile
+import ar.uba.fi.tallerii.comprameli.domain.profile.Profile
 import timber.log.Timber
 
 class RegisterPresenter(private val mProfileService: ProfileService, private val mSessionService: SessionService) :

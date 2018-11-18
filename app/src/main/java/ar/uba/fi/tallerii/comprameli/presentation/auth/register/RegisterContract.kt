@@ -2,7 +2,7 @@ package ar.uba.fi.tallerii.comprameli.presentation.auth.register
 
 import ar.uba.fi.tallerii.comprameli.data.session.FirebaseCredentials
 import ar.uba.fi.tallerii.comprameli.presentation.MvpPresenter
-import ar.uba.fi.tallerii.comprameli.model.Profile
+import ar.uba.fi.tallerii.comprameli.domain.profile.Profile
 
 interface RegisterContract {
     interface View {
