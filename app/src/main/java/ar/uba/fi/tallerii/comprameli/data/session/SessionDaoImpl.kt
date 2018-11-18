@@ -30,16 +30,11 @@ class SessionDaoImpl(private val mAppServerApi: AppServerRestApi,
                     .map { token: Token -> token.token }
 
 
-    override fun getAuthTokenFromFacebookLogin(credential: AuthCredential): Single<Session> =
-            getFireBaseAuthToken(credential).observeOn(Schedulers.io())
-                    .flatMap { fireBaseCredentials: FirebaseFacebookCredentials ->
-                        run {
-                            mAppServerApi.logIn(LogInBody(fireBaseCredentials.authToken)).map { token: Token ->
-                                Session(token.token, fireBaseCredentials.userName)
-                            }
-                        }
-                    }
 
+
+    override fun getAuthToken(credentials: FirebaseCredentials): Single<String> =
+            mAppServerApi.logIn(LogInBody(credentials.authToken))
+                    .map { token: Token -> token.token }
 
     override fun getSession(): Single<Session> =
             Singles.zip(
@@ -78,7 +73,7 @@ class SessionDaoImpl(private val mAppServerApi: AppServerRestApi,
                         }
             }
 
-    private fun getFireBaseAuthToken(credential: AuthCredential): Single<FirebaseFacebookCredentials> =
+    override fun getFirebaseTokenFromFacebookToken(credential: AuthCredential): Single<FirebaseCredentials> =
             Single.create {
                 FirebaseAuth
                         .getInstance()
@@ -87,8 +82,9 @@ class SessionDaoImpl(private val mAppServerApi: AppServerRestApi,
                             run {
                                 if (task.isSuccessful) {
                                     val user = task.result.user
+                                    val isNewUser = task.result.additionalUserInfo.isNewUser
                                     user.getIdToken(true).addOnCompleteListener { idTokenResult ->
-                                        it.onSuccess(FirebaseFacebookCredentials(idTokenResult.result.token!!, user.email!!))
+                                        it.onSuccess(FirebaseCredentials(idTokenResult.result.token!!, user.email!!, user.uid, isNewUser))
                                     }
                                 } else {
                                     // Failure

@@ -23,6 +23,8 @@
     <string name="auth_register_form_personal_data">Datos del usuario</string>
     <string name="auth_register_form_name">Nombre</string>
     <string name="auth_register_form_last_name">Apellido</string>
+    <string name="auth_register_error_title">Escribiste bien?</string>
+    <string name="auth_register_error_message">Por favor, completa todos tus datos antes de continuar</string>
     <!--                 Sign in                    -->
     <string name="auth_sign_in_title_1">Ya tenes una cuenta?</string>
     <string name="auth_sign_in_title_2">Inicia Session</string>
@@ -72,5 +74,6 @@
     <string name="product_details_units">Stock: %1$s unidades</string>
     <string name="product_details_questions">Preguntas y Respuestas</string>
     <string name="product_details_question_answer">Respuesta</string>
+
 
 </resources>

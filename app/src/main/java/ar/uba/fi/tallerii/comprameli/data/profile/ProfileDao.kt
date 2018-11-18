@@ -9,4 +9,6 @@ interface ProfileDao {
 
     fun updateProfile(profile: Profile): Completable
 
+    fun registerProfile(profile: Profile): Completable
+
 }

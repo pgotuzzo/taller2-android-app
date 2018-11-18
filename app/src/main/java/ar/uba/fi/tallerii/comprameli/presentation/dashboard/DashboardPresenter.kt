@@ -3,6 +3,7 @@ package ar.uba.fi.tallerii.comprameli.presentation.dashboard
 import ar.uba.fi.tallerii.comprameli.domain.profile.ProfileService
 import ar.uba.fi.tallerii.comprameli.domain.session.SessionService
 import ar.uba.fi.tallerii.comprameli.presentation.base.BasePresenter
+import com.facebook.login.LoginManager
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
@@ -68,6 +69,9 @@ class DashboardPresenter(private val mSessionService: SessionService,
                     Timber.d("Redireccionando al flujo de Autenticacion")
                     getView()?.goAuth()
                 }
+
+        LoginManager.getInstance().logOut()
+
         mCompositeDisposable.add(disposable)
     }
 

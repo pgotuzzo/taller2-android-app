@@ -34,4 +34,7 @@ interface AppServerRestApi {
     @PUT("/user/profile")
     fun updateUserProfile(@Body body: Profile): Completable
 
+    @POST("/user/register")
+    fun registerUser(@Body body: Profile): Completable
+
 }

@@ -1,6 +1,7 @@
 package ar.uba.fi.tallerii.comprameli.domain.session
 
 import ar.uba.fi.tallerii.comprameli.data.repository.AuthTokenProvider
+import ar.uba.fi.tallerii.comprameli.data.session.FirebaseCredentials
 import ar.uba.fi.tallerii.comprameli.data.session.Session
 import ar.uba.fi.tallerii.comprameli.data.session.SessionDao
 import com.google.firebase.auth.AuthCredential
@@ -26,6 +27,17 @@ class SessionServiceImpl(private val mSessionDao: SessionDao,
                         ))
                     }
 
+    override fun logIn(credentials: FirebaseCredentials): Completable =
+            mSessionDao.getAuthToken(credentials)
+                    .flatMapCompletable { token ->
+                        Completable.merge(listOf(
+                                // Store session data
+                                mSessionDao.storeSession(Session(authToken = token, userName = credentials.userName)),
+                                // Set up token provider
+                                mAuthTokenProvider.setAuthToken(token)
+                        ))
+                    }
+
     override fun logOut(): Completable =
             Completable.merge(listOf(
                     // Clear session data
@@ -34,14 +46,8 @@ class SessionServiceImpl(private val mSessionDao: SessionDao,
                     mAuthTokenProvider.invalidateToken()
             ))
 
-    override fun logInWithFacebook(credential: AuthCredential): Completable =
-        mSessionDao.getAuthTokenFromFacebookLogin(credential)
-                    .flatMapCompletable { session ->
-                        Completable.merge(listOf(
-                                mSessionDao.storeSession(session),
-                                mAuthTokenProvider.setAuthToken(session.authToken)
-                        ))
-                    }
+    override fun logInWithFacebookToken(credential: AuthCredential): Single<FirebaseCredentials> =
+        mSessionDao.getFirebaseTokenFromFacebookToken(credential)
 
 
 }

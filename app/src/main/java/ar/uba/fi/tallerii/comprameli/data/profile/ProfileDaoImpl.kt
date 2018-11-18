@@ -6,6 +6,8 @@ import io.reactivex.Single
 
 class ProfileDaoImpl(private val mAppServerRestApi: AppServerRestApi) : ProfileDao {
 
+    override fun registerProfile(profile: Profile): Completable = mAppServerRestApi.registerUser(profile)
+
     override fun getProfile(): Single<Profile> = mAppServerRestApi.userProfile()
 
     override fun updateProfile(profile: Profile): Completable =
