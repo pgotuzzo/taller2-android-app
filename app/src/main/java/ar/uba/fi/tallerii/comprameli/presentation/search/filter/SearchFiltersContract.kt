@@ -2,11 +2,9 @@ package ar.uba.fi.tallerii.comprameli.presentation.search.filter
 
 import ar.uba.fi.tallerii.comprameli.model.ProductFilter
 import ar.uba.fi.tallerii.comprameli.presentation.MvpPresenter
+import ar.uba.fi.tallerii.comprameli.presentation.widget.list.adapter.SelectableItem
 
 interface SearchFiltersContract {
-
-    data class SelectableItem(val label: String,
-                              val selected: Boolean)
 
     data class FiltersFormData(val minPrice: String?,
                                val maxPrice: String?,

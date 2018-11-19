@@ -3,7 +3,9 @@ package ar.uba.fi.tallerii.comprameli.data.products
 import ar.uba.fi.tallerii.comprameli.data.repository.AppServerRestApi
 import ar.uba.fi.tallerii.comprameli.model.ProductFilter
 import com.jakewharton.retrofit2.adapter.rxjava2.HttpException
+import io.reactivex.Completable
 import io.reactivex.Single
+import io.reactivex.schedulers.Schedulers
 
 class ProductsDaoImpl(private val mAppServerApi: AppServerRestApi) : ProductsDao {
 
@@ -27,12 +29,18 @@ class ProductsDaoImpl(private val mAppServerApi: AppServerRestApi) : ProductsDao
                                 if (error.code() == 404) ArrayList() else throw error
                             else -> throw error
                         }
-                    }
+                    }.subscribeOn(Schedulers.io())
 
-    override fun getProductById(productId: String): Single<Product> = mAppServerApi.productById(productId)
+    override fun getProductById(productId: String): Single<Product> =
+            mAppServerApi.productById(productId).subscribeOn(Schedulers.io())
 
-    override fun getCategories(): Single<List<Category>> = mAppServerApi.categories()
+    override fun getCategories(): Single<List<Category>> =
+            mAppServerApi.categories().subscribeOn(Schedulers.io())
 
-    override fun getPaymentMethods(): Single<List<PaymentMethod>> = mAppServerApi.paymentMethods()
+    override fun getPaymentMethods(): Single<List<PaymentMethod>> =
+            mAppServerApi.paymentMethods().subscribeOn(Schedulers.io())
+
+    override fun createProduct(product: Product): Completable =
+            mAppServerApi.newProduct(product).subscribeOn(Schedulers.io())
 
 }

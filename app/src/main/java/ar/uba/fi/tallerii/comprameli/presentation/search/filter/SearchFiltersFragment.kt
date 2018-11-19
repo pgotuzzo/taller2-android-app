@@ -11,6 +11,8 @@ import ar.uba.fi.tallerii.comprameli.model.ProductFilter
 import ar.uba.fi.tallerii.comprameli.presentation.base.BaseFragment
 import ar.uba.fi.tallerii.comprameli.presentation.search.filter.SearchFiltersFragment.IntentBundle.KEY_PRODUCT_FILTER
 import ar.uba.fi.tallerii.comprameli.presentation.search.filter.di.SearchFiltersModule
+import ar.uba.fi.tallerii.comprameli.presentation.widget.list.adapter.CategoryToggleListAdapter
+import ar.uba.fi.tallerii.comprameli.presentation.widget.list.adapter.SelectableItem
 import kotlinx.android.synthetic.main.search_filters_fragment.*
 import timber.log.Timber
 import javax.inject.Inject
@@ -40,8 +42,8 @@ class SearchFiltersFragment : BaseFragment(), SearchFiltersContract.View {
     private var mSearchFiltersEventHandler: SearchFiltersEventHandler? = null
 
     private val mComponent by lazy { app()!!.component.plus(SearchFiltersModule()) }
-    private val mCategoriesAdapter = ToggleListAdapter()
-    private val mPaymentMethodsAdapter = ToggleListAdapter()
+    private val mCategoriesAdapter = CategoryToggleListAdapter()
+    private val mPaymentMethodsAdapter = CategoryToggleListAdapter()
 
     override fun onAttach(context: Context?) {
         super.onAttach(context)
@@ -108,11 +110,11 @@ class SearchFiltersFragment : BaseFragment(), SearchFiltersContract.View {
         minUnitsInputEdit.setText(min?.toString())
     }
 
-    override fun setCategories(categories: List<SearchFiltersContract.SelectableItem>) {
+    override fun setCategories(categories: List<SelectableItem>) {
         mCategoriesAdapter.setItems(categories)
     }
 
-    override fun setPaymentMethods(paymentMethods: List<SearchFiltersContract.SelectableItem>) {
+    override fun setPaymentMethods(paymentMethods: List<SelectableItem>) {
         mPaymentMethodsAdapter.setItems(paymentMethods)
     }
 

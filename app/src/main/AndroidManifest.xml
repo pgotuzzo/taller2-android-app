@@ -25,6 +25,7 @@
         <activity android:name=".presentation.dashboard.DashboardActivity" />
         <activity android:name=".presentation.search.SearchActivity" />
         <activity android:name=".presentation.productdetails.ProductDetailsActivity" />
+        <activity android:name=".presentation.publish.PublishActivity" />
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id" />

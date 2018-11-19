@@ -3,7 +3,7 @@ package ar.uba.fi.tallerii.comprameli.presentation.search.filter
 import ar.uba.fi.tallerii.comprameli.domain.products.ProductsService
 import ar.uba.fi.tallerii.comprameli.model.ProductFilter
 import ar.uba.fi.tallerii.comprameli.presentation.base.BasePresenter
-import ar.uba.fi.tallerii.comprameli.presentation.search.filter.SearchFiltersContract.SelectableItem
+import ar.uba.fi.tallerii.comprameli.presentation.widget.list.adapter.SelectableItem
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.Singles

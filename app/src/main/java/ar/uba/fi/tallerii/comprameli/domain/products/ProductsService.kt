@@ -1,6 +1,7 @@
 package ar.uba.fi.tallerii.comprameli.domain.products
 
 import ar.uba.fi.tallerii.comprameli.model.ProductFilter
+import io.reactivex.Completable
 import io.reactivex.Single
 
 interface ProductsService {
@@ -17,6 +18,8 @@ interface ProductsService {
     fun getCategories(): Single<List<Category>>
 
     fun getPaymentMethods(): Single<List<PaymentMethod>>
+
+    fun createProduct(product: Product): Completable
 
 }
 

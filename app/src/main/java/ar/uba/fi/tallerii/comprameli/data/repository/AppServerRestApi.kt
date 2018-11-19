@@ -24,7 +24,7 @@ interface AppServerRestApi {
     fun userProfile(): Single<Profile>
 
     @PUT("/user/profile")
-    fun updateUserProfile(@Body body: Profile): Completable
+    fun updateUserProfile(@Body profile: Profile): Completable
 
     /**
      * PRODUCTS
@@ -42,6 +42,9 @@ interface AppServerRestApi {
 
     @GET("products/{id}")
     fun productById(@Path("id") productId: String): Single<Product>
+
+    @POST("products")
+    fun newProduct(@Body product: Product): Completable
 
     @GET("/products/categories")
     fun categories(): Single<List<Category>>

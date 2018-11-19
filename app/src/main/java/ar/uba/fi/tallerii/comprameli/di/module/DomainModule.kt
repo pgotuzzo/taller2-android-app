@@ -26,8 +26,10 @@ class DomainModule {
 
     @Provides
     @PerApplication
-    fun provideProductsService(productsDao: ProductsDao): ProductsService =
-            ProductsServiceImpl(productsDao)
+    fun provideProductsService(productsDao: ProductsDao,
+                               profileDao: ProfileDao,
+                               filesDao: FilesDao): ProductsService =
+            ProductsServiceImpl(productsDao, profileDao, filesDao)
 
     @Provides
     @PerApplication

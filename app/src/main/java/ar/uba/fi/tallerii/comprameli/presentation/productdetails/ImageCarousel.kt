@@ -55,9 +55,7 @@ class ImageCarousel : ViewPager {
 
         override fun getCount(): Int = imageUrls.size
 
-        override fun destroyItem(container: ViewGroup, position: Int, `object`: Any) {
-            container.removeAllViews()
-        }
+        override fun destroyItem(container: ViewGroup, position: Int, `object`: Any) {}
 
     }
 

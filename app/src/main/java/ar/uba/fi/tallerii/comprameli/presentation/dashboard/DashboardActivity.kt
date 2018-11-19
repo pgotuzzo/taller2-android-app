@@ -15,6 +15,7 @@ import ar.uba.fi.tallerii.comprameli.presentation.dashboard.home.HomeFragment
 import ar.uba.fi.tallerii.comprameli.presentation.dashboard.mall.MallFragment
 import ar.uba.fi.tallerii.comprameli.presentation.dashboard.profile.ProfileEventsHandler
 import ar.uba.fi.tallerii.comprameli.presentation.dashboard.profile.ProfileFragment
+import ar.uba.fi.tallerii.comprameli.presentation.publish.PublishActivity
 import ar.uba.fi.tallerii.comprameli.presentation.search.SearchActivity
 import kotlinx.android.synthetic.main.dashboad_activity.*
 import kotlinx.android.synthetic.main.dashboard_nav_header.view.*
@@ -139,6 +140,10 @@ class DashboardActivity : BaseActivity(), DashboardContract.View, HomeEventHandl
 
     override fun onCategorySelected(category: String) {
         goSearchCategory(category.toLowerCase())
+    }
+
+    override fun onPublishProduct() {
+        startActivity(Intent(this, PublishActivity::class.java))
     }
 
     override fun onProfileChanged() {

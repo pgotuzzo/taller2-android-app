@@ -81,6 +81,18 @@
     <string name="product_details_units">Stock: %1$s unidades</string>
     <string name="product_details_questions">Preguntas y Respuestas</string>
     <string name="product_details_question_answer">Respuesta</string>
+    <!-- ========================================== -->
+    <!--                 Publish                    -->
+    <!-- ========================================== -->
+    <string name="publish_section_images">Imagenes</string>
+    <string name="publish_section_details">Detalles</string>
+    <string name="publish_section_details_title">Titulo</string>
+    <string name="publish_section_details_description">Descripcion</string>
+    <string name="publish_section_details_price">Precio</string>
+    <string name="publish_section_details_units">Stock</string>
+    <string name="publish_section_categories">Categorias</string>
+    <string name="publish_section_payment_methods">Metodos de pago</string>
+    <string name="publish_list_add_item">Agregar\nImagen</string>
 
 
 </resources>

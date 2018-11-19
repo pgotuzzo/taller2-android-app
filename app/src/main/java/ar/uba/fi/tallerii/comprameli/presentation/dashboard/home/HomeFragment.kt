@@ -57,6 +57,9 @@ class HomeFragment : BaseFragment(), HomeContract.View {
                         CategoriesCarousel.Category("Ropa", R.drawable.category_clothes)
                 )
         ) { mHomeEventHandler!!.onCategorySelected(it) }
+
+        // Publish Button
+        publishBtn.setOnClickListener { mHomeEventHandler!!.onPublishProduct() }
     }
 
     override fun onDestroyView() {
