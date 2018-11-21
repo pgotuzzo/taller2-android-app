@@ -32,7 +32,7 @@ class RegisterPresenter(private val mProfileService: ProfileService, private val
                                 },
                                 {
                                     Timber.e(it)
-                                    getView()?.showLoginErrorMessage()
+                                    getView()?.showRegisterErrorMessage()
                                 }
                         )
 

@@ -24,7 +24,9 @@
     <string name="auth_register_form_name">Nombre</string>
     <string name="auth_register_form_last_name">Apellido</string>
     <string name="auth_register_error_title">Escribiste bien?</string>
-    <string name="auth_register_error_message">Por favor, completa todos tus datos antes de continuar</string>
+    <string name="auth_register_error_message_uncomplete_data">Por favor, completa todos tus datos antes de continuar</string>
+    <string name="auth_register_error_message_confirm_password">La confirmacion de tu contraseña no coincide con la misma. \n Ingresa tus datos nuevamente!</string>
+    <string name="auth_register_error_message_password_length">La contraseña debe ser igual o mayor a 6 caracteres. \n Ingresa tus datos nuevamente!</string>
     <!--                 Sign in                    -->
     <string name="auth_sign_in_title_1">Ya tenes una cuenta?</string>
     <string name="auth_sign_in_title_2">Inicia Session</string>

@@ -117,7 +117,7 @@ class RegisterFragment : BaseFragment(), RegisterContract.View {
         val email: String = userInputEdit.text.toString()
         val password: String = passInputEdit.text.toString()
 
-        if (!name.isEmpty() && !lastName.isEmpty() && !email.isEmpty() && !password.isEmpty()) {
+        if (isValid()) {
 
             auth.createUserWithEmailAndPassword(email, password)
                     .addOnCompleteListener { task ->
@@ -133,16 +133,38 @@ class RegisterFragment : BaseFragment(), RegisterContract.View {
                             mPresenter.registerUser(profile)
                         }
                     }
-        } else {
-            showAskToRegisterDataMessage()
         }
 
     }
 
-    private fun showAskToRegisterDataMessage() {
+    private fun isValid(): Boolean {
+        val name: String = nameInputEdit.text.toString()
+        val lastName: String = lastNameInputEdit.text.toString()
+        val email: String = userInputEdit.text.toString()
+        val password: String = passInputEdit.text.toString()
+        val confirmPassword: String = passConfirmInputEdit.text.toString()
+
+        var isValid = true
+
+        if (name.isEmpty() || lastName.isEmpty() || email.isEmpty()
+                || password.isEmpty() || confirmPassword.isEmpty()) {
+            showWriteAlertMessage(R.string.auth_register_error_message_uncomplete_data)
+            isValid =  false
+        } else if (password != confirmPassword) {
+            showWriteAlertMessage(R.string.auth_register_error_message_confirm_password)
+            isValid = false
+        } else if (password.length < 6) {
+            showWriteAlertMessage(R.string.auth_register_error_message_password_length)
+            isValid = false
+        }
+
+        return isValid
+    }
+
+    private fun showWriteAlertMessage(message: Int) {
         AlertDialog.Builder(context)
                 .setTitle(R.string.auth_register_error_title)
-                .setMessage(R.string.auth_register_error_message)
+                .setMessage(message)
                 .create()
                 .show()
     }
@@ -155,7 +177,15 @@ class RegisterFragment : BaseFragment(), RegisterContract.View {
     override fun showLoginErrorMessage() {
         AlertDialog.Builder(context)
                 .setTitle("Ups!")
-                .setMessage("Ocurrio un error al intentar iniciar la sesion..\n Intenta nuevamente")
+                .setMessage("Ocurrio un error al intentar iniciar la sesion..\n Intenta logearte desde la pantalla de logeo.")
+                .create()
+                .show()
+    }
+
+    override fun showRegisterErrorMessage() {
+        AlertDialog.Builder(context)
+                .setTitle("Ups!")
+                .setMessage("Ocurrio un error al intentar registrar tu usuario..\n Intenta nuevamente")
                 .create()
                 .show()
     }

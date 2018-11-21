@@ -8,6 +8,7 @@ interface RegisterContract {
     interface View {
         fun notifyUserSigned()
         fun showLoginErrorMessage()
+        fun showRegisterErrorMessage()
         fun doLogin()
     }
 
