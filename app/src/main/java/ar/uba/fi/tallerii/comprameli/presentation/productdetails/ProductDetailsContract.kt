@@ -16,10 +16,16 @@ interface ProductDetailsContract {
 
     interface View {
         fun showProductDetails(productDetails: ProductDetails)
+        fun enableBuyButton(enable: Boolean)
+        fun enableAskQuestionButton(enable: Boolean)
+        fun showQuestionDialog()
         fun showError()
     }
 
     interface Presenter : MvpPresenter<View> {
         fun onInit(productId: String)
+        fun onAskQuestionButtonClick()
+        fun onSendQuestionClick(question: String?)
+        fun onBuyButtonClick()
     }
 }

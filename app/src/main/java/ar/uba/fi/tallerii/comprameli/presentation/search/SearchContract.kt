@@ -25,6 +25,7 @@ interface SearchContract {
         fun showEmptyListMessage()
         fun goProductDetails(productId: String)
         fun goFilters(productFilter: ProductFilter)
+        fun showLoader(show: Boolean)
         fun showError(@Error error: Int)
     }
 

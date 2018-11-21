@@ -31,14 +31,17 @@ class SearchPresenter(private val mProductsService: ProductsService,
     }
 
     override fun onInit(showOnlyOwnerProducts: Boolean) {
-        if (showOnlyOwnerProducts) {
+        if (!showOnlyOwnerProducts) {
             applyFilter(ProductFilter(), true)
         } else {
             val disposable = mProfileService
                     .getProfile()
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe({ applyFilter(ProductFilter(seller = it.userId), true) }, { processSearchError(it) })
+                    .subscribe(
+                            { applyFilter(ProductFilter(seller = it.userId), true) },
+                            { processSearchError(it) }
+                    )
             mDisposables.add(disposable)
         }
     }
@@ -66,6 +69,7 @@ class SearchPresenter(private val mProductsService: ProductsService,
     private fun applyFilter(productFilter: ProductFilter, isInitializing: Boolean) {
         if (isInitializing || productFilter != mFilter) {
             // Only applies a filter different from the current one
+            getView()?.showLoader(true)
             mFilter = productFilter
             val disposable = mProductsService
                     .getProductsByFilter(productFilter)
@@ -82,6 +86,7 @@ class SearchPresenter(private val mProductsService: ProductsService,
 
     private fun processSearch(items: List<SearchContract.SearchItem>) {
         getView()?.apply {
+            showLoader(false)
             if (items.isEmpty())
                 this.showEmptyListMessage()
             else
@@ -91,7 +96,10 @@ class SearchPresenter(private val mProductsService: ProductsService,
 
     private fun processSearchError(throwable: Throwable) {
         Timber.e(throwable)
-        getView()?.showError(PRODUCTS_FETCH)
+        getView()?.apply {
+            showLoader(false)
+            showError(PRODUCTS_FETCH)
+        }
     }
 
 }

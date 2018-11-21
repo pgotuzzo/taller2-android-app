@@ -1,7 +1,6 @@
 package ar.uba.fi.tallerii.comprameli.presentation.widget
 
 import android.content.Context
-import android.support.v4.content.ContextCompat
 import android.util.AttributeSet
 import android.view.View
 import android.widget.FrameLayout
@@ -27,8 +26,6 @@ class ProgressOverlayView : FrameLayout {
     init {
         View.inflate(context, R.layout.widget_progress_overlay, this)
         isClickable = true
-        alpha = 0.5f
-        setBackgroundColor(ContextCompat.getColor(context, R.color.black))
     }
 
     fun enable(enable: Boolean) {

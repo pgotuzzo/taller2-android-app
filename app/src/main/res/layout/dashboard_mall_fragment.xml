@@ -28,6 +28,7 @@
         app:layout_constraintBottom_toTopOf="@+id/notFoundLabel"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_chainStyle="packed"
         app:layout_constraintWidth_percent="0.5" />
 
@@ -43,5 +44,10 @@
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/notFoundImg" />
+
+    <ar.uba.fi.tallerii.comprameli.presentation.widget.ProgressOverlayView
+        android:id="@+id/progressOverlay"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
 </android.support.constraint.ConstraintLayout>

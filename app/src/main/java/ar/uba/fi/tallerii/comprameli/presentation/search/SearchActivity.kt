@@ -121,6 +121,10 @@ class SearchActivity : BaseActivity(), SearchContract.View, SearchFiltersEventHa
                 .commit()
     }
 
+    override fun showLoader(show: Boolean) {
+        progressOverlay.enable(show)
+    }
+
     override fun showError(error: Int) {
         AlertDialog.Builder(this)
                 .setTitle(R.string.search_error_products_fetch_title)

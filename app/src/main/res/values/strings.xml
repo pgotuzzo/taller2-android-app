@@ -83,6 +83,10 @@
     <string name="product_details_units">Stock: %1$s unidades</string>
     <string name="product_details_questions">Preguntas y Respuestas</string>
     <string name="product_details_question_answer">Respuesta</string>
+    <string name="product_details_ask_question_title">Preguntanos</string>
+    <string name="product_details_ask_question_hint">Que te gustaria saber?</string>
+    <string name="product_details_ask_question_send">ENVIAR</string>
+    <string name="product_details_ask_question_cancel">CANCELAR</string>
     <!-- ========================================== -->
     <!--                 Publish                    -->
     <!-- ========================================== -->

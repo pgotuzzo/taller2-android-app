@@ -72,6 +72,10 @@ class MallFragment : BaseFragment(), SearchContract.View {
         // No op yet
     }
 
+    override fun showLoader(show: Boolean) {
+        progressOverlay.enable(show)
+    }
+
     override fun showError(error: Int) {
         AlertDialog.Builder(context)
                 .setTitle(R.string.search_error_products_fetch_title)

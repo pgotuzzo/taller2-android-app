@@ -51,6 +51,14 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/notFoundImg" />
 
+    <ar.uba.fi.tallerii.comprameli.presentation.widget.ProgressOverlayView
+        android:id="@+id/progressOverlay"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar"
+        tools:visibility="gone" />
+
     <FrameLayout
         android:id="@+id/filterContainer"
         android:layout_width="match_parent"
