@@ -1,9 +1,6 @@
 package ar.uba.fi.tallerii.comprameli.data.repository
 
-import ar.uba.fi.tallerii.comprameli.data.products.Category
-import ar.uba.fi.tallerii.comprameli.data.products.PaymentMethod
-import ar.uba.fi.tallerii.comprameli.data.products.Product
-import ar.uba.fi.tallerii.comprameli.data.products.Products
+import ar.uba.fi.tallerii.comprameli.data.products.*
 import ar.uba.fi.tallerii.comprameli.data.profile.Profile
 import ar.uba.fi.tallerii.comprameli.data.session.LogInBody
 import ar.uba.fi.tallerii.comprameli.data.session.Token
@@ -48,6 +45,15 @@ interface AppServerRestApi {
 
     @GET("/products/categories")
     fun categories(): Single<List<Category>>
+
+    @POST("/products/{id}/questions")
+    fun addQuestionToProduct(@Path("id") productId: String,
+                             @Body question: Question): Single<Product>
+
+    @POST("/products/{id}/questions/{questionId}/answers")
+    fun answer(@Path("id") productId: String,
+               @Path("questionId") questionId: String,
+               @Body answer: AnswerBody): Single<Product>
 
     /**
      * PAYMENTS

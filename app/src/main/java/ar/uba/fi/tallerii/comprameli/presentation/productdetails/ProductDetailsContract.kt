@@ -4,7 +4,8 @@ import ar.uba.fi.tallerii.comprameli.presentation.MvpPresenter
 
 interface ProductDetailsContract {
 
-    data class Question(val question: String,
+    data class Question(val id: String,
+                        val question: String,
                         val answer: String?)
 
     data class ProductDetails(val title: String,
@@ -17,15 +18,18 @@ interface ProductDetailsContract {
     interface View {
         fun showProductDetails(productDetails: ProductDetails)
         fun enableBuyButton(enable: Boolean)
-        fun enableAskQuestionButton(enable: Boolean)
-        fun showQuestionDialog()
+        fun enableQuestionButton(alert: Boolean)
+        fun disableQuestionButton()
+        fun showAskQuestionDialog()
+        fun showSelectQuestionToAnswerDialog(questions: List<Question>)
         fun showError()
     }
 
     interface Presenter : MvpPresenter<View> {
         fun onInit(productId: String)
-        fun onAskQuestionButtonClick()
-        fun onSendQuestionClick(question: String?)
+        fun onQuestionButtonClick()
+        fun onSendQuestionClick(question: String)
+        fun onSendAnswerClick(questionId: String, answer: String)
         fun onBuyButtonClick()
     }
 }

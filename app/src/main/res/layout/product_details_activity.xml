@@ -119,6 +119,7 @@
         android:clickable="true"
         android:focusable="true"
         android:src="@drawable/ic_shop"
+        android:visibility="invisible"
         app:backgroundTint="@color/colorPrimaryDark"
         app:fabSize="normal" />
 
@@ -131,6 +132,7 @@
         android:clickable="true"
         android:focusable="true"
         android:src="@drawable/ic_question"
+        android:visibility="invisible"
         app:backgroundTint="@color/colorPrimaryDark"
         app:fabSize="normal" />
 

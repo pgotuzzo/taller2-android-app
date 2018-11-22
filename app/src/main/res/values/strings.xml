@@ -87,6 +87,10 @@
     <string name="product_details_ask_question_hint">Que te gustaria saber?</string>
     <string name="product_details_ask_question_send">ENVIAR</string>
     <string name="product_details_ask_question_cancel">CANCELAR</string>
+    <string name="product_details_select_question_title">Elegi la pregunta queres responder?</string>
+    <string name="product_details_answer_question_title">Responde</string>
+    <string name="product_details_answer_question_hint">Respuesta</string>
+    <string name="product_details_answer_question_send">ENVIAR RESPUESTA</string>
     <!-- ========================================== -->
     <!--                 Publish                    -->
     <!-- ========================================== -->

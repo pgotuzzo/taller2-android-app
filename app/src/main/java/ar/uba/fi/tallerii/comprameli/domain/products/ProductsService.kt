@@ -21,5 +21,9 @@ interface ProductsService {
 
     fun createProduct(product: Product): Completable
 
+    fun addQuestionToProduct(productId: String, question: String): Single<Product>
+
+    fun answerQuestion(productId: String, questionId: String, answer: String): Single<Product>
+
 }
 

@@ -64,6 +64,14 @@ class ProductsServiceImpl(private val mProductsDao: ProductsDao,
                 }
     }
 
+    override fun addQuestionToProduct(productId: String, question: String): Single<Product> =
+            mProductsDao.addQuestionToProduct(productId, question).map { p -> productFrom(p) }
+
+    override fun answerQuestion(productId: String,
+                                questionId: String,
+                                answer: String): Single<Product> =
+            mProductsDao.answerQuestion(productId, questionId, answer).map { p -> productFrom(p) }
+
     private fun answerFrom(answer: ar.uba.fi.tallerii.comprameli.data.products.Answer?) =
             if (answer == null) null else Answer(id = answer.id, text = answer.text)
 
@@ -82,7 +90,7 @@ class ProductsServiceImpl(private val mProductsDao: ProductsDao,
                     units = product.units,
                     categories = product.categories,
                     paymentMethods = product.paymentMethods,
-                    question = product.questions.map { q -> questionFrom(q) }
+                    questions = product.questions.map { q -> questionFrom(q) }
             )
 
     private fun productTo(product: Product) =
