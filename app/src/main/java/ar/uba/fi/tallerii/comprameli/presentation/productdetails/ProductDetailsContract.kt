@@ -1,5 +1,6 @@
 package ar.uba.fi.tallerii.comprameli.presentation.productdetails
 
+import ar.uba.fi.tallerii.comprameli.domain.products.Product
 import ar.uba.fi.tallerii.comprameli.presentation.MvpPresenter
 
 interface ProductDetailsContract {
@@ -23,6 +24,7 @@ interface ProductDetailsContract {
         fun showAskQuestionDialog()
         fun showSelectQuestionToAnswerDialog(questions: List<Question>)
         fun showError()
+        fun goCheckOut(product: Product)
     }
 
     interface Presenter : MvpPresenter<View> {

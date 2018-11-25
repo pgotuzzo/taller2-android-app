@@ -44,7 +44,9 @@ class ProductDetailsPresenter(private val mProductsService: ProductsService,
     }
 
     override fun onBuyButtonClick() {
-        // TODO - Implement
+        mProduct?.apply {
+            getView()?.goCheckOut(this)
+        }
     }
 
     override fun onQuestionButtonClick() {
@@ -116,7 +118,7 @@ class ProductDetailsPresenter(private val mProductsService: ProductsService,
 
     private fun fromQuestion(question: Question): ProductDetailsContract.Question =
             ProductDetailsContract.Question(
-                    id = question.id!!,
+                    id = question.id,
                     question = question.text,
                     answer = question.answer?.text)
 

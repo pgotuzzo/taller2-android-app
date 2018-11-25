@@ -19,7 +19,7 @@ interface ProductsService {
 
     fun getPaymentMethods(): Single<List<PaymentMethod>>
 
-    fun createProduct(product: Product): Completable
+    fun createProduct(productData: ProductData): Completable
 
     fun addQuestionToProduct(productId: String, question: String): Single<Product>
 

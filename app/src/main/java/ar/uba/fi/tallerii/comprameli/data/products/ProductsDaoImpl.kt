@@ -40,12 +40,12 @@ class ProductsDaoImpl(private val mAppServerApi: AppServerRestApi) : ProductsDao
     override fun getPaymentMethods(): Single<List<PaymentMethod>> =
             mAppServerApi.paymentMethods().subscribeOn(Schedulers.io())
 
-    override fun createProduct(product: Product): Completable =
-            mAppServerApi.newProduct(product).subscribeOn(Schedulers.io())
+    override fun createProduct(productData: ProductData): Completable =
+            mAppServerApi.newProduct(productData).subscribeOn(Schedulers.io())
 
     override fun addQuestionToProduct(productId: String, question: String): Single<Product> =
             mAppServerApi
-                    .addQuestionToProduct(productId, Question(text = question))
+                    .addQuestionToProduct(productId, QuestionData(text = question))
                     .subscribeOn(Schedulers.io())
 
     override fun answerQuestion(productId: String,

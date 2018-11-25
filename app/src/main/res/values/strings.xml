@@ -37,7 +37,6 @@
     <string name="auth_sign_in_error_message">Chequea que el usuario y la contraseña sean correctos\nY volve a intentar</string>
     <string name="auth_sign_in_error_facebook_title">Ups!</string>
     <string name="auth_sign_in_error_facebook_message">El inicio de sesión con Facebook ha fallado.\nIntenta nuevamente mas tarde</string>
-
     <!-- ========================================== -->
     <!--                Dashboard                   -->
     <!-- ========================================== -->
@@ -103,6 +102,17 @@
     <string name="publish_section_categories">Categorias</string>
     <string name="publish_section_payment_methods">Metodos de pago</string>
     <string name="publish_list_add_item">Agregar\nImagen</string>
+    <!-- ========================================== -->
+    <!--               Check Out                    -->
+    <!-- ========================================== -->
+    <string name="check_out_price">Precio Unitario:\n%1$s</string>
+    <string name="check_out_label_1">Ya casi es tuyo!</string>
+    <string name="check_out_label_2">Ingresa los datos faltantes para concretar la compra</string>
+    <string name="check_out_units_selection">Cuantas unidades queres pedir?</string>
+    <string name="check_out_payment_selection">Como queres realizar el pago?</string>
+    <string name="check_out_payment_selection_unique">Solo hay un metodo de pago disponible</string>
+    <string name="check_out_payment_cash">Efectivo</string>
+    <string name="check_out_payment_card">Tarjeta</string>
 
 
 </resources>

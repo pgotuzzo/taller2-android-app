@@ -1,6 +1,6 @@
 package ar.uba.fi.tallerii.comprameli.presentation.publish
 
-import ar.uba.fi.tallerii.comprameli.domain.products.Product
+import ar.uba.fi.tallerii.comprameli.domain.products.ProductData
 import ar.uba.fi.tallerii.comprameli.domain.products.ProductsService
 import ar.uba.fi.tallerii.comprameli.presentation.base.BasePresenter
 import ar.uba.fi.tallerii.comprameli.presentation.widget.list.adapter.SelectableItem
@@ -96,7 +96,7 @@ class PublishPresenter(private val mProductsService: ProductsService) :
     override fun onSubmit(imagesUri: List<String>, categories: List<String>, paymentMethods: List<String>) {
         if (!mIsProcessing) {
             mIsProcessing = true
-            val newProduct = Product(
+            val newProduct = ProductData(
                     title = mTitle!!,
                     description = mDescription!!,
                     price = mPrice!!,
@@ -120,14 +120,14 @@ class PublishPresenter(private val mProductsService: ProductsService) :
         }
     }
 
-    private fun submitProduct(product: Product) {
+    private fun submitProduct(productData: ProductData) {
         getView()?.apply {
             // Update UI
             showSubmitButton(false)
             showLoading(true)
         }
         val disposable = mProductsService
-                .createProduct(product)
+                .createProduct(productData)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe {
                     getView()?.apply {

@@ -1,13 +1,16 @@
 package ar.uba.fi.tallerii.comprameli.presentation.productdetails
 
 import android.app.AlertDialog
+import android.content.Intent
 import android.content.res.ColorStateList
 import android.os.Bundle
 import android.support.v4.content.ContextCompat
 import android.support.v7.widget.LinearLayoutManager
 import android.view.View
 import ar.uba.fi.tallerii.comprameli.R
+import ar.uba.fi.tallerii.comprameli.domain.products.Product
 import ar.uba.fi.tallerii.comprameli.presentation.base.BaseActivity
+import ar.uba.fi.tallerii.comprameli.presentation.checkout.CheckOutActivity
 import ar.uba.fi.tallerii.comprameli.presentation.productdetails.di.ProductDetailsModule
 import kotlinx.android.synthetic.main.product_details_activity.*
 import kotlinx.android.synthetic.main.product_details_answer_question_dialog.view.*
@@ -45,6 +48,7 @@ class ProductDetailsActivity : BaseActivity(), ProductDetailsContract.View {
             questionsList.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
 
             questionBtn.setOnClickListener { mPresenter.onQuestionButtonClick() }
+            buyBtn.setOnClickListener { mPresenter.onBuyButtonClick() }
 
             mPresenter.onInit(productId)
         }
@@ -111,6 +115,12 @@ class ProductDetailsActivity : BaseActivity(), ProductDetailsContract.View {
                 .setOnDismissListener { finish() }
                 .create()
                 .show()
+    }
+
+    override fun goCheckOut(product: Product) {
+        val intent = Intent(this, CheckOutActivity::class.java)
+        intent.putExtras(CheckOutActivity.createBundle(product))
+        startActivity(intent)
     }
 
     private fun showAnswerQuestionDialog(question: ProductDetailsContract.Question) {

@@ -74,7 +74,7 @@ class SearchPresenter(private val mProductsService: ProductsService,
             val disposable = mProductsService
                     .getProductsByFilter(productFilter)
                     .map { products ->
-                        products.map { SearchContract.SearchItem(it.productId!!, it.images, it.title, it.price) }
+                        products.map { SearchContract.SearchItem(it.productId, it.images, it.title, it.price) }
                     }
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())

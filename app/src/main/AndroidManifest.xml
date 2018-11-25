@@ -13,6 +13,7 @@
         <!-- =============================================================== -->
         <!--                            ACTIVITY                             -->
         <!-- =============================================================== -->
+        <!-- ========================= Comprameli ========================== -->
         <activity android:name=".presentation.splash.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
@@ -26,15 +27,12 @@
         <activity android:name=".presentation.search.SearchActivity" />
         <activity android:name=".presentation.productdetails.ProductDetailsActivity" />
         <activity android:name=".presentation.publish.PublishActivity" />
-        <meta-data
-            android:name="com.facebook.sdk.ApplicationId"
-            android:value="@string/facebook_app_id" />
-
+        <activity android:name=".presentation.checkout.CheckOutActivity" />
+        <!-- ========================= Facebook =========================== -->
         <activity
             android:name="com.facebook.FacebookActivity"
             android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
             android:label="@string/app_name" />
-
         <activity
             android:name="com.facebook.CustomTabActivity"
             android:exported="true">
@@ -47,6 +45,14 @@
                 <data android:scheme="@string/fb_login_protocol_scheme" />
             </intent-filter>
         </activity>
+
+        <!-- =============================================================== -->
+        <!--                            META-DATA                            -->
+        <!-- =============================================================== -->
+        <!-- ========================= Facebook ============================ -->
+        <meta-data
+            android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/facebook_app_id" />
 
     </application>
 

@@ -41,14 +41,14 @@ interface AppServerRestApi {
     fun productById(@Path("id") productId: String): Single<Product>
 
     @POST("products")
-    fun newProduct(@Body product: Product): Completable
+    fun newProduct(@Body product: ProductData): Completable
 
     @GET("/products/categories")
     fun categories(): Single<List<Category>>
 
     @POST("/products/{id}/questions")
     fun addQuestionToProduct(@Path("id") productId: String,
-                             @Body question: Question): Single<Product>
+                             @Body questionData: QuestionData): Single<Product>
 
     @POST("/products/{id}/questions/{questionId}/answers")
     fun answer(@Path("id") productId: String,

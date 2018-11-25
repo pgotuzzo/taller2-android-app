@@ -35,7 +35,7 @@ class ProductsServiceImpl(private val mProductsDao: ProductsDao,
                 methodsList.map { method -> PaymentMethod(name = method.name) }
             }
 
-    override fun createProduct(product: Product): Completable {
+    override fun createProduct(productData: ProductData): Completable {
         val dateFormat = SimpleDateFormat("yyyy-MM-dd_HH-mm-ss", Locale.US)
         val timeStamp = dateFormat.format(Calendar.getInstance().time)
         val imagesUrls: MutableList<String> = MutableList(0) { "" }
@@ -44,7 +44,7 @@ class ProductsServiceImpl(private val mProductsDao: ProductsDao,
         // Fetch User Id
         return mProfileDao.getProfile().map { profile -> profile.id }.flatMapObservable { userId ->
             // Upload images
-            product.images.toObservable().flatMapSingle { imageUri ->
+            productData.images.toObservable().flatMapSingle { imageUri ->
                 count++
                 mFilesDao.uploadFile(imageUri, "images/$userId/products/$timeStamp/$count.png")
             }.map { url ->
@@ -54,9 +54,9 @@ class ProductsServiceImpl(private val mProductsDao: ProductsDao,
         }.flatMapCompletable { Completable.complete() }
                 // Modify product to make use of urls
                 .andThen {
-                    val updatedProduct = product.copy(images = imagesUrls)
+                    val updatedProduct = productData.copy(images = imagesUrls)
                     val disposable = mProductsDao
-                            .createProduct(productTo(updatedProduct))
+                            .createProduct(productDataTo(updatedProduct))
                             .doOnComplete { it.onComplete() }
                             .doOnError { e -> it.onError(e) }
                             .subscribe()
@@ -93,16 +93,15 @@ class ProductsServiceImpl(private val mProductsDao: ProductsDao,
                     questions = product.questions.map { q -> questionFrom(q) }
             )
 
-    private fun productTo(product: Product) =
-            ar.uba.fi.tallerii.comprameli.data.products.Product(
-                    id = product.productId,
-                    name = product.title,
-                    description = product.description,
-                    images = product.images,
-                    price = product.price,
-                    units = product.units,
-                    categories = product.categories,
-                    paymentMethods = product.paymentMethods,
+    private fun productDataTo(productData: ProductData) =
+            ar.uba.fi.tallerii.comprameli.data.products.ProductData(
+                    name = productData.title,
+                    description = productData.description,
+                    images = productData.images,
+                    price = productData.price,
+                    units = productData.units,
+                    categories = productData.categories,
+                    paymentMethods = productData.paymentMethods,
                     location = Location(0.0, 0.0)
             )
 
