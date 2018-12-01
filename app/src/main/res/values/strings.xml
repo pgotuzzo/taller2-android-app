@@ -113,6 +113,26 @@
     <string name="check_out_payment_selection_unique">Solo hay un metodo de pago disponible</string>
     <string name="check_out_payment_cash">Efectivo</string>
     <string name="check_out_payment_card">Tarjeta</string>
+    <string name="check_out_card_dialog_title">Ingrese los datos de su tarjeta</string>
+    <string name="check_out_confirm_dialog_title">Confirmacion</string>
+    <string name="check_out_confirm_dialog_message">Desea realizar la transaccion?</string>
+    <string name="check_out_confirm_dialog_positive">ACEPTAR</string>
+    <string name="check_out_confirm_dialog_negative">CANCELAR</string>
+    <!--                Card Form                   -->
+    <string name="check_out_card_form_hint_card_number">Numero de tarjeta</string>
+    <string name="check_out_card_form_hint_card_holder">Nombre y apellidos del titular</string>
+    <string name="check_out_card_form_desc_security_code">Codigo de Seguridad</string>
+    <string name="check_out_card_form_hint_cvv">CVV</string>
+    <string name="check_out_card_form_desc_expiration">Fecha de vencimiento</string>
+    <string name="check_out_card_form_confirm">CONFIRMAR</string>
 
+
+    <!-- ========================================== -->
+    <!--                 Widgets                    -->
+    <!-- ========================================== -->
+    <string name="widget_card_date_picker_title">Seleccione la fecha de vencimiento de su tarjeta</string>
+    <string name="widget_card_date_picker_year">Año</string>
+    <string name="widget_card_date_picker_month">Mes</string>
+    <string name="widget_card_date_picker_confirm">Confirmar</string>
 
 </resources>

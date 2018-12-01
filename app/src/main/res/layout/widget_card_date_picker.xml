@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:gravity="left"
+        android:text="@string/widget_card_date_picker_title"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@+id/yearLabel"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="packed" />
+
+    <TextView
+        android:id="@+id/yearLabel"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:text="@string/widget_card_date_picker_year"
+        android:textColor="@color/colorPrimary"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toTopOf="@+id/yearPicker"
+        app:layout_constraintLeft_toLeftOf="@+id/yearPicker"
+        app:layout_constraintRight_toRightOf="@+id/yearPicker"
+        app:layout_constraintTop_toBottomOf="@+id/title" />
+
+    <NumberPicker
+        android:id="@+id/yearPicker"
+        android:layout_width="wrap_content"
+        android:layout_height="120dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/monthPicker"
+        app:layout_constraintTop_toBottomOf="@+id/yearLabel" />
+
+    <TextView
+        android:id="@+id/monthLabel"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="@string/widget_card_date_picker_month"
+        android:textColor="@color/colorPrimary"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toTopOf="@+id/monthPicker"
+        app:layout_constraintLeft_toLeftOf="@+id/monthPicker"
+        app:layout_constraintRight_toRightOf="@+id/monthPicker" />
+
+    <NumberPicker
+        android:id="@+id/monthPicker"
+        android:layout_width="wrap_content"
+        android:layout_height="120dp"
+        app:layout_constraintBottom_toBottomOf="@+id/yearPicker"
+        app:layout_constraintLeft_toRightOf="@id/yearPicker"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/yearPicker" />
+
+</android.support.constraint.ConstraintLayout>

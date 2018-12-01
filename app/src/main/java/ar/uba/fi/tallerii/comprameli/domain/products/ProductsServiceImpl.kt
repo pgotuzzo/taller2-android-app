@@ -32,7 +32,7 @@ class ProductsServiceImpl(private val mProductsDao: ProductsDao,
 
     override fun getPaymentMethods(): Single<List<PaymentMethod>> =
             mProductsDao.getPaymentMethods().map { methodsList ->
-                methodsList.map { method -> PaymentMethod(name = method.name) }
+                methodsList.map { method -> paymentMethodFrom(method) }
             }
 
     override fun createProduct(productData: ProductData): Completable {
@@ -72,6 +72,9 @@ class ProductsServiceImpl(private val mProductsDao: ProductsDao,
                                 answer: String): Single<Product> =
             mProductsDao.answerQuestion(productId, questionId, answer).map { p -> productFrom(p) }
 
+    private fun paymentMethodFrom(paymentMethod: ar.uba.fi.tallerii.comprameli.data.products.PaymentMethod) =
+            PaymentMethod(name = paymentMethod.name, image = paymentMethod.image, type = paymentMethod.type)
+
     private fun answerFrom(answer: ar.uba.fi.tallerii.comprameli.data.products.Answer?) =
             if (answer == null) null else Answer(id = answer.id, text = answer.text)
 
@@ -89,7 +92,7 @@ class ProductsServiceImpl(private val mProductsDao: ProductsDao,
                     seller = product.seller,
                     units = product.units,
                     categories = product.categories,
-                    paymentMethods = product.paymentMethods,
+                    paymentMethods = product.paymentMethods.map { p -> paymentMethodFrom(p) },
                     questions = product.questions.map { q -> questionFrom(q) }
             )
 

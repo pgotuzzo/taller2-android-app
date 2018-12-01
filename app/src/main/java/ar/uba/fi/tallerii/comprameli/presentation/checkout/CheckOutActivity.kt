@@ -1,5 +1,7 @@
 package ar.uba.fi.tallerii.comprameli.presentation.checkout
 
+import android.app.Activity
+import android.app.AlertDialog
 import android.os.Bundle
 import android.view.View.GONE
 import android.view.View.VISIBLE
@@ -9,6 +11,7 @@ import ar.uba.fi.tallerii.comprameli.presentation.GlideApp
 import ar.uba.fi.tallerii.comprameli.presentation.base.BaseActivity
 import ar.uba.fi.tallerii.comprameli.presentation.checkout.CheckOutContract.Companion.CARD
 import ar.uba.fi.tallerii.comprameli.presentation.checkout.CheckOutContract.Companion.CASH
+import ar.uba.fi.tallerii.comprameli.presentation.checkout.cardform.CheckOutCardFormView
 import ar.uba.fi.tallerii.comprameli.presentation.checkout.di.CheckOutModule
 import kotlinx.android.synthetic.main.check_out_activity.*
 import timber.log.Timber
@@ -72,6 +75,7 @@ class CheckOutActivity : BaseActivity(), CheckOutContract.View {
                 mPresenter.onNextButtonClick()
             }
             unitsInput.setMin(1)
+            unitsInput.setListener { units -> mPresenter.onUnitsChanged(units) }
 
             mPresenter.onInit(product)
         }
@@ -114,5 +118,40 @@ class CheckOutActivity : BaseActivity(), CheckOutContract.View {
 
     override fun showNextBtn() {
         nextBtn.show()
+    }
+
+    override fun showCardDetailsForm(cardsAvailable: List<CheckOutContract.Card>) {
+        val dialogView = CheckOutCardFormView(this, null, cardsAvailable)
+        val dialog = AlertDialog.Builder(this)
+                .setTitle(R.string.check_out_card_dialog_title)
+                .setView(dialogView)
+                .create()
+        dialog.show()
+        dialogView.setListener { cardDetails ->
+            dialog.dismiss()
+            mPresenter.onCardDetailsInput(cardDetails)
+        }
+    }
+
+    override fun showConfirmationDialog() {
+        AlertDialog.Builder(this)
+                .setTitle(R.string.check_out_confirm_dialog_title)
+                .setMessage(R.string.check_out_confirm_dialog_message)
+                .setPositiveButton(R.string.check_out_confirm_dialog_positive) { _, _ -> mPresenter.onPaymentConfirmed() }
+                .setNegativeButton(R.string.check_out_confirm_dialog_negative) { _, _ -> }
+                .create()
+                .show()
+    }
+
+    override fun showError() {
+        AlertDialog.Builder(this)
+                .setTitle("Algo salio mal")
+                .create()
+                .show()
+    }
+
+    override fun dismiss() {
+        setResult(Activity.RESULT_OK)
+        finish()
     }
 }

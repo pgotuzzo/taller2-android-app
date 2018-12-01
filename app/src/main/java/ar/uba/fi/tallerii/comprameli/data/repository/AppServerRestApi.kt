@@ -1,5 +1,7 @@
 package ar.uba.fi.tallerii.comprameli.data.repository
 
+import ar.uba.fi.tallerii.comprameli.data.orders.OrderData
+import ar.uba.fi.tallerii.comprameli.data.orders.OrderTracking
 import ar.uba.fi.tallerii.comprameli.data.products.*
 import ar.uba.fi.tallerii.comprameli.data.profile.Profile
 import ar.uba.fi.tallerii.comprameli.data.session.LogInBody
@@ -16,6 +18,9 @@ interface AppServerRestApi {
      */
     @POST("user/auth")
     fun logIn(@Body body: LogInBody): Single<Token>
+
+    @POST("/user/register")
+    fun registerUser(@Body profile: Profile): Completable
 
     @GET("/user/profile")
     fun userProfile(): Single<Profile>
@@ -61,7 +66,10 @@ interface AppServerRestApi {
     @GET("/payments")
     fun paymentMethods(): Single<List<PaymentMethod>>
 
-    @POST("/user/register")
-    fun registerUser(@Body body: Profile): Completable
+    /**
+     * ORDERS
+     */
+    @POST("/orders")
+    fun newOrder(@Body order: OrderData): Single<OrderTracking>
 
 }

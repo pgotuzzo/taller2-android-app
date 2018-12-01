@@ -14,4 +14,10 @@
     <!-- ========================================================= -->
     <!--                       Filters                             -->
     <dimen name="search_filters_section_font">18sp</dimen>
+
+    <!-- ========================================================= -->
+    <!--                      Check Out                            -->
+    <!-- ========================================================= -->
+    <dimen name="check_out_card_form_input_font">14sp</dimen>
+    <dimen name="check_out_card_form_label_font">12sp</dimen>
 </resources>

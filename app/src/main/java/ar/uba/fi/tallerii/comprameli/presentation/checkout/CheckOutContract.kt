@@ -16,11 +16,17 @@ interface CheckOutContract {
         const val CARD = 1
     }
 
+    data class Card(val name: String, val image: String)
+
     interface View {
         fun enablePayment(@PaymentType paymentType: Int, enable: Boolean)
         fun showSinglePaymentMessage(@PaymentType paymentType: Int)
         fun setMaxUnits(max: Int)
         fun showNextBtn()
+        fun showCardDetailsForm(cardsAvailable: List<Card>)
+        fun showConfirmationDialog()
+        fun showError()
+        fun dismiss()
     }
 
     interface Presenter : MvpPresenter<View> {
@@ -28,6 +34,8 @@ interface CheckOutContract {
         fun onPaymentTypeSelected(@PaymentType paymentType: Int)
         fun onUnitsChanged(units: Int)
         fun onNextButtonClick()
+        fun onCardDetailsInput(cardDetails: CardDetails)
+        fun onPaymentConfirmed()
     }
 
 }

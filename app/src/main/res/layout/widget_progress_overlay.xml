@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <merge xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:parentTag="ar.uba.fi.tallerii.comprameli.presentation.widget.ProgressOverlayView">
+    tools:parentTag="ar.uba.fi.tallerii.comprameli.presentation.widget.view.ProgressOverlayView">
 
     <android.support.v4.widget.ContentLoadingProgressBar
         android:id="@+id/progressBar"

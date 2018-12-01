@@ -10,7 +10,7 @@ data class Product(val productId: String,
                    val price: Float,
                    val units: Int,
                    val categories: List<String>,
-                   val paymentMethods: List<String>,
+                   val paymentMethods: List<PaymentMethod> = ArrayList(),
                    val questions: List<Question> = ArrayList(),
                    val seller: String) : Parcelable {
 
@@ -22,7 +22,7 @@ data class Product(val productId: String,
             parcel.readFloat(),
             parcel.readInt(),
             parcel.createStringArrayList()!!,
-            parcel.createStringArrayList()!!,
+            parcel.createTypedArrayList(PaymentMethod)!!,
             parcel.createTypedArrayList(Question)!!,
             parcel.readString()!!)
 
@@ -34,7 +34,7 @@ data class Product(val productId: String,
         parcel.writeFloat(price)
         parcel.writeInt(units)
         parcel.writeStringList(categories)
-        parcel.writeStringList(paymentMethods)
+        parcel.writeTypedList(paymentMethods)
         parcel.writeTypedList(questions)
         parcel.writeString(seller)
     }

@@ -82,7 +82,7 @@
             android:textSize="20sp"
             app:layout_constraintTop_toBottomOf="@+id/title" />
 
-        <ar.uba.fi.tallerii.comprameli.presentation.widget.CounterInputView
+        <ar.uba.fi.tallerii.comprameli.presentation.widget.view.CounterInputView
             android:id="@+id/unitsInput"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -158,7 +158,6 @@
             app:layout_constraintLeft_toLeftOf="@+id/cardBtn"
             app:layout_constraintRight_toRightOf="@id/cardBtn"
             app:layout_constraintTop_toBottomOf="@+id/cardBtn" />
-
 
     </android.support.constraint.ConstraintLayout>
 

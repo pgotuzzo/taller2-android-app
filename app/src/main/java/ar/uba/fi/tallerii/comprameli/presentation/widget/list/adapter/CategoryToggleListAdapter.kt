@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import ar.uba.fi.tallerii.comprameli.R
-import kotlinx.android.synthetic.main.widget_category_toggle_item.view.*
+import kotlinx.android.synthetic.main.widget_list_category_toggle_item.view.*
 
 class CategoryToggleListAdapter : RecyclerView.Adapter<CategoryToggleListAdapter.ToggleItemViewHolder> {
 
@@ -36,7 +36,7 @@ class CategoryToggleListAdapter : RecyclerView.Adapter<CategoryToggleListAdapter
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ToggleItemViewHolder {
         val view = LayoutInflater.from(parent.context)
-                .inflate(R.layout.widget_category_toggle_item, parent, false)
+                .inflate(R.layout.widget_list_category_toggle_item, parent, false)
         return ToggleItemViewHolder(view)
     }
 

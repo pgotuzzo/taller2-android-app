@@ -4,6 +4,8 @@ import android.content.Context
 import ar.uba.fi.tallerii.comprameli.BuildConfig
 import ar.uba.fi.tallerii.comprameli.data.files.FilesDao
 import ar.uba.fi.tallerii.comprameli.data.files.FilesDaoImpl
+import ar.uba.fi.tallerii.comprameli.data.orders.OrdersDao
+import ar.uba.fi.tallerii.comprameli.data.orders.OrdersDaoImpl
 import ar.uba.fi.tallerii.comprameli.data.products.ProductsDao
 import ar.uba.fi.tallerii.comprameli.data.products.ProductsDaoImpl
 import ar.uba.fi.tallerii.comprameli.data.profile.ProfileDao
@@ -66,5 +68,11 @@ class PersistenceModule {
     @Provides
     @PerApplication
     fun provideFilesDao(): FilesDao = FilesDaoImpl()
+
+    @Provides
+    @PerApplication
+    fun provideOrdersDao(appServerRestApi: AppServerRestApi): OrdersDao =
+            OrdersDaoImpl(appServerRestApi)
+
 
 }

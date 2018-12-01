@@ -1,4 +1,4 @@
-package ar.uba.fi.tallerii.comprameli.presentation.widget
+package ar.uba.fi.tallerii.comprameli.presentation.widget.view
 
 import android.content.Context
 import android.support.constraint.ConstraintLayout
@@ -13,6 +13,7 @@ class CounterInputView(context: Context, attrs: AttributeSet) : ConstraintLayout
 
     private var mMin: Int? = null
     private var mMax: Int? = null
+    private var mListener: (units: Int) -> Unit = {}
 
     init {
         // Inflate view
@@ -69,6 +70,11 @@ class CounterInputView(context: Context, attrs: AttributeSet) : ConstraintLayout
             }
             input.setText(updateValue.toString())
         }
+        input.addTextChangedListener(object : SimpleTextWatcher() {
+            override fun afterTextChanged(s: Editable?) {
+                s?.apply { mListener.invoke(toString().toInt()) }
+            }
+        })
     }
 
     fun setMax(maxLimit: Int?) {
@@ -87,6 +93,11 @@ class CounterInputView(context: Context, attrs: AttributeSet) : ConstraintLayout
                 input.setText(mMin!!.toString())
             }
         }
+    }
+
+    fun setListener(listener: (units: Int) -> Unit) {
+        mListener = listener
+        input.text?.apply { mListener.invoke(toString().toInt()) }
     }
 
 }

@@ -1,4 +1,4 @@
-package ar.uba.fi.tallerii.comprameli.presentation.widget
+package ar.uba.fi.tallerii.comprameli.presentation.widget.view
 
 import android.content.Context
 import android.util.AttributeSet

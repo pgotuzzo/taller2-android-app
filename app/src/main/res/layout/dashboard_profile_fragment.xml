@@ -103,7 +103,7 @@
         app:backgroundTint="@color/colorPrimaryDark"
         app:fabSize="normal" />
 
-    <ar.uba.fi.tallerii.comprameli.presentation.widget.ProgressOverlayView
+    <ar.uba.fi.tallerii.comprameli.presentation.widget.view.ProgressOverlayView
         android:id="@+id/progressOverlay"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
