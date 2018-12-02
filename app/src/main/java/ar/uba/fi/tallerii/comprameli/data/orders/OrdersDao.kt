@@ -9,4 +9,6 @@ interface OrdersDao {
      */
     fun createOrder(order: OrderData): Single<String>
 
+    fun getSales(): Single<List<Sale>>
+
 }

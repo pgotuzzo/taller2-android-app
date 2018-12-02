@@ -15,6 +15,8 @@ import ar.uba.fi.tallerii.comprameli.presentation.dashboard.home.HomeFragment
 import ar.uba.fi.tallerii.comprameli.presentation.dashboard.mall.MallFragment
 import ar.uba.fi.tallerii.comprameli.presentation.dashboard.profile.ProfileEventsHandler
 import ar.uba.fi.tallerii.comprameli.presentation.dashboard.profile.ProfileFragment
+import ar.uba.fi.tallerii.comprameli.presentation.dashboard.sales.SalesEventHandler
+import ar.uba.fi.tallerii.comprameli.presentation.dashboard.sales.SalesFragment
 import ar.uba.fi.tallerii.comprameli.presentation.publish.PublishActivity
 import ar.uba.fi.tallerii.comprameli.presentation.search.SearchActivity
 import kotlinx.android.synthetic.main.dashboad_activity.*
@@ -23,12 +25,13 @@ import javax.inject.Inject
 
 
 class DashboardActivity : BaseActivity(), DashboardContract.View, HomeEventHandler,
-        ProfileEventsHandler {
+        ProfileEventsHandler, SalesEventHandler {
 
-    companion object {
-        const val TAG_FRAGMENT_HOME = "FragmentHome"
-        const val TAG_FRAGMENT_MALL = "FragmentMall"
-        const val TAG_FRAGMENT_PROFILE = "FragmentProfile"
+    object FragmentTag {
+        const val HOME = "FragmentHome"
+        const val MALL = "FragmentMall"
+        const val PROFILE = "FragmentProfile"
+        const val SALES = "FragmentSales"
     }
 
     private val mComponent by lazy { app.component.plus((DashboardModule())) }
@@ -56,8 +59,9 @@ class DashboardActivity : BaseActivity(), DashboardContract.View, HomeEventHandl
             when (menuItem.itemId) {
                 R.id.home -> mPresenter.onNavigationHomeClick()
                 R.id.myAccount -> mPresenter.onNavigationAccountSettingsClick()
-                R.id.myProducts -> mPresenter.onNavigationMyProductsClick()
+                R.id.mall -> mPresenter.onNavigationMallClick()
                 R.id.search -> mPresenter.onNavigationSearchClick()
+                R.id.sales -> mPresenter.onNavigationSalesClick()
                 R.id.closeSession -> mPresenter.onNavigationCloseSessionClick()
             }
             true
@@ -94,28 +98,37 @@ class DashboardActivity : BaseActivity(), DashboardContract.View, HomeEventHandl
     }
 
     override fun showHome() {
-        if (supportFragmentManager.findFragmentByTag(TAG_FRAGMENT_HOME) == null) {
+        if (supportFragmentManager.findFragmentByTag(FragmentTag.HOME) == null) {
             supportFragmentManager
                     .beginTransaction()
-                    .replace(mainContainer.id, HomeFragment.getInstance(), TAG_FRAGMENT_HOME)
+                    .replace(mainContainer.id, HomeFragment.getInstance(), FragmentTag.HOME)
                     .commit()
         }
     }
 
     override fun showMyAccount() {
-        if (supportFragmentManager.findFragmentByTag(TAG_FRAGMENT_PROFILE) == null) {
+        if (supportFragmentManager.findFragmentByTag(FragmentTag.PROFILE) == null) {
             supportFragmentManager
                     .beginTransaction()
-                    .replace(mainContainer.id, ProfileFragment.getInstance(), TAG_FRAGMENT_PROFILE)
+                    .replace(mainContainer.id, ProfileFragment.getInstance(), FragmentTag.PROFILE)
                     .commit()
         }
     }
 
-    override fun showMyProducts() {
-        if (supportFragmentManager.findFragmentByTag(TAG_FRAGMENT_MALL) == null) {
+    override fun showMall() {
+        if (supportFragmentManager.findFragmentByTag(FragmentTag.MALL) == null) {
             supportFragmentManager
                     .beginTransaction()
-                    .replace(mainContainer.id, MallFragment.getInstance(), TAG_FRAGMENT_MALL)
+                    .replace(mainContainer.id, MallFragment.getInstance(), FragmentTag.MALL)
+                    .commit()
+        }
+    }
+
+    override fun showSales() {
+        if (supportFragmentManager.findFragmentByTag(FragmentTag.SALES) == null) {
+            supportFragmentManager
+                    .beginTransaction()
+                    .replace(mainContainer.id, SalesFragment.getInstance(), FragmentTag.SALES)
                     .commit()
         }
     }
@@ -148,6 +161,15 @@ class DashboardActivity : BaseActivity(), DashboardContract.View, HomeEventHandl
 
     override fun onProfileChanged() {
         mPresenter.onProfileChanged()
+    }
+
+    override fun onChatSelected(transactionId: String) {
+//        if (supportFragmentManager.findFragmentByTag(FragmentTag.MALL) == null) {
+//            supportFragmentManager
+//                    .beginTransaction()
+//                    .replace(mainContainer.id, MallFragment.getInstance(), FragmentTag.MALL)
+//                    .commit()
+//        }
     }
 
 }

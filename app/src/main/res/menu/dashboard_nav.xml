@@ -14,9 +14,13 @@
             android:icon="@drawable/ic_search"
             android:title="@string/dashboard_nav_search" />
         <item
-            android:id="@+id/myProducts"
+            android:id="@+id/mall"
             android:icon="@drawable/ic_mall"
-            android:title="@string/dashboard_nav_my_products" />
+            android:title="@string/dashboard_nav_mall" />
+        <item
+            android:id="@+id/sales"
+            android:icon="@drawable/ic_money"
+            android:title="@string/dashboard_nav_sales" />
         <item
             android:id="@+id/closeSession"
             android:icon="@drawable/ic_power_off"

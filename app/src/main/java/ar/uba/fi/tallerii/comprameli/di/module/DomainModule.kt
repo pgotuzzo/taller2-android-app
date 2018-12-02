@@ -41,7 +41,7 @@ class DomainModule {
 
     @Provides
     @PerApplication
-    fun provideOrdersService(ordersDao: OrdersDao): OrdersService =
-            OrdersServiceImpl(ordersDao)
+    fun provideOrdersService(ordersDao: OrdersDao, productsDao: ProductsDao): OrdersService =
+            OrdersServiceImpl(ordersDao, productsDao)
 
 }

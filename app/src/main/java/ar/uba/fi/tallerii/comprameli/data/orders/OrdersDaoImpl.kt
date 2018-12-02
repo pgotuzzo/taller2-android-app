@@ -12,4 +12,7 @@ class OrdersDaoImpl(private val mAppServerRestApi: AppServerRestApi) : OrdersDao
                     .map { orderTracking -> orderTracking.trackingNumber }
                     .subscribeOn(Schedulers.io())
 
+    override fun getSales(): Single<List<Sale>> =
+            mAppServerRestApi.sales().map { sales -> sales.sales }.subscribeOn(Schedulers.io())
+
 }

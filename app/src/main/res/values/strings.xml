@@ -47,7 +47,8 @@
     <string name="dashboard_nav_home">Inicio</string>
     <string name="dashboard_nav_account">Cuenta</string>
     <string name="dashboard_nav_search">Buscar productos</string>
-    <string name="dashboard_nav_my_products">Mis productos</string>
+    <string name="dashboard_nav_mall">Mis productos</string>
+    <string name="dashboard_nav_sales">Ventas</string>
     <string name="dashboard_nav_log_out">Cerrar Session</string>
     <!--                  Home                      -->
     <string name="dashboard_home_earn_money">Queres ganar algo de dinero?</string>
@@ -58,6 +59,12 @@
     <string name="dashboard_profile_email">Correo electronico</string>
     <string name="dashboard_profile_name_error">"Debe ingresar un nombre"</string>
     <string name="dashboard_profile_surname_error">"Debe ingresar un apellido"</string>
+    <!--                  Sales                     -->
+    <string name="dashboard_sales_not_found">No se encontraron ventas!</string>
+    <string name="dashboard_sales_list_item_units">Unidades: %1$s</string>
+    <string name="dashboard_sales_list_item_total">Total: %1$s</string>
+    <string name="dashboard_sales_list_item_status">Estado: %1$s</string>
+    <string name="dashboard_sales_list_item_chat">Chat</string>
     <!-- ========================================== -->
     <!--                 Search                     -->
     <!-- ========================================== -->
