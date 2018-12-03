@@ -1,5 +1,6 @@
 package ar.uba.fi.tallerii.comprameli.di.module
 
+import ar.uba.fi.tallerii.comprameli.data.db.DatabaseDao
 import ar.uba.fi.tallerii.comprameli.data.files.FilesDao
 import ar.uba.fi.tallerii.comprameli.data.orders.OrdersDao
 import ar.uba.fi.tallerii.comprameli.data.products.ProductsDao
@@ -7,6 +8,8 @@ import ar.uba.fi.tallerii.comprameli.data.profile.ProfileDao
 import ar.uba.fi.tallerii.comprameli.data.repository.AuthTokenProvider
 import ar.uba.fi.tallerii.comprameli.data.session.SessionDao
 import ar.uba.fi.tallerii.comprameli.di.scope.PerApplication
+import ar.uba.fi.tallerii.comprameli.domain.chats.ChatsService
+import ar.uba.fi.tallerii.comprameli.domain.chats.ChatsServiceImpl
 import ar.uba.fi.tallerii.comprameli.domain.orders.OrdersService
 import ar.uba.fi.tallerii.comprameli.domain.orders.OrdersServiceImpl
 import ar.uba.fi.tallerii.comprameli.domain.products.ProductsService
@@ -43,5 +46,11 @@ class DomainModule {
     @PerApplication
     fun provideOrdersService(ordersDao: OrdersDao, productsDao: ProductsDao): OrdersService =
             OrdersServiceImpl(ordersDao, productsDao)
+
+
+    @Provides
+    @PerApplication
+    fun provideChatsService(databaseDao: DatabaseDao, profileDao: ProfileDao): ChatsService =
+            ChatsServiceImpl(databaseDao, profileDao)
 
 }

@@ -65,6 +65,9 @@
     <string name="dashboard_sales_list_item_total">Total: %1$s</string>
     <string name="dashboard_sales_list_item_status">Estado: %1$s</string>
     <string name="dashboard_sales_list_item_chat">Chat</string>
+    <!--                  Chat                      -->
+    <string name="dashboard_chat_input_hint">Que te interesa saber…</string>
+    <string name="dashboard_chat_list_item_me">Yo</string>
     <!-- ========================================== -->
     <!--                 Search                     -->
     <!-- ========================================== -->

@@ -9,6 +9,7 @@ import ar.uba.fi.tallerii.comprameli.R
 import ar.uba.fi.tallerii.comprameli.presentation.GlideApp
 import ar.uba.fi.tallerii.comprameli.presentation.auth.AuthActivity
 import ar.uba.fi.tallerii.comprameli.presentation.base.BaseActivity
+import ar.uba.fi.tallerii.comprameli.presentation.dashboard.chat.ChatFragment
 import ar.uba.fi.tallerii.comprameli.presentation.dashboard.di.DashboardModule
 import ar.uba.fi.tallerii.comprameli.presentation.dashboard.home.HomeEventHandler
 import ar.uba.fi.tallerii.comprameli.presentation.dashboard.home.HomeFragment
@@ -32,6 +33,7 @@ class DashboardActivity : BaseActivity(), DashboardContract.View, HomeEventHandl
         const val MALL = "FragmentMall"
         const val PROFILE = "FragmentProfile"
         const val SALES = "FragmentSales"
+        const val CHAT = "FragmentChat"
     }
 
     private val mComponent by lazy { app.component.plus((DashboardModule())) }
@@ -164,12 +166,13 @@ class DashboardActivity : BaseActivity(), DashboardContract.View, HomeEventHandl
     }
 
     override fun onChatSelected(transactionId: String) {
-//        if (supportFragmentManager.findFragmentByTag(FragmentTag.MALL) == null) {
-//            supportFragmentManager
-//                    .beginTransaction()
-//                    .replace(mainContainer.id, MallFragment.getInstance(), FragmentTag.MALL)
-//                    .commit()
-//        }
+        if (supportFragmentManager.findFragmentByTag(FragmentTag.CHAT) == null) {
+            supportFragmentManager
+                    .beginTransaction()
+                    .add(mainContainer.id, ChatFragment.getInstance(transactionId), FragmentTag.CHAT)
+                    .addToBackStack(null)
+                    .commit()
+        }
     }
 
 }

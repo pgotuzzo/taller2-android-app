@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="10dp">
+
+    <ImageView
+        android:id="@+id/leftChatIcon"
+        android:layout_width="10dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:adjustViewBounds="true"
+        android:src="@drawable/chat_left"
+        android:tint="@color/colorPrimaryDark"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/textContainer" />
+
+    <LinearLayout
+        android:id="@+id/textContainer"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/chat_left_bg"
+        android:backgroundTint="@color/colorPrimaryDark"
+        android:orientation="vertical"
+        android:padding="10dp"
+        app:layout_constraintLeft_toRightOf="@+id/leftChatIcon"
+        app:layout_constraintRight_toLeftOf="@+id/rightEnd"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/userName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:textSize="13sp"
+            android:textStyle="italic"
+            tools:text="Juan Perez" />
+
+        <TextView
+            android:id="@+id/text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:textSize="13sp"
+            tools:text="Soy un texto largo que me sirve para probar si se ve bien o no el layout que estoy programando" />
+
+    </LinearLayout>
+
+    <android.support.constraint.Guideline
+        android:id="@+id/rightEnd"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.8" />
+
+</android.support.constraint.ConstraintLayout>

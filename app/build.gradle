@@ -52,6 +52,7 @@ dependencies {
     implementation "com.google.dagger:dagger-android-support:$dagger_version"
     //      Firebase
     implementation "com.google.firebase:firebase-database:$firebase_version"
+    implementation "com.google.firebase:firebase-firestore:$firebase_version"
     implementation "com.google.firebase:firebase-auth:$firebase_version"
     implementation "com.google.firebase:firebase-core:$firebase_version"
     implementation "com.google.firebase:firebase-storage:$firebase_version"

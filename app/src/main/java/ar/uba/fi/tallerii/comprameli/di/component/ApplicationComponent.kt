@@ -12,6 +12,8 @@ import ar.uba.fi.tallerii.comprameli.presentation.auth.signin.di.SignInComponent
 import ar.uba.fi.tallerii.comprameli.presentation.auth.signin.di.SignInModule
 import ar.uba.fi.tallerii.comprameli.presentation.checkout.di.CheckOutComponent
 import ar.uba.fi.tallerii.comprameli.presentation.checkout.di.CheckOutModule
+import ar.uba.fi.tallerii.comprameli.presentation.dashboard.chat.di.ChatComponent
+import ar.uba.fi.tallerii.comprameli.presentation.dashboard.chat.di.ChatModule
 import ar.uba.fi.tallerii.comprameli.presentation.dashboard.di.DashboardComponent
 import ar.uba.fi.tallerii.comprameli.presentation.dashboard.di.DashboardModule
 import ar.uba.fi.tallerii.comprameli.presentation.dashboard.home.di.HomeComponent
@@ -51,4 +53,5 @@ interface ApplicationComponent {
     fun plus(module: ProductDetailsModule): ProductDetailsComponent
     fun plus(module: PublishModule): PublishComponent
     fun plus(module: CheckOutModule): CheckOutComponent
+    fun plus(module: ChatModule): ChatComponent
 }
