@@ -11,4 +11,6 @@ interface OrdersDao {
 
     fun getSales(): Single<List<Sale>>
 
+    fun getPurchases(): Single<List<Purchase>>
+
 }

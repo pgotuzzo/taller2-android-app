@@ -48,23 +48,17 @@ class HomeFragment : BaseFragment(), HomeContract.View {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         mPresenter.attachView(this)
-
-        // Categories
-        categoriesCarousel.setUp(
-                listOf(
-                        CategoriesCarousel.Category("Tecnologia", R.drawable.category_technology),
-                        CategoriesCarousel.Category("Auto", R.drawable.category_cars),
-                        CategoriesCarousel.Category("Ropa", R.drawable.category_clothes)
-                )
-        ) { mHomeEventHandler!!.onCategorySelected(it) }
-
-        // Publish Button
+        mPresenter.onInit()
         publishBtn.setOnClickListener { mHomeEventHandler!!.onPublishProduct() }
     }
 
     override fun onDestroyView() {
         mPresenter.detachView()
         super.onDestroyView()
+    }
+
+    override fun refreshCarousel(categories: List<HomeContract.Category>) {
+        categoriesCarousel.setUp(categories) { mHomeEventHandler!!.onCategorySelected(it) }
     }
 
 }

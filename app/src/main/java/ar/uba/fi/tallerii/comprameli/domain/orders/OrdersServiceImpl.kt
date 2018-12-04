@@ -36,6 +36,15 @@ class OrdersServiceImpl(private val mOrdersDao: OrdersDao,
                                 .map { product -> saleFrom(sale, product.images) }
                     }
 
+    override fun getPurchases(): Observable<Purchase> =
+            mOrdersDao.getPurchases()
+                    .flatMapObservable { Observable.fromIterable(it) }
+                    .flatMapSingle { purchase ->
+                        mProductsDao
+                                .getProductById(purchase.productId)
+                                .map { product -> purchaseFrom(purchase, product.images) }
+                    }
+
     private fun saleFrom(sale: ar.uba.fi.tallerii.comprameli.data.orders.Sale, productImages: List<String>): Sale =
             Sale(
                     productImage = if (productImages.isEmpty()) null else productImages[0],
@@ -44,6 +53,16 @@ class OrdersServiceImpl(private val mOrdersDao: OrdersDao,
                     productName = sale.productName,
                     status = "Entregado",
                     transactionId = sale.transactionId
+            )
+
+    private fun purchaseFrom(purchase: ar.uba.fi.tallerii.comprameli.data.orders.Purchase, productImages: List<String>): Purchase =
+            Purchase(
+                    productImage = if (productImages.isEmpty()) null else productImages[0],
+                    units = purchase.units,
+                    total = purchase.total,
+                    productName = purchase.productName,
+                    status = "Entregado",
+                    transactionId = purchase.transactionId
             )
 
 }

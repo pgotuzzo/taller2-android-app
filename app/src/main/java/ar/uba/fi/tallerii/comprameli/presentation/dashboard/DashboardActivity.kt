@@ -16,7 +16,7 @@ import ar.uba.fi.tallerii.comprameli.presentation.dashboard.home.HomeFragment
 import ar.uba.fi.tallerii.comprameli.presentation.dashboard.mall.MallFragment
 import ar.uba.fi.tallerii.comprameli.presentation.dashboard.profile.ProfileEventsHandler
 import ar.uba.fi.tallerii.comprameli.presentation.dashboard.profile.ProfileFragment
-import ar.uba.fi.tallerii.comprameli.presentation.dashboard.sales.SalesEventHandler
+import ar.uba.fi.tallerii.comprameli.presentation.dashboard.purchases.PurchasesFragment
 import ar.uba.fi.tallerii.comprameli.presentation.dashboard.sales.SalesFragment
 import ar.uba.fi.tallerii.comprameli.presentation.publish.PublishActivity
 import ar.uba.fi.tallerii.comprameli.presentation.search.SearchActivity
@@ -26,13 +26,14 @@ import javax.inject.Inject
 
 
 class DashboardActivity : BaseActivity(), DashboardContract.View, HomeEventHandler,
-        ProfileEventsHandler, SalesEventHandler {
+        ProfileEventsHandler, ChatsEventHandler {
 
     object FragmentTag {
         const val HOME = "FragmentHome"
         const val MALL = "FragmentMall"
         const val PROFILE = "FragmentProfile"
         const val SALES = "FragmentSales"
+        const val PURCHASES = "FragmentPurchases"
         const val CHAT = "FragmentChat"
     }
 
@@ -64,6 +65,7 @@ class DashboardActivity : BaseActivity(), DashboardContract.View, HomeEventHandl
                 R.id.mall -> mPresenter.onNavigationMallClick()
                 R.id.search -> mPresenter.onNavigationSearchClick()
                 R.id.sales -> mPresenter.onNavigationSalesClick()
+                R.id.purchases -> mPresenter.onNavigationPurchasesClick()
                 R.id.closeSession -> mPresenter.onNavigationCloseSessionClick()
             }
             true
@@ -131,6 +133,15 @@ class DashboardActivity : BaseActivity(), DashboardContract.View, HomeEventHandl
             supportFragmentManager
                     .beginTransaction()
                     .replace(mainContainer.id, SalesFragment.getInstance(), FragmentTag.SALES)
+                    .commit()
+        }
+    }
+
+    override fun showPurchases() {
+        if (supportFragmentManager.findFragmentByTag(FragmentTag.PURCHASES) == null) {
+            supportFragmentManager
+                    .beginTransaction()
+                    .replace(mainContainer.id, PurchasesFragment.getInstance(), FragmentTag.PURCHASES)
                     .commit()
         }
     }

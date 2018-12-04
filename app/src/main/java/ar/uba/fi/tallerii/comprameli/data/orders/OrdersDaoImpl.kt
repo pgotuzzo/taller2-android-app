@@ -7,12 +7,12 @@ import io.reactivex.schedulers.Schedulers
 class OrdersDaoImpl(private val mAppServerRestApi: AppServerRestApi) : OrdersDao {
 
     override fun createOrder(order: OrderData): Single<String> =
-            mAppServerRestApi
-                    .newOrder(order)
-                    .map { orderTracking -> orderTracking.trackingNumber }
-                    .subscribeOn(Schedulers.io())
+            mAppServerRestApi.newOrder(order).map { it.trackingNumber }.subscribeOn(Schedulers.io())
 
     override fun getSales(): Single<List<Sale>> =
-            mAppServerRestApi.sales().map { sales -> sales.sales }.subscribeOn(Schedulers.io())
+            mAppServerRestApi.sales().map { it.sales }.subscribeOn(Schedulers.io())
+
+    override fun getPurchases(): Single<List<Purchase>> =
+            mAppServerRestApi.purchases().map { it.purchases }.subscribeOn(Schedulers.io())
 
 }

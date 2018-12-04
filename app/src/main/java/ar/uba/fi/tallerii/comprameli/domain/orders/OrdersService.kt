@@ -11,4 +11,6 @@ interface OrdersService {
 
     fun getSales(): Observable<Sale>
 
+    fun getPurchases(): Observable<Purchase>
+
 }

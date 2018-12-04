@@ -14,6 +14,7 @@ interface DashboardContract {
         fun showMyAccount()
         fun showMall()
         fun showSales()
+        fun showPurchases()
         fun goAuth()
         fun goSearch()
         fun goSearchCategory(category: String)
@@ -27,6 +28,7 @@ interface DashboardContract {
         fun onNavigationMallClick()
         fun onNavigationSearchClick()
         fun onNavigationSalesClick()
+        fun onNavigationPurchasesClick()
         fun onNavigationCloseSessionClick()
         fun onProfileChanged()
     }

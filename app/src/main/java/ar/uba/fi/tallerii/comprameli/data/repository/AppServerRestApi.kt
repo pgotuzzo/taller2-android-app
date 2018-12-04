@@ -2,6 +2,7 @@ package ar.uba.fi.tallerii.comprameli.data.repository
 
 import ar.uba.fi.tallerii.comprameli.data.orders.OrderData
 import ar.uba.fi.tallerii.comprameli.data.orders.OrderTracking
+import ar.uba.fi.tallerii.comprameli.data.orders.Purchases
 import ar.uba.fi.tallerii.comprameli.data.orders.Sales
 import ar.uba.fi.tallerii.comprameli.data.products.*
 import ar.uba.fi.tallerii.comprameli.data.profile.Profile
@@ -75,5 +76,8 @@ interface AppServerRestApi {
 
     @GET("/orders/sales")
     fun sales(): Single<Sales>
+
+    @GET("/orders/purchases")
+    fun purchases(): Single<Purchases>
 
 }

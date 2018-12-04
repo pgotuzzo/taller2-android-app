@@ -63,6 +63,10 @@ class DashboardPresenter(private val mSessionService: SessionService,
         getView()?.showSales()
     }
 
+    override fun onNavigationPurchasesClick() {
+        getView()?.showPurchases()
+    }
+
     override fun onNavigationCloseSessionClick() {
         Timber.d("Cerrando session")
         val disposable = mSessionService

@@ -1,9 +1,7 @@
 package ar.uba.fi.tallerii.comprameli.presentation.dashboard.home
 
 import android.content.Context
-import android.support.annotation.DrawableRes
 import android.support.constraint.ConstraintLayout
-import android.support.v4.content.ContextCompat
 import android.util.AttributeSet
 import android.view.View
 import ar.uba.fi.tallerii.comprameli.R
@@ -30,12 +28,8 @@ class CategoryView : ConstraintLayout {
         View.inflate(context, R.layout.dashboad_category, this)
     }
 
-    fun setUp(@DrawableRes drawable: Int, label: String, listener: (String) -> Unit) {
-        if (isInEditMode) {
-            categoryBg.setImageDrawable(ContextCompat.getDrawable(context, drawable))
-            return
-        }
-        GlideApp.with(context).load(drawable).centerCrop().into(categoryBg)
+    fun setUp(imageUrl: String, label: String, listener: (String) -> Unit) {
+        GlideApp.with(context).load(imageUrl).centerCrop().into(categoryBg)
         categoryLabel.apply {
             text = label
             setOnClickListener { listener(label) }

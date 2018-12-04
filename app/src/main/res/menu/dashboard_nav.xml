@@ -22,6 +22,10 @@
             android:icon="@drawable/ic_money"
             android:title="@string/dashboard_nav_sales" />
         <item
+            android:id="@+id/purchases"
+            android:icon="@drawable/ic_purchase"
+            android:title="@string/dashboard_nav_purchases" />
+        <item
             android:id="@+id/closeSession"
             android:icon="@drawable/ic_power_off"
             android:title="@string/dashboard_nav_log_out" />

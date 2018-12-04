@@ -49,6 +49,7 @@
     <string name="dashboard_nav_search">Buscar productos</string>
     <string name="dashboard_nav_mall">Mis productos</string>
     <string name="dashboard_nav_sales">Ventas</string>
+    <string name="dashboard_nav_purchases">Compras</string>
     <string name="dashboard_nav_log_out">Cerrar Session</string>
     <!--                  Home                      -->
     <string name="dashboard_home_earn_money">Queres ganar algo de dinero?</string>
@@ -65,6 +66,12 @@
     <string name="dashboard_sales_list_item_total">Total: %1$s</string>
     <string name="dashboard_sales_list_item_status">Estado: %1$s</string>
     <string name="dashboard_sales_list_item_chat">Chat</string>
+    <!--                Purchases                   -->
+    <string name="dashboard_purchases_not_found">No se encontraron compras!</string>
+    <string name="dashboard_purchases_list_item_units">Unidades: %1$s</string>
+    <string name="dashboard_purchases_list_item_total">Total: %1$s</string>
+    <string name="dashboard_purchases_list_item_status">Estado: %1$s</string>
+    <string name="dashboard_purchases_list_item_chat">Chat</string>
     <!--                  Chat                      -->
     <string name="dashboard_chat_input_hint">Que te interesa saber…</string>
     <string name="dashboard_chat_list_item_me">Yo</string>

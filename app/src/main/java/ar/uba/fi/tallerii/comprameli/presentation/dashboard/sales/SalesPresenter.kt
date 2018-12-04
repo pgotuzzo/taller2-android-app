@@ -41,5 +41,4 @@ class SalesPresenter(private val mOrdersService: OrdersService) :
                     transactionId = sale.transactionId
             )
 
-
 }
