@@ -39,8 +39,9 @@ interface AppServerRestApi {
                  @Query("units") units: Int?,
                  @Query("min_price") priceMin: Float?,
                  @Query("max_price") priceMax: Float?,
-                 @Query("x") x: Float?,
-                 @Query("y") y: Float?,
+                 @Query("longitude") longitude: Float?,
+                 @Query("latitude") latitude: Float?,
+                 @Query("max_distance") maxDistance: Float?,
                  @Query("categories") categories: List<String>,
                  @Query("payment_methods") paymentMethods: List<String>): Single<Products>
 

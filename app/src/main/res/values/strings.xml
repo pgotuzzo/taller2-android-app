@@ -47,6 +47,7 @@
     <string name="dashboard_nav_home">Inicio</string>
     <string name="dashboard_nav_account">Cuenta</string>
     <string name="dashboard_nav_search">Buscar productos</string>
+    <string name="dashboard_nav_map">Mapa de actividades</string>
     <string name="dashboard_nav_mall">Mis productos</string>
     <string name="dashboard_nav_sales">Ventas</string>
     <string name="dashboard_nav_purchases">Compras</string>

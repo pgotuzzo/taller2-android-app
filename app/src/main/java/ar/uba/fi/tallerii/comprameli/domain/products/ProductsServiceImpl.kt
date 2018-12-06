@@ -91,6 +91,8 @@ class ProductsServiceImpl(private val mProductsDao: ProductsDao,
                     price = product.price,
                     seller = product.seller,
                     units = product.units,
+                    longitude = product.location.x.toFloat(),
+                    latitude = product.location.y.toFloat(),
                     categories = product.categories,
                     paymentMethods = product.paymentMethods.map { p -> paymentMethodFrom(p) },
                     questions = product.questions.map { q -> questionFrom(q) }

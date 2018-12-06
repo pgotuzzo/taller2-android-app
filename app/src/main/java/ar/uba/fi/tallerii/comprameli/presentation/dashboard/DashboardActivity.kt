@@ -18,6 +18,7 @@ import ar.uba.fi.tallerii.comprameli.presentation.dashboard.profile.ProfileEvent
 import ar.uba.fi.tallerii.comprameli.presentation.dashboard.profile.ProfileFragment
 import ar.uba.fi.tallerii.comprameli.presentation.dashboard.purchases.PurchasesFragment
 import ar.uba.fi.tallerii.comprameli.presentation.dashboard.sales.SalesFragment
+import ar.uba.fi.tallerii.comprameli.presentation.map.MapActivity
 import ar.uba.fi.tallerii.comprameli.presentation.publish.PublishActivity
 import ar.uba.fi.tallerii.comprameli.presentation.search.SearchActivity
 import kotlinx.android.synthetic.main.dashboad_activity.*
@@ -62,8 +63,9 @@ class DashboardActivity : BaseActivity(), DashboardContract.View, HomeEventHandl
             when (menuItem.itemId) {
                 R.id.home -> mPresenter.onNavigationHomeClick()
                 R.id.myAccount -> mPresenter.onNavigationAccountSettingsClick()
-                R.id.mall -> mPresenter.onNavigationMallClick()
                 R.id.search -> mPresenter.onNavigationSearchClick()
+                R.id.map -> mPresenter.onNavigationMapClick()
+                R.id.mall -> mPresenter.onNavigationMallClick()
                 R.id.sales -> mPresenter.onNavigationSalesClick()
                 R.id.purchases -> mPresenter.onNavigationPurchasesClick()
                 R.id.closeSession -> mPresenter.onNavigationCloseSessionClick()
@@ -153,6 +155,10 @@ class DashboardActivity : BaseActivity(), DashboardContract.View, HomeEventHandl
 
     override fun goSearch() {
         startActivity(Intent(this, SearchActivity::class.java))
+    }
+
+    override fun goMap() {
+        startActivity(Intent(this, MapActivity::class.java))
     }
 
     override fun goSearchCategory(category: String) {

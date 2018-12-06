@@ -59,6 +59,10 @@ class DashboardPresenter(private val mSessionService: SessionService,
         getView()?.goSearch()
     }
 
+    override fun onNavigationMapClick() {
+        getView()?.goMap()
+    }
+
     override fun onNavigationSalesClick() {
         getView()?.showSales()
     }
