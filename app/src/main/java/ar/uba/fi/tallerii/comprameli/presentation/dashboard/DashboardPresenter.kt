@@ -63,6 +63,10 @@ class DashboardPresenter(private val mSessionService: SessionService,
         getView()?.goMap()
     }
 
+    override fun onNavigationQRClick() {
+        getView()?.goScan()
+    }
+
     override fun onNavigationSalesClick() {
         getView()?.showSales()
     }
@@ -103,6 +107,10 @@ class DashboardPresenter(private val mSessionService: SessionService,
                         { getView()?.showError() }
                 )
         mCompositeDisposable.add(disposable)
+    }
+
+    override fun onProductIdScanned(productId: String) {
+        getView()?.goProductDetails(productId)
     }
 
 }

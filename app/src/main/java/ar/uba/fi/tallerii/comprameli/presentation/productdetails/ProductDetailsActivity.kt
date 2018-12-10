@@ -3,15 +3,22 @@ package ar.uba.fi.tallerii.comprameli.presentation.productdetails
 import android.app.AlertDialog
 import android.content.Intent
 import android.content.res.ColorStateList
+import android.graphics.Bitmap
+import android.graphics.Color
 import android.os.Bundle
 import android.support.v4.content.ContextCompat
 import android.support.v7.widget.LinearLayoutManager
+import android.util.TypedValue
 import android.view.View
+import android.widget.ImageView
 import ar.uba.fi.tallerii.comprameli.R
 import ar.uba.fi.tallerii.comprameli.domain.products.Product
 import ar.uba.fi.tallerii.comprameli.presentation.base.BaseActivity
 import ar.uba.fi.tallerii.comprameli.presentation.checkout.CheckOutActivity
 import ar.uba.fi.tallerii.comprameli.presentation.productdetails.di.ProductDetailsModule
+import com.google.zxing.BarcodeFormat
+import com.google.zxing.MultiFormatWriter
+import com.google.zxing.common.BitMatrix
 import kotlinx.android.synthetic.main.product_details_activity.*
 import kotlinx.android.synthetic.main.product_details_answer_question_dialog.view.*
 import kotlinx.android.synthetic.main.product_details_ask_question_dialog.view.*
@@ -49,6 +56,7 @@ class ProductDetailsActivity : BaseActivity(), ProductDetailsContract.View {
 
             questionBtn.setOnClickListener { mPresenter.onQuestionButtonClick() }
             buyBtn.setOnClickListener { mPresenter.onBuyButtonClick() }
+            qrBtn.setOnClickListener { mPresenter.onQrButtonClick() }
 
             mPresenter.onInit(productId)
         }
@@ -108,10 +116,20 @@ class ProductDetailsActivity : BaseActivity(), ProductDetailsContract.View {
                 .show()
     }
 
+    override fun showQR(encode: String) {
+        val bitmap = encodeAsBitmap(encode)
+        val imageView = ImageView(this)
+        imageView.setImageBitmap(bitmap)
+        AlertDialog.Builder(this)
+                .setView(imageView)
+                .create()
+                .show()
+    }
+
     override fun showError() {
         AlertDialog.Builder(this)
                 .setTitle("Error")
-                .setMessage("Hubo un error...chequea los logsɵ")
+                .setMessage("Hubo un error...chequea los logs")
                 .setOnDismissListener { finish() }
                 .create()
                 .show()
@@ -137,6 +155,30 @@ class ProductDetailsActivity : BaseActivity(), ProductDetailsContract.View {
                 }
                 .create()
                 .show()
+    }
+
+    private fun encodeAsBitmap(str: String): Bitmap? {
+        val size = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 250f, resources.displayMetrics).toInt()
+        val result: BitMatrix
+        try {
+            result = MultiFormatWriter().encode(str, BarcodeFormat.QR_CODE, size, size, null)
+        } catch (iae: IllegalArgumentException) {
+            // Unsupported format
+            return null
+        }
+
+        val w = result.width
+        val h = result.height
+        val pixels = IntArray(w * h)
+        for (y in 0 until h) {
+            val offset = y * w
+            for (x in 0 until w) {
+                pixels[offset + x] = if (result.get(x, y)) Color.BLACK else Color.WHITE
+            }
+        }
+        val bitmap = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888)
+        bitmap.setPixels(pixels, 0, size, 0, 0, w, h)
+        return bitmap
     }
 
 }

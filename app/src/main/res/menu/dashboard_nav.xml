@@ -18,6 +18,10 @@
             android:icon="@drawable/ic_the_earth"
             android:title="@string/dashboard_nav_map" />
         <item
+            android:id="@+id/qr"
+            android:icon="@drawable/ic_qr_code"
+            android:title="@string/dashboard_nav_qr" />
+        <item
             android:id="@+id/mall"
             android:icon="@drawable/ic_mall"
             android:title="@string/dashboard_nav_mall" />

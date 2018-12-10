@@ -33,6 +33,17 @@
             app:layout_constraintRight_toRightOf="@+id/carousel"
             tools:text="$300,000.00" />
 
+        <ImageView
+            android:id="@+id/qrBtn"
+            android:layout_width="40dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/product_details_cash_bg"
+            android:src="@drawable/ic_qr_code"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <TextView
             android:id="@+id/productTitle"
             android:layout_width="match_parent"

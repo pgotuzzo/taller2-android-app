@@ -19,6 +19,8 @@ interface DashboardContract {
         fun goSearch()
         fun goMap()
         fun goSearchCategory(category: String)
+        fun goScan()
+        fun goProductDetails(productId: String)
         fun showError()
     }
 
@@ -29,9 +31,11 @@ interface DashboardContract {
         fun onNavigationMallClick()
         fun onNavigationSearchClick()
         fun onNavigationMapClick()
+        fun onNavigationQRClick()
         fun onNavigationSalesClick()
         fun onNavigationPurchasesClick()
         fun onNavigationCloseSessionClick()
         fun onProfileChanged()
+        fun onProductIdScanned(productId: String)
     }
 }

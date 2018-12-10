@@ -10,6 +10,7 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.Singles
 import timber.log.Timber
 
+
 class ProductDetailsPresenter(private val mProductsService: ProductsService,
                               private val profileService: ProfileService) :
         BasePresenter<ProductDetailsContract.View>(),
@@ -93,6 +94,10 @@ class ProductDetailsPresenter(private val mProductsService: ProductsService,
                                     })
             mDisposables.add(disposable)
         }
+    }
+
+    override fun onQrButtonClick() {
+        mProduct?.also { getView()?.showQR(it.productId) }
     }
 
     private fun processProduct(product: Product) {

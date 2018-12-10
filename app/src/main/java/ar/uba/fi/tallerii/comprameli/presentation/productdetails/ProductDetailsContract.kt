@@ -23,6 +23,7 @@ interface ProductDetailsContract {
         fun disableQuestionButton()
         fun showAskQuestionDialog()
         fun showSelectQuestionToAnswerDialog(questions: List<Question>)
+        fun showQR(encode: String)
         fun showError()
         fun goCheckOut(product: Product)
     }
@@ -33,5 +34,6 @@ interface ProductDetailsContract {
         fun onSendQuestionClick(question: String)
         fun onSendAnswerClick(questionId: String, answer: String)
         fun onBuyButtonClick()
+        fun onQrButtonClick()
     }
 }

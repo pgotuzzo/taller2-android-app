@@ -7,6 +7,7 @@ import android.support.v4.view.GravityCompat
 import android.view.MenuItem
 import ar.uba.fi.tallerii.comprameli.R
 import ar.uba.fi.tallerii.comprameli.presentation.GlideApp
+import ar.uba.fi.tallerii.comprameli.presentation.scanner.IntentIntegrator
 import ar.uba.fi.tallerii.comprameli.presentation.auth.AuthActivity
 import ar.uba.fi.tallerii.comprameli.presentation.base.BaseActivity
 import ar.uba.fi.tallerii.comprameli.presentation.dashboard.chat.ChatFragment
@@ -19,6 +20,7 @@ import ar.uba.fi.tallerii.comprameli.presentation.dashboard.profile.ProfileFragm
 import ar.uba.fi.tallerii.comprameli.presentation.dashboard.purchases.PurchasesFragment
 import ar.uba.fi.tallerii.comprameli.presentation.dashboard.sales.SalesFragment
 import ar.uba.fi.tallerii.comprameli.presentation.map.MapActivity
+import ar.uba.fi.tallerii.comprameli.presentation.productdetails.ProductDetailsActivity
 import ar.uba.fi.tallerii.comprameli.presentation.publish.PublishActivity
 import ar.uba.fi.tallerii.comprameli.presentation.search.SearchActivity
 import kotlinx.android.synthetic.main.dashboad_activity.*
@@ -65,6 +67,7 @@ class DashboardActivity : BaseActivity(), DashboardContract.View, HomeEventHandl
                 R.id.myAccount -> mPresenter.onNavigationAccountSettingsClick()
                 R.id.search -> mPresenter.onNavigationSearchClick()
                 R.id.map -> mPresenter.onNavigationMapClick()
+                R.id.qr -> mPresenter.onNavigationQRClick()
                 R.id.mall -> mPresenter.onNavigationMallClick()
                 R.id.sales -> mPresenter.onNavigationSalesClick()
                 R.id.purchases -> mPresenter.onNavigationPurchasesClick()
@@ -74,6 +77,17 @@ class DashboardActivity : BaseActivity(), DashboardContract.View, HomeEventHandl
         }
 
         mPresenter.onInit()
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        val scanResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, intent)
+        if (scanResult != null) {
+            data?.extras?.getString("SCAN_RESULT")?.also {
+                mPresenter.onProductIdScanned(it)
+            }
+        } else {
+            super.onActivityResult(requestCode, resultCode, data)
+        }
     }
 
     override fun onDestroy() {
@@ -164,6 +178,17 @@ class DashboardActivity : BaseActivity(), DashboardContract.View, HomeEventHandl
     override fun goSearchCategory(category: String) {
         val intent = Intent(this, SearchActivity::class.java)
         intent.putExtra(SearchActivity.INTENT_EXTRA_CATEGORY, category)
+        startActivity(intent)
+    }
+
+    override fun goScan() {
+        val integrator = IntentIntegrator(this)
+        integrator.initiateScan()
+    }
+
+    override fun goProductDetails(productId: String) {
+        val intent = Intent(this, ProductDetailsActivity::class.java)
+        intent.putExtra(ProductDetailsActivity.INTENT_BUNDLE_EXTRA_PRODUCT_ID, productId)
         startActivity(intent)
     }
 
