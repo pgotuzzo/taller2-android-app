@@ -34,7 +34,7 @@ class CategoriesCarousel : ViewPager {
             val category = categories[position]
             val params = ViewGroup.LayoutParams(MATCH_PARENT, MATCH_PARENT)
             val categoryView = CategoryView(container.context)
-            categoryView.setUp(category.image, category.name, mOnCategoryClickListener)
+            categoryView.setUp(category.image, category.name) { label -> onCategoryClick(label) }
             container.addView(categoryView, params)
             return categoryView
         }
@@ -45,6 +45,10 @@ class CategoriesCarousel : ViewPager {
 
         override fun destroyItem(container: ViewGroup, position: Int, `object`: Any) {}
 
+    }
+
+    private fun onCategoryClick(label: String) {
+        mOnCategoryClickListener(label)
     }
 
 }

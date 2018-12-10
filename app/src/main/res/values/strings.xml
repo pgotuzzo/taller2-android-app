@@ -2,6 +2,7 @@
     <string name="app_name">Compra Meli</string>
     <string name="facebook_app_id">514087719361269</string>
     <string name="fb_login_protocol_scheme">fb514087719361269</string>
+    <string name="google_geo_api_key">AIzaSyCF2ZPPRewPnwYjCAKyadFTfK06CxkwaLE</string>
     <!-- ========================================== -->
     <!--                 Splash                     -->
     <!-- ========================================== -->

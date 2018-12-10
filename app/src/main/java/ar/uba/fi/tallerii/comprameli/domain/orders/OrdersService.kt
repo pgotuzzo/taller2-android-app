@@ -9,8 +9,8 @@ interface OrdersService {
 
     fun createCardOrder(productId: String, units: Int, cardPaymentName: String, cardData: CardData): Completable
 
-    fun getSales(): Observable<Sale>
+    fun getSales(): Observable<Order>
 
-    fun getPurchases(): Observable<Purchase>
+    fun getPurchases(): Observable<Order>
 
 }

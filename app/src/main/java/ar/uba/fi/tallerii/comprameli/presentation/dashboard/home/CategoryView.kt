@@ -12,6 +12,8 @@ class CategoryView : ConstraintLayout {
 
     private val mAttrs: AttributeSet?
 
+    private var mListener: (String) -> Unit = {}
+
     constructor(context: Context?) : super(context) {
         mAttrs = null
     }
@@ -29,11 +31,16 @@ class CategoryView : ConstraintLayout {
     }
 
     fun setUp(imageUrl: String, label: String, listener: (String) -> Unit) {
+        mListener = listener
         GlideApp.with(context).load(imageUrl).centerCrop().into(categoryBg)
         categoryLabel.apply {
             text = label
-            setOnClickListener { listener(label) }
+            setOnClickListener { onClick(label) }
         }
+    }
+
+    private fun onClick(label: String) {
+        mListener(label)
     }
 
 }

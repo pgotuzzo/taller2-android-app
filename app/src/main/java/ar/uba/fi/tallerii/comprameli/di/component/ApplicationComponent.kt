@@ -60,4 +60,6 @@ interface ApplicationComponent {
     fun plus(module: CheckOutModule): CheckOutComponent
     fun plus(module: ChatModule): ChatComponent
     fun plus(module: MapModule): MapComponent
+
+    fun createService(): ServiceComponent
 }

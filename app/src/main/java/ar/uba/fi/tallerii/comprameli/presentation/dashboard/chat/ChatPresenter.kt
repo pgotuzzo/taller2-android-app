@@ -10,6 +10,7 @@ class ChatPresenter(private val mChatsService: ChatsService) :
 
     private val mDisposables = CompositeDisposable()
     private lateinit var mChatId: String
+    private var mIsCurrentUserOwner: Boolean = false
     private var mText: String = ""
 
     override fun onViewDetached() {
@@ -17,10 +18,11 @@ class ChatPresenter(private val mChatsService: ChatsService) :
         super.onViewDetached()
     }
 
-    override fun onInit(chatId: String) {
+    override fun onInit(chatId: String, isCurrentUserOwner: Boolean) {
         mChatId = chatId
+        mIsCurrentUserOwner = isCurrentUserOwner
         val disposable = mChatsService
-                .getChatById(chatId)
+                .getChatById(chatId, mIsCurrentUserOwner)
                 .map { messageList ->
                     messageList.map {
                         ChatContract.Message(text = it.text, isCurrentUser = it.isCurrentUser, userName = it.userName)

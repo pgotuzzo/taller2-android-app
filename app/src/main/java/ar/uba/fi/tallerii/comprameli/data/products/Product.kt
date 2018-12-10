@@ -1,5 +1,6 @@
 package ar.uba.fi.tallerii.comprameli.data.products
 
+import ar.uba.fi.tallerii.comprameli.data.Location
 import com.google.gson.annotations.SerializedName
 
 data class Product(@SerializedName("_id") val id: String,

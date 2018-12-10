@@ -27,8 +27,10 @@ class DomainModule {
     @Provides
     @PerApplication
     fun provideSessionService(sessionDao: SessionDao,
-                              authTokenProvider: AuthTokenProvider): SessionService =
-            SessionServiceImpl(sessionDao, authTokenProvider)
+                              authTokenProvider: AuthTokenProvider,
+                              databaseDao: DatabaseDao,
+                              profileDao: ProfileDao): SessionService =
+            SessionServiceImpl(sessionDao, authTokenProvider, databaseDao, profileDao)
 
     @Provides
     @PerApplication
@@ -50,7 +52,9 @@ class DomainModule {
 
     @Provides
     @PerApplication
-    fun provideChatsService(databaseDao: DatabaseDao, profileDao: ProfileDao): ChatsService =
-            ChatsServiceImpl(databaseDao, profileDao)
+    fun provideChatsService(databaseDao: DatabaseDao,
+                            profileDao: ProfileDao,
+                            ordersDao: OrdersDao): ChatsService =
+            ChatsServiceImpl(databaseDao, profileDao, ordersDao)
 
 }

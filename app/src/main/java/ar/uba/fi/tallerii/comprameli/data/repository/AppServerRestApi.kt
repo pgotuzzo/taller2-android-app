@@ -2,8 +2,7 @@ package ar.uba.fi.tallerii.comprameli.data.repository
 
 import ar.uba.fi.tallerii.comprameli.data.orders.OrderData
 import ar.uba.fi.tallerii.comprameli.data.orders.OrderTracking
-import ar.uba.fi.tallerii.comprameli.data.orders.Purchases
-import ar.uba.fi.tallerii.comprameli.data.orders.Sales
+import ar.uba.fi.tallerii.comprameli.data.orders.Orders
 import ar.uba.fi.tallerii.comprameli.data.products.*
 import ar.uba.fi.tallerii.comprameli.data.profile.Profile
 import ar.uba.fi.tallerii.comprameli.data.session.LogInBody
@@ -76,9 +75,9 @@ interface AppServerRestApi {
     fun newOrder(@Body order: OrderData): Single<OrderTracking>
 
     @GET("/orders/sales")
-    fun sales(): Single<Sales>
+    fun sales(): Single<Orders>
 
     @GET("/orders/purchases")
-    fun purchases(): Single<Purchases>
+    fun purchases(): Single<Orders>
 
 }

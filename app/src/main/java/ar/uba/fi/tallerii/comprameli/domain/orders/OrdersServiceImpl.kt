@@ -27,42 +27,32 @@ class OrdersServiceImpl(private val mOrdersDao: OrdersDao,
         return mOrdersDao.createOrder(order).flatMapCompletable { Completable.complete() }
     }
 
-    override fun getSales(): Observable<Sale> =
+    override fun getSales(): Observable<Order> =
             mOrdersDao.getSales()
                     .flatMapObservable { sales -> Observable.fromIterable(sales) }
                     .flatMapSingle { sale ->
                         mProductsDao
                                 .getProductById(sale.productId)
-                                .map { product -> saleFrom(sale, product.images) }
+                                .map { product -> orderFrom(sale, product.images) }
                     }
 
-    override fun getPurchases(): Observable<Purchase> =
+    override fun getPurchases(): Observable<Order> =
             mOrdersDao.getPurchases()
                     .flatMapObservable { Observable.fromIterable(it) }
                     .flatMapSingle { purchase ->
                         mProductsDao
                                 .getProductById(purchase.productId)
-                                .map { product -> purchaseFrom(purchase, product.images) }
+                                .map { product -> orderFrom(purchase, product.images) }
                     }
 
-    private fun saleFrom(sale: ar.uba.fi.tallerii.comprameli.data.orders.Sale, productImages: List<String>): Sale =
-            Sale(
+    private fun orderFrom(order: ar.uba.fi.tallerii.comprameli.data.orders.Order, productImages: List<String>): Order =
+            Order(
                     productImage = if (productImages.isEmpty()) null else productImages[0],
-                    units = sale.units,
-                    total = sale.total,
-                    productName = sale.productName,
-                    status = "Entregado",
-                    transactionId = sale.transactionId
-            )
-
-    private fun purchaseFrom(purchase: ar.uba.fi.tallerii.comprameli.data.orders.Purchase, productImages: List<String>): Purchase =
-            Purchase(
-                    productImage = if (productImages.isEmpty()) null else productImages[0],
-                    units = purchase.units,
-                    total = purchase.total,
-                    productName = purchase.productName,
-                    status = "Entregado",
-                    transactionId = purchase.transactionId
+                    units = order.units,
+                    total = order.total,
+                    productName = order.productName,
+                    status = order.status,
+                    transactionId = order.transactionId
             )
 
 }

@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import ar.uba.fi.tallerii.comprameli.R
 import ar.uba.fi.tallerii.comprameli.presentation.base.BaseFragment
 import ar.uba.fi.tallerii.comprameli.presentation.dashboard.chat.ChatFragment.BundleExtras.CHAT_ID
+import ar.uba.fi.tallerii.comprameli.presentation.dashboard.chat.ChatFragment.BundleExtras.IS_CURRENT_USER_OWNER
 import ar.uba.fi.tallerii.comprameli.presentation.dashboard.chat.di.ChatModule
 import ar.uba.fi.tallerii.comprameli.presentation.utils.SimpleTextWatcher
 import kotlinx.android.synthetic.main.dashboard_chat_fragment.*
@@ -19,13 +20,15 @@ class ChatFragment : BaseFragment(), ChatContract.View {
 
     object BundleExtras {
         const val CHAT_ID = "chatId"
+        const val IS_CURRENT_USER_OWNER = "isCurrentUserOwner"
     }
 
     companion object {
-        fun getInstance(chatId: String): ChatFragment {
+        fun getInstance(chatId: String, isCurrentUserOwner: Boolean): ChatFragment {
             val fragment = ChatFragment()
             val args = Bundle()
             args.putString(CHAT_ID, chatId)
+            args.putBoolean(IS_CURRENT_USER_OWNER, isCurrentUserOwner)
             fragment.arguments = args
             return fragment
         }
@@ -49,7 +52,10 @@ class ChatFragment : BaseFragment(), ChatContract.View {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         mPresenter.attachView(this)
-        mPresenter.onInit(arguments?.getString(CHAT_ID)!!)
+        mPresenter.onInit(
+                arguments?.getString(CHAT_ID)!!,
+                arguments?.getBoolean(IS_CURRENT_USER_OWNER)!!
+        )
 
         messagesList.layoutManager = LinearLayoutManager(context, VERTICAL, false)
         messagesList.adapter = mAdapter

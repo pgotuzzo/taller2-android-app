@@ -11,6 +11,8 @@ interface SessionDao {
 
     fun getAuthToken(credentials: FirebaseCredentials): Single<String>
 
+    fun getFirebaseTokenFromFacebookToken(credential: AuthCredential): Single<FirebaseCredentials>
+
     fun storeSession(session: Session): Completable
 
     /**
@@ -22,7 +24,5 @@ interface SessionDao {
     fun getSession(): Single<Session>
 
     fun clearSession(): Completable
-
-    fun getFirebaseTokenFromFacebookToken(credential: AuthCredential): Single<FirebaseCredentials>
 
 }

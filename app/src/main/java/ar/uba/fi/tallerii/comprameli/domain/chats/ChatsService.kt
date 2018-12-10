@@ -5,7 +5,7 @@ import io.reactivex.Observable
 
 interface ChatsService {
 
-    fun getChatById(chatId: String): Observable<List<Message>>
+    fun getChatById(chatId: String, isCurrentUserOwner: Boolean): Observable<List<Message>>
 
     fun sendMessage(chatId: String, message: String): Completable
 

@@ -23,13 +23,11 @@ class SessionDaoImpl(private val mAppServerApi: AppServerRestApi,
     }
 
     override fun getAuthToken(userName: String, password: String): Single<String> =
-            // Fetch FireBase Token
+    // Fetch FireBase Token
             getFireBaseAuthToken(userName, password).observeOn(Schedulers.io())
                     // Fetch App Server Token
                     .flatMap { fireBaseToken -> mAppServerApi.logIn(LogInBody(fireBaseToken)) }
                     .map { token: Token -> token.token }
-
-
 
 
     override fun getAuthToken(credentials: FirebaseCredentials): Single<String> =
@@ -62,8 +60,8 @@ class SessionDaoImpl(private val mAppServerApi: AppServerRestApi,
                             run {
                                 if (task.isSuccessful) {
                                     // Success
-                                    task.result.user.getIdToken(true).addOnCompleteListener { idTokenResult ->
-                                        it.onSuccess(idTokenResult.result.token!!)
+                                    task.result!!.user.getIdToken(true).addOnCompleteListener { idTokenResult ->
+                                        it.onSuccess(idTokenResult.result!!.token!!)
                                     }
                                 } else {
                                     // Failure
@@ -81,10 +79,10 @@ class SessionDaoImpl(private val mAppServerApi: AppServerRestApi,
                         .addOnCompleteListener { task ->
                             run {
                                 if (task.isSuccessful) {
-                                    val user = task.result.user
-                                    val isNewUser = task.result.additionalUserInfo.isNewUser
+                                    val user = task.result!!.user
+                                    val isNewUser = task.result!!.additionalUserInfo.isNewUser
                                     user.getIdToken(true).addOnCompleteListener { idTokenResult ->
-                                        it.onSuccess(FirebaseCredentials(idTokenResult.result.token!!, user.email!!, user.uid, isNewUser))
+                                        it.onSuccess(FirebaseCredentials(idTokenResult.result!!.token!!, user.email!!, user.uid, isNewUser))
                                     }
                                 } else {
                                     // Failure

@@ -68,7 +68,7 @@ class SalesFragment : BaseFragment(), SalesContract.View {
 
     override fun showTransactions(transactionsList: List<SalesContract.Transaction>) {
         mAdapter.setItems(transactionsList) { transactionId ->
-            mChatsEventHandler.onChatSelected(transactionId)
+            mChatsEventHandler.onChatSelected(transactionId, true)
         }
         itemList.visibility = if (transactionsList.isEmpty()) GONE else VISIBLE
         notFoundImg.visibility = if (transactionsList.isEmpty()) VISIBLE else GONE

@@ -14,7 +14,7 @@ interface ChatContract {
     }
 
     interface Presenter : MvpPresenter<View> {
-        fun onInit(chatId: String)
+        fun onInit(chatId: String, isCurrentUserOwner: Boolean)
         fun onTextInputChanged(text: String)
         fun onSendBtnClick()
     }

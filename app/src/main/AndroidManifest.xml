@@ -48,7 +48,14 @@
                 <data android:scheme="@string/fb_login_protocol_scheme" />
             </intent-filter>
         </activity>
-
+        <!-- =============================================================== -->
+        <!--                             SERVICE                             -->
+        <!-- =============================================================== -->
+        <service android:name=".services.CloudMessagingService">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
         <!-- =============================================================== -->
         <!--                            META-DATA                            -->
         <!-- =============================================================== -->
@@ -56,12 +63,26 @@
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id" />
+        <!-- ========================== Google ============================= -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyCF2ZPPRewPnwYjCAKyadFTfK06CxkwaLE" />
+            android:value="@string/google_geo_api_key" />
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
+        <!-- ======================== Firebase ============================ -->
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_icon"
+            android:resource="@drawable/ic_message" />
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_color"
+            android:resource="@color/colorAccent" />
+        <!-- =============================================================== -->
+        <!--                         USES-LIBRARY                            -->
+        <!-- =============================================================== -->
+        <uses-library
+            android:name="org.apache.http.legacy"
+            android:required="false" />
 
     </application>
 

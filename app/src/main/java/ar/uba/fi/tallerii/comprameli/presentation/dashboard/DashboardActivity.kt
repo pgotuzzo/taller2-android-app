@@ -182,11 +182,11 @@ class DashboardActivity : BaseActivity(), DashboardContract.View, HomeEventHandl
         mPresenter.onProfileChanged()
     }
 
-    override fun onChatSelected(transactionId: String) {
+    override fun onChatSelected(transactionId: String, isCurrentUserOwner: Boolean) {
         if (supportFragmentManager.findFragmentByTag(FragmentTag.CHAT) == null) {
             supportFragmentManager
                     .beginTransaction()
-                    .add(mainContainer.id, ChatFragment.getInstance(transactionId), FragmentTag.CHAT)
+                    .add(mainContainer.id, ChatFragment.getInstance(transactionId, isCurrentUserOwner), FragmentTag.CHAT)
                     .addToBackStack(null)
                     .commit()
         }

@@ -1,5 +1,6 @@
 package ar.uba.fi.tallerii.comprameli.domain.profile
 
+import ar.uba.fi.tallerii.comprameli.data.Location
 import ar.uba.fi.tallerii.comprameli.data.files.FilesDao
 import ar.uba.fi.tallerii.comprameli.data.profile.ProfileDao
 import io.reactivex.Completable
@@ -29,7 +30,8 @@ class ProfileServiceImpl(private val mProfileDao: ProfileDao,
                             facebook = profile.facebook,
                             google = profile.google,
                             avatar = profile.avatar,
-                            email = profile.email)
+                            email = profile.email,
+                            location = Location(0.0, 0.0))
             )
 
     override fun updateProfile(profile: Profile, avatarUri: String): Single<Profile> =
@@ -40,7 +42,7 @@ class ProfileServiceImpl(private val mProfileDao: ProfileDao,
                 updateProfile(profileUpdated).toSingleDefault(profileUpdated)
             }
 
-    override fun registerUser(profile: Profile) : Completable =
+    override fun registerUser(profile: Profile): Completable =
             mProfileDao.registerProfile(
                     ar.uba.fi.tallerii.comprameli.data.profile.Profile(
                             name = profile.name,
@@ -49,7 +51,8 @@ class ProfileServiceImpl(private val mProfileDao: ProfileDao,
                             facebook = profile.facebook,
                             google = profile.google,
                             avatar = profile.avatar,
-                            email = profile.email)
+                            email = profile.email,
+                            location = Location(0.0, 0.0))
             )
 
 }

@@ -1,7 +1,7 @@
 package ar.uba.fi.tallerii.comprameli.presentation.dashboard.purchases
 
+import ar.uba.fi.tallerii.comprameli.domain.orders.Order
 import ar.uba.fi.tallerii.comprameli.domain.orders.OrdersService
-import ar.uba.fi.tallerii.comprameli.domain.orders.Purchase
 import ar.uba.fi.tallerii.comprameli.presentation.base.BasePresenter
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
@@ -18,7 +18,7 @@ class PurchasesPresenter(private val mOrdersService: OrdersService) :
     }
 
     override fun onInit() {
-        val disposable = mOrdersService.getPurchases().map { fromSale(it) }.toList()
+        val disposable = mOrdersService.getPurchases().map { fromOrder(it) }.toList()
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
                         { transactions -> getView()?.showTransactions(transactions) },
@@ -28,13 +28,13 @@ class PurchasesPresenter(private val mOrdersService: OrdersService) :
         mDisposables.add(disposable)
     }
 
-    private fun fromSale(purchase: Purchase): PurchasesContract.Transaction =
+    private fun fromOrder(order: Order): PurchasesContract.Transaction =
             PurchasesContract.Transaction(
-                    productName = purchase.productName,
-                    productImage = purchase.productImage,
-                    total = purchase.total,
-                    status = purchase.status,
-                    units = purchase.units,
-                    transactionId = purchase.transactionId
+                    productName = order.productName,
+                    productImage = order.productImage,
+                    total = order.total,
+                    status = order.status,
+                    units = order.units,
+                    transactionId = order.transactionId
             )
 }

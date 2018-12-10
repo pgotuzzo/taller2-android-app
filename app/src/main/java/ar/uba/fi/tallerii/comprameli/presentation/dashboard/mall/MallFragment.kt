@@ -63,7 +63,7 @@ class MallFragment : BaseFragment(), SearchContract.View {
         itemList.setHasFixedSize(true)
 
         // Add Button
-        addBtn.setOnClickListener { mPublishEventHandler!!.onPublishProduct() }
+        addBtn.setOnClickListener { mPublishEventHandler.onPublishProduct() }
 
         mPresenter.onInit(true)
     }

@@ -1,7 +1,7 @@
 package ar.uba.fi.tallerii.comprameli.domain.products
 
+import ar.uba.fi.tallerii.comprameli.data.Location
 import ar.uba.fi.tallerii.comprameli.data.files.FilesDao
-import ar.uba.fi.tallerii.comprameli.data.products.Location
 import ar.uba.fi.tallerii.comprameli.data.products.ProductsDao
 import ar.uba.fi.tallerii.comprameli.data.profile.ProfileDao
 import ar.uba.fi.tallerii.comprameli.model.ProductFilter
@@ -91,8 +91,8 @@ class ProductsServiceImpl(private val mProductsDao: ProductsDao,
                     price = product.price,
                     seller = product.seller,
                     units = product.units,
-                    longitude = product.location.x.toFloat(),
-                    latitude = product.location.y.toFloat(),
+                    longitude = product.location.longitude.toFloat(),
+                    latitude = product.location.latitude.toFloat(),
                     categories = product.categories,
                     paymentMethods = product.paymentMethods.map { p -> paymentMethodFrom(p) },
                     questions = product.questions.map { q -> questionFrom(q) }
