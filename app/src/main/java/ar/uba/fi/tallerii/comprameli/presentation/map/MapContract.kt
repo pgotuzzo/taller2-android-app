@@ -4,8 +4,8 @@ import ar.uba.fi.tallerii.comprameli.presentation.MvpPresenter
 
 interface MapContract {
 
-    data class Marker(val longitude: Float,
-                      val latitude: Float,
+    data class Marker(val longitude: Double,
+                      val latitude: Double,
                       val productId: String,
                       val productName: String,
                       val productImage: String?)

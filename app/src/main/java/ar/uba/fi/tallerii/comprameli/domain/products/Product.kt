@@ -9,8 +9,8 @@ data class Product(val productId: String,
                    val images: List<String>,
                    val price: Float,
                    val units: Int,
-                   val longitude: Float,
-                   val latitude: Float,
+                   val longitude: Double,
+                   val latitude: Double,
                    val categories: List<String>,
                    val paymentMethods: List<PaymentMethod> = ArrayList(),
                    val questions: List<Question> = ArrayList(),
@@ -23,8 +23,8 @@ data class Product(val productId: String,
             parcel.createStringArrayList()!!,
             parcel.readFloat(),
             parcel.readInt(),
-            parcel.readFloat(),
-            parcel.readFloat(),
+            parcel.readDouble(),
+            parcel.readDouble(),
             parcel.createStringArrayList()!!,
             parcel.createTypedArrayList(PaymentMethod)!!,
             parcel.createTypedArrayList(Question)!!,
@@ -37,8 +37,8 @@ data class Product(val productId: String,
         parcel.writeStringList(images)
         parcel.writeFloat(price)
         parcel.writeInt(units)
-        parcel.writeFloat(longitude)
-        parcel.writeFloat(latitude)
+        parcel.writeDouble(longitude)
+        parcel.writeDouble(latitude)
         parcel.writeStringList(categories)
         parcel.writeTypedList(paymentMethods)
         parcel.writeTypedList(questions)

@@ -20,8 +20,8 @@ class ProfileServiceImpl(private val mProfileDao: ProfileDao,
                         google = it.google,
                         avatar = it.avatar,
                         email = it.email,
-                        longitude = it.location.longitude,
-                        latitude = it.location.latitude)
+                        longitude = it.location.coordinates[0],
+                        latitude = it.location.coordinates[1])
             }
 
     override fun updateProfile(profile: Profile): Completable =
@@ -32,7 +32,8 @@ class ProfileServiceImpl(private val mProfileDao: ProfileDao,
                             facebook = profile.facebook,
                             google = profile.google,
                             avatar = profile.avatar,
-                            location = Location(longitude = profile.longitude, latitude = profile.latitude))
+                            location = Location(coordinates = listOf(profile.longitude, profile.latitude))
+                    )
             )
 
     override fun updateProfile(profile: Profile, avatarUri: String): Single<Profile> =
@@ -53,7 +54,8 @@ class ProfileServiceImpl(private val mProfileDao: ProfileDao,
                             google = profile.google,
                             avatar = profile.avatar,
                             email = profile.email,
-                            location = Location(longitude = profile.longitude, latitude = profile.latitude))
+                            location = Location(coordinates = listOf(profile.longitude, profile.latitude))
+                    )
             )
 
 }
