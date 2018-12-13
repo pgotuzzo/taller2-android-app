@@ -12,6 +12,7 @@ import ar.uba.fi.tallerii.comprameli.presentation.base.BaseActivity
 import ar.uba.fi.tallerii.comprameli.presentation.checkout.CheckOutContract.Companion.CARD
 import ar.uba.fi.tallerii.comprameli.presentation.checkout.CheckOutContract.Companion.CASH
 import ar.uba.fi.tallerii.comprameli.presentation.checkout.cardform.CheckOutCardFormView
+import ar.uba.fi.tallerii.comprameli.presentation.checkout.delivery.DeliveryView
 import ar.uba.fi.tallerii.comprameli.presentation.checkout.di.CheckOutModule
 import kotlinx.android.synthetic.main.check_out_activity.*
 import timber.log.Timber
@@ -131,6 +132,18 @@ class CheckOutActivity : BaseActivity(), CheckOutContract.View {
             dialog.dismiss()
             mPresenter.onCardDetailsInput(cardDetails)
         }
+    }
+
+    override fun showDelivery(deliveryCost: Float) {
+        val dialogView = DeliveryView(this, null)
+        dialogView.setPrice(deliveryCost)
+        val dialog = AlertDialog.Builder(this)
+                .setView(dialogView)
+                .setTitle(R.string.check_out_delivery_title)
+                .setPositiveButton(R.string.check_out_delivery_confirm) { _, _ -> mPresenter.onDeliveryConfirmed(true) }
+                .setNegativeButton(R.string.check_out_delivery_cancel) { _, _ -> mPresenter.onDeliveryConfirmed(false) }
+                .create()
+        dialog.show()
     }
 
     override fun showConfirmationDialog() {

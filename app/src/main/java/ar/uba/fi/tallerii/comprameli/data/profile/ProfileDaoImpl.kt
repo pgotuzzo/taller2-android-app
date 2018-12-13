@@ -13,7 +13,7 @@ class ProfileDaoImpl(private val mAppServerRestApi: AppServerRestApi) : ProfileD
     override fun getProfile(): Single<Profile> =
             mAppServerRestApi.userProfile().subscribeOn(Schedulers.io())
 
-    override fun updateProfile(profile: Profile): Completable =
-            mAppServerRestApi.updateUserProfile(profile).subscribeOn(Schedulers.io())
+    override fun updateProfile(profileChanges: ProfileChanges): Completable =
+            mAppServerRestApi.updateUserProfile(profileChanges).subscribeOn(Schedulers.io())
 
 }

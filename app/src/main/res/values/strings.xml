@@ -145,7 +145,11 @@
     <string name="check_out_card_form_hint_cvv">CVV</string>
     <string name="check_out_card_form_desc_expiration">Fecha de vencimiento</string>
     <string name="check_out_card_form_confirm">CONFIRMAR</string>
-
+    <!--                Delivery                    -->
+    <string name="check_out_delivery_title">"Si queres incluir el envio"</string>
+    <string name="check_out_delivery_description">Tu pedido tiene un costo de envio de:</string>
+    <string name="check_out_delivery_confirm">REALIZAR ENVIO</string>
+    <string name="check_out_delivery_cancel">NO ENVIAR</string>
 
     <!-- ========================================== -->
     <!--                 Widgets                    -->

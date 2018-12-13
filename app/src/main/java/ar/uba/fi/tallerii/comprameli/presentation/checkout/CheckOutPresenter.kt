@@ -10,6 +10,7 @@ import ar.uba.fi.tallerii.comprameli.presentation.checkout.CheckOutContract.Comp
 import io.reactivex.Completable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
+import timber.log.Timber
 
 class CheckOutPresenter(private val mOrdersService: OrdersService) :
         BasePresenter<CheckOutContract.View>(), CheckOutContract.Presenter {
@@ -21,6 +22,7 @@ class CheckOutPresenter(private val mOrdersService: OrdersService) :
     private var mCashPaymentName: String? = null
     private var mUnits = 1
     private var mCardDetails: CardDetails? = null
+    private var mDeliveryIncluded: Boolean = false
 
     override fun onViewDetached() {
         mDisposables.clear()
@@ -76,20 +78,25 @@ class CheckOutPresenter(private val mOrdersService: OrdersService) :
                         .map { paymentMethod -> CheckOutContract.Card(paymentMethod.name, paymentMethod.image) }
                 showCardDetailsForm(cardsAvailable)
             } else {
-                showConfirmationDialog()
+                checkDelivery()
             }
         }
     }
 
     override fun onCardDetailsInput(cardDetails: CardDetails) {
         mCardDetails = cardDetails
+        checkDelivery()
+    }
+
+    override fun onDeliveryConfirmed(include: Boolean) {
+        mDeliveryIncluded = include
         getView()?.showConfirmationDialog()
     }
 
     override fun onPaymentConfirmed() {
         val disposable = when (mPaymentSelection) {
             CASH -> {
-                mOrdersService.createCashOrder(mProduct!!.productId, mUnits, mCashPaymentName!!)
+                mOrdersService.createCashOrder(mProduct!!.productId, mUnits, mCashPaymentName!!, mDeliveryIncluded)
             }
             CARD -> {
                 val cardData = CardData(
@@ -97,7 +104,7 @@ class CheckOutPresenter(private val mOrdersService: OrdersService) :
                         cardHolderName = mCardDetails!!.cardHolder,
                         expirationDate = mCardDetails!!.expirationDate,
                         securityCode = mCardDetails!!.securityCode)
-                mOrdersService.createCardOrder(mProduct!!.productId, mUnits, mCardDetails!!.cardName, cardData)
+                mOrdersService.createCardOrder(mProduct!!.productId, mUnits, mCardDetails!!.cardName, cardData, mDeliveryIncluded)
             }
             else -> {
                 Completable.create { getView()?.showError() }
@@ -105,6 +112,27 @@ class CheckOutPresenter(private val mOrdersService: OrdersService) :
         }.observeOn(AndroidSchedulers.mainThread())
                 .subscribe { getView()?.dismiss() }
 
+        mDisposables.add(disposable)
+    }
+
+    private fun checkDelivery() {
+        val disposable = mOrdersService
+                .getDeliveryCost(mProduct!!.productId, mUnits)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                        { estimation ->
+                            if (estimation.isAvailable) {
+                                getView()?.showDelivery(estimation.cost!!)
+                            } else {
+                                mDeliveryIncluded = false
+                                getView()?.showConfirmationDialog()
+                            }
+                        },
+                        { throwable ->
+                            Timber.e(throwable)
+                            getView()?.showError()
+                        }
+                )
         mDisposables.add(disposable)
     }
 

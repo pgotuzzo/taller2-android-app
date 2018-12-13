@@ -72,7 +72,10 @@ class CounterInputView(context: Context, attrs: AttributeSet) : ConstraintLayout
         }
         input.addTextChangedListener(object : SimpleTextWatcher() {
             override fun afterTextChanged(s: Editable?) {
-                s?.apply { mListener.invoke(toString().toInt()) }
+                mListener.invoke(
+                        if (s.isNullOrEmpty()) 0
+                        else s.toString().toInt()
+                )
             }
         })
     }

@@ -7,7 +7,7 @@ interface ProfileDao {
 
     fun getProfile(): Single<Profile>
 
-    fun updateProfile(profile: Profile): Completable
+    fun updateProfile(profileChanges: ProfileChanges): Completable
 
     fun registerProfile(profile: Profile): Completable
 

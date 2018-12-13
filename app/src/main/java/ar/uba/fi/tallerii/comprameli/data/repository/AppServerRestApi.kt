@@ -1,10 +1,9 @@
 package ar.uba.fi.tallerii.comprameli.data.repository
 
-import ar.uba.fi.tallerii.comprameli.data.orders.OrderData
-import ar.uba.fi.tallerii.comprameli.data.orders.OrderTracking
-import ar.uba.fi.tallerii.comprameli.data.orders.Orders
+import ar.uba.fi.tallerii.comprameli.data.orders.*
 import ar.uba.fi.tallerii.comprameli.data.products.*
 import ar.uba.fi.tallerii.comprameli.data.profile.Profile
+import ar.uba.fi.tallerii.comprameli.data.profile.ProfileChanges
 import ar.uba.fi.tallerii.comprameli.data.session.LogInBody
 import ar.uba.fi.tallerii.comprameli.data.session.Token
 import io.reactivex.Completable
@@ -27,7 +26,7 @@ interface AppServerRestApi {
     fun userProfile(): Single<Profile>
 
     @PUT("/user/profile")
-    fun updateUserProfile(@Body profile: Profile): Completable
+    fun updateUserProfile(@Body profileChanges: ProfileChanges): Completable
 
     /**
      * PRODUCTS
@@ -79,5 +78,8 @@ interface AppServerRestApi {
 
     @GET("/orders/purchases")
     fun purchases(): Single<Orders>
+
+    @POST("/orders/shipping/estimate")
+    fun estimateDelivery(@Body orderToEstimate: EstimateData): Single<DeliveryEstimation>
 
 }

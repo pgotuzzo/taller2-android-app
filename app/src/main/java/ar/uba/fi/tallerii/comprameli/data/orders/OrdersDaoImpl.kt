@@ -15,4 +15,10 @@ class OrdersDaoImpl(private val mAppServerRestApi: AppServerRestApi) : OrdersDao
     override fun getPurchases(): Single<List<Order>> =
             mAppServerRestApi.purchases().map { it.orders }.subscribeOn(Schedulers.io())
 
+    override fun estimateOrderDelivery(productId: String, units: Int): Single<Float> =
+            mAppServerRestApi
+                    .estimateDelivery(EstimateData(productId = productId, units = units))
+                    .map { it.cost }
+                    .subscribeOn(Schedulers.io())
+
 }

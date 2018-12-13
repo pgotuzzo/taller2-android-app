@@ -24,6 +24,7 @@ interface CheckOutContract {
         fun setMaxUnits(max: Int)
         fun showNextBtn()
         fun showCardDetailsForm(cardsAvailable: List<Card>)
+        fun showDelivery(deliveryCost: Float)
         fun showConfirmationDialog()
         fun showError()
         fun dismiss()
@@ -36,6 +37,7 @@ interface CheckOutContract {
         fun onNextButtonClick()
         fun onCardDetailsInput(cardDetails: CardDetails)
         fun onPaymentConfirmed()
+        fun onDeliveryConfirmed(include: Boolean)
     }
 
 }

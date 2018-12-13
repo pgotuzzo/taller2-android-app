@@ -13,4 +13,6 @@ interface OrdersDao {
 
     fun getPurchases(): Single<List<Order>>
 
+    fun estimateOrderDelivery(productId: String, units: Int): Single<Float>
+
 }
