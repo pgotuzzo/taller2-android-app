@@ -7,6 +7,8 @@ interface ProfileContract {
     data class UserInfo(val name: String,
                         val surname: String,
                         val email: String,
+                        val longitude: Double,
+                        val latitude: Double,
                         val avatar: String?)
 
     interface View {
@@ -15,6 +17,7 @@ interface ProfileContract {
         fun showSaveButton(show: Boolean)
         fun enableNameError(enable: Boolean)
         fun enableSurnameError(enable: Boolean)
+        fun enableAddressError(enable: Boolean)
         fun notifyProfileChanged()
         fun showError()
     }
@@ -24,6 +27,7 @@ interface ProfileContract {
         fun onNameChanged(name: String?)
         fun onSurnameChanged(surname: String?)
         fun onAvatarChanged(uri: String)
+        fun onAddressChanged(latitude: Double?, longitude: Double?)
         fun onConfirmClick()
     }
 }

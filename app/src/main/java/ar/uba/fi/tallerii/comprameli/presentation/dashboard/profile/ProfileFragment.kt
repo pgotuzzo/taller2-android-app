@@ -3,7 +3,10 @@ package ar.uba.fi.tallerii.comprameli.presentation.dashboard.profile
 import android.app.Activity.RESULT_OK
 import android.content.Context
 import android.content.Intent
+import android.location.Address
+import android.location.Geocoder
 import android.os.Bundle
+import android.os.Handler
 import android.text.Editable
 import android.view.LayoutInflater
 import android.view.View
@@ -30,10 +33,19 @@ class ProfileFragment : BaseFragment(), ProfileContract.View {
     }
 
     private val mComponent by lazy { app()!!.component.plus(ProfileModule()) }
+    private val mGeoCoder by lazy { Geocoder(context) }
+    private val mHandler by lazy { Handler() }
+    private val mCheckAddressRunnable = Runnable {
+        addressInputEdit.text?.apply {
+            val address = decodeAddressFromInput(this.toString())
+            mPresenter.onAddressChanged(address?.latitude, address?.longitude)
+        }
+    }
 
     @Inject
     lateinit var mPresenter: ProfileContract.Presenter
     private var mProfileEventsHandler: ProfileEventsHandler? = null
+
 
     override fun onAttach(context: Context?) {
         super.onAttach(context)
@@ -65,6 +77,12 @@ class ProfileFragment : BaseFragment(), ProfileContract.View {
         surnameInputEdit.addTextChangedListener(object : SimpleTextWatcher() {
             override fun afterTextChanged(s: Editable?) {
                 mPresenter.onSurnameChanged(s?.toString())
+            }
+        })
+        addressInputEdit.addTextChangedListener(object : SimpleTextWatcher() {
+            override fun afterTextChanged(s: Editable?) {
+                mHandler.removeCallbacks(mCheckAddressRunnable)
+                mHandler.postDelayed(mCheckAddressRunnable, 1000)
             }
         })
         confirmBtn.hide()
@@ -100,6 +118,11 @@ class ProfileFragment : BaseFragment(), ProfileContract.View {
         nameInputEdit.setText(userInfo.name)
         surnameInputEdit.setText(userInfo.surname)
         emailInputEdit.setText(userInfo.email)
+        addressInputEdit.setText(
+                formatAddress(
+                        mGeoCoder.getFromLocation(userInfo.latitude, userInfo.longitude, 1)[0]
+                )
+        )
     }
 
     override fun showLoader(show: Boolean) {
@@ -118,6 +141,10 @@ class ProfileFragment : BaseFragment(), ProfileContract.View {
         surnameInput.error = if (enable) getString(R.string.dashboard_profile_surname_error) else ""
     }
 
+    override fun enableAddressError(enable: Boolean) {
+        addressInput.error = if (enable) getString(R.string.dashboard_profile_address_error) else ""
+    }
+
     override fun notifyProfileChanged() {
         mProfileEventsHandler?.onProfileChanged()
     }
@@ -133,5 +160,20 @@ class ProfileFragment : BaseFragment(), ProfileContract.View {
         intent.addCategory(Intent.CATEGORY_OPENABLE)
         startActivityForResult(intent, RequestCode.GET_IMAGE)
     }
+
+    private fun decodeAddressFromInput(addressInput: String?): Address? {
+        if (addressInput.isNullOrEmpty())
+            return null
+
+        val addresses: List<Address> = mGeoCoder.getFromLocationName(addressInput, 1)
+        return if (addresses.isNotEmpty()) {
+            val address = addresses[0]
+            Timber.d("Latitude: %s, Longitude: %s, Direccion: %s", address.latitude, address.longitude, formatAddress(address))
+            address
+        } else null
+    }
+
+    private fun formatAddress(address: Address): String =
+            address.featureName + ", " + address.thoroughfare + ", " + address.locality + ", " + address.adminArea + ", " + address.countryName
 
 }

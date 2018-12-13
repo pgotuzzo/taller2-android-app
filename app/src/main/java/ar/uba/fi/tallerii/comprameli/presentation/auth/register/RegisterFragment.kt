@@ -40,7 +40,6 @@ class RegisterFragment : BaseFragment(), RegisterContract.View {
     private val mComponent by lazy { app()!!.component.plus(RegisterModule()) }
 
 
-
     override fun onAttach(context: Context?) {
         super.onAttach(context)
         try {
@@ -107,7 +106,10 @@ class RegisterFragment : BaseFragment(), RegisterContract.View {
                 facebook = facebook,
                 avatar = null,
                 userId = userId,
-                google = null
+                google = null,
+                // FIXME
+                longitude = -58.2889509,
+                latitude = -34.7091154
         )
     }
 
@@ -149,7 +151,7 @@ class RegisterFragment : BaseFragment(), RegisterContract.View {
         if (name.isEmpty() || lastName.isEmpty() || email.isEmpty()
                 || password.isEmpty() || confirmPassword.isEmpty()) {
             showWriteAlertMessage(R.string.auth_register_error_message_uncomplete_data)
-            isValid =  false
+            isValid = false
         } else if (password != confirmPassword) {
             showWriteAlertMessage(R.string.auth_register_error_message_confirm_password)
             isValid = false

@@ -2,6 +2,7 @@ package ar.uba.fi.tallerii.comprameli.presentation.dashboard.purchases
 
 import android.content.Context
 import android.os.Bundle
+import android.support.v7.app.AlertDialog
 import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
@@ -61,12 +62,27 @@ class PurchasesFragment : BaseFragment(), PurchasesContract.View {
     }
 
     override fun showTransactions(transactionsList: List<PurchasesContract.Transaction>) {
-        mAdapter.setItems(transactionsList) { transactionId ->
-            mChatsEventHandler.onChatSelected(transactionId, false)
-        }
+        mAdapter.setItems(
+                transactionsList,
+                { transactionId -> mChatsEventHandler.onChatSelected(transactionId, false) },
+                { trackingNumber -> mPresenter.onRateBtnClick(trackingNumber) }
+        )
         itemList.visibility = if (transactionsList.isEmpty()) View.GONE else View.VISIBLE
         notFoundImg.visibility = if (transactionsList.isEmpty()) View.VISIBLE else View.GONE
         notFoundLabel.visibility = if (transactionsList.isEmpty()) View.VISIBLE else View.GONE
+    }
+
+    override fun showRateDialog() {
+        val dialogView = RateView(context!!, null)
+        val dialog = AlertDialog.Builder(context!!)
+                .setView(dialogView)
+                .setTitle(R.string.dashboard_purchases_rate_title)
+                .create()
+        dialogView.setOnClickListener { value ->
+            dialog.dismiss()
+            mPresenter.onRate(value)
+        }
+        dialog.show()
     }
 
 }

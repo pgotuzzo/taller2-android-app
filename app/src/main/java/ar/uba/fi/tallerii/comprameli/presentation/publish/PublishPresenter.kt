@@ -18,6 +18,8 @@ class PublishPresenter(private val mProductsService: ProductsService) :
     private var mDescription: String? = null
     private var mPrice: Float? = null
     private var mUnits: Int? = null
+    private var mLongitude: Double? = null
+    private var mLatitude: Double? = null
     private var mPaymentsMethods: List<String> = ArrayList()
     private var mIsProcessing: Boolean = false
 
@@ -88,6 +90,12 @@ class PublishPresenter(private val mProductsService: ProductsService) :
         validateInputs()
     }
 
+    override fun onAddressChanged(latitude: Double?, longitude: Double?) {
+        mLongitude = longitude
+        mLatitude = latitude
+        validateInputs()
+    }
+
     override fun onPaymentMethodsSelected(paymentMethods: List<String>) {
         mPaymentsMethods = paymentMethods
         validateInputs()
@@ -103,7 +111,9 @@ class PublishPresenter(private val mProductsService: ProductsService) :
                     units = mUnits!!,
                     images = imagesUri,
                     categories = categories,
-                    paymentMethods = paymentMethods
+                    paymentMethods = paymentMethods,
+                    longitude = mLongitude!!,
+                    latitude = mLatitude!!
             )
             submitProduct(newProduct)
         }
@@ -115,7 +125,11 @@ class PublishPresenter(private val mProductsService: ProductsService) :
                     !mDescription.isNullOrEmpty() &&
                     mPrice != null &&
                     mUnits != null &&
+                    mLatitude != null && mLongitude != null &&
                     mPaymentsMethods.isNotEmpty()
+            if (show) {
+                showAddress(mLatitude!!, mLongitude!!)
+            }
             showSubmitButton(show)
         }
     }

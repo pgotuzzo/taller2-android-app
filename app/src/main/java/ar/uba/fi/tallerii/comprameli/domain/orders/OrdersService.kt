@@ -16,4 +16,6 @@ interface OrdersService {
 
     fun getDeliveryCost(productId: String, units: Int): Single<DeliveryEstimation>
 
+    fun rateSeller(trackingNumber: Int, rate: String): Completable
+
 }

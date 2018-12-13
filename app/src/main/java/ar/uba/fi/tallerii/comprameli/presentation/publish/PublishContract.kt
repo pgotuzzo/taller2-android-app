@@ -7,6 +7,7 @@ interface PublishContract {
     interface View {
         fun setCategories(categories: List<SelectableItem>)
         fun setPaymentMethods(paymentMethods: List<SelectableItem>)
+        fun showAddress(latitude: Double, longitude: Double)
         fun showSubmitButton(show: Boolean)
         fun showLoading(show: Boolean)
         fun dismiss()
@@ -18,6 +19,7 @@ interface PublishContract {
         fun onDescriptionChanged(text: String?)
         fun onPriceChanged(text: String?)
         fun onUnitsChanged(text: String?)
+        fun onAddressChanged(latitude: Double?, longitude: Double?)
         fun onPaymentMethodsSelected(paymentMethods: List<String>)
         fun onSubmit(imagesUri: List<String>, categories: List<String>, paymentMethods: List<String>)
     }

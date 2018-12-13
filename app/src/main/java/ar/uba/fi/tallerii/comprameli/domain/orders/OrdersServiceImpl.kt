@@ -68,6 +68,9 @@ class OrdersServiceImpl(private val mOrdersDao: OrdersDao,
                 DeliveryEstimation(isAvailable = isAvailable, cost = realCost)
             }
 
+    override fun rateSeller(trackingNumber: Int, rate: String): Completable =
+            mOrdersDao.rateSeller(trackingNumber, rate)
+
     private fun orderFrom(order: ar.uba.fi.tallerii.comprameli.data.orders.Order, productImages: List<String>): Order =
             Order(
                     productImage = if (productImages.isEmpty()) null else productImages[0],
@@ -75,7 +78,10 @@ class OrdersServiceImpl(private val mOrdersDao: OrdersDao,
                     total = order.total,
                     productName = order.productName,
                     status = order.status,
-                    transactionId = order.transactionId
+                    transactionId = order.transactionId,
+                    deliveryIncluded = order.deliveryIncluded,
+                    rate = order.rate,
+                    trackingNumber = order.trackingNumber
             )
 
 }

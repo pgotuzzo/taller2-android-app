@@ -1,5 +1,6 @@
 package ar.uba.fi.tallerii.comprameli.data.orders
 
+import io.reactivex.Completable
 import io.reactivex.Single
 
 interface OrdersDao {
@@ -14,5 +15,7 @@ interface OrdersDao {
     fun getPurchases(): Single<List<Order>>
 
     fun estimateOrderDelivery(productId: String, units: Int): Single<Float>
+
+    fun rateSeller(trackingNumber: Int, rate: String): Completable
 
 }

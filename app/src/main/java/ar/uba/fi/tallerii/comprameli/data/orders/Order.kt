@@ -10,4 +10,7 @@ class Order(@SerializedName("_id") val transactionId: String,
             @SerializedName("product_name") val productName: String,
             @SerializedName("units") val units: Int,
             @SerializedName("status") val status: String,
+            @SerializedName("rate") val rate: String?,
+            @SerializedName("tracking_number") val trackingNumber: Int,
+            @SerializedName("has_to_be_shipped") val deliveryIncluded: Boolean,
             @SerializedName("total") val total: Float)

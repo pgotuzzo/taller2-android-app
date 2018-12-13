@@ -107,7 +107,7 @@ class ProductsServiceImpl(private val mProductsDao: ProductsDao,
                     units = productData.units,
                     categories = productData.categories,
                     paymentMethods = productData.paymentMethods,
-                    location = Location(0.0, 0.0)
+                    location = Location(longitude = productData.longitude, latitude = productData.latitude)
             )
 
 }

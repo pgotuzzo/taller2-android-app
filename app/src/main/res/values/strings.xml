@@ -61,8 +61,10 @@
     <string name="dashboard_profile_name">Nombre</string>
     <string name="dashboard_profile_surname">Apellido</string>
     <string name="dashboard_profile_email">Correo electronico</string>
+    <string name="dashboard_profile_address">Direccion</string>
     <string name="dashboard_profile_name_error">"Debe ingresar un nombre"</string>
     <string name="dashboard_profile_surname_error">"Debe ingresar un apellido"</string>
+    <string name="dashboard_profile_address_error">"Debe ingresar una direccion existente"</string>
     <!--                  Sales                     -->
     <string name="dashboard_sales_not_found">No se encontraron ventas!</string>
     <string name="dashboard_sales_list_item_units">Unidades: %1$s</string>
@@ -75,6 +77,8 @@
     <string name="dashboard_purchases_list_item_total">Total: %1$s</string>
     <string name="dashboard_purchases_list_item_status">Estado: %1$s</string>
     <string name="dashboard_purchases_list_item_chat">Chat</string>
+    <string name="dashboard_purchases_list_item_rate">Calificar</string>
+    <string name="dashboard_purchases_rate_title">Que te parecio el vendedor?</string>
     <!--                  Chat                      -->
     <string name="dashboard_chat_input_hint">Que te interesa saber…</string>
     <string name="dashboard_chat_list_item_me">Yo</string>
@@ -119,6 +123,7 @@
     <string name="publish_section_details_description">Descripcion</string>
     <string name="publish_section_details_price">Precio</string>
     <string name="publish_section_details_units">Stock</string>
+    <string name="publish_section_details_address">Direccion</string>
     <string name="publish_section_categories">Categorias</string>
     <string name="publish_section_payment_methods">Metodos de pago</string>
     <string name="publish_list_add_item">Agregar\nImagen</string>

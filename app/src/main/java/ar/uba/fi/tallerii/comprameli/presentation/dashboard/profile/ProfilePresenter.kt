@@ -16,6 +16,8 @@ class ProfilePresenter(private val mProfileService: ProfileService) :
     private var mCurrentProfile: Profile? = null
     private var mNewProfile: Profile? = null
     private var mUpdateAvatarPending: Boolean = false
+    private var mIsLocationChanged: Boolean = false
+    private var mShowLocationError: Boolean = false
 
     override fun onViewDetached() {
         mDisposables.clear()
@@ -28,12 +30,7 @@ class ProfilePresenter(private val mProfileService: ProfileService) :
                 .map {
                     mCurrentProfile = it
                     mNewProfile = it
-                    ProfileContract.UserInfo(
-                            name = it.name,
-                            surname = it.surname,
-                            email = it.email,
-                            avatar = it.avatar
-                    )
+                    fromProfile(it)
                 }
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -66,6 +63,15 @@ class ProfilePresenter(private val mProfileService: ProfileService) :
         validateInputs()
     }
 
+    override fun onAddressChanged(latitude: Double?, longitude: Double?) {
+        mShowLocationError = latitude == null || longitude == null
+        mIsLocationChanged = !(mCurrentProfile!!.longitude == longitude && mCurrentProfile!!.latitude == latitude)
+        if (mIsLocationChanged && !mShowLocationError) {
+            mNewProfile = mNewProfile?.copy(latitude = latitude!!, longitude = longitude!!)
+        }
+        validateInputs()
+    }
+
     override fun onConfirmClick() {
         getView()?.apply {
             showSaveButton(false)
@@ -90,6 +96,7 @@ class ProfilePresenter(private val mProfileService: ProfileService) :
                                 mUpdateAvatarPending = false
                                 getView()?.apply {
                                     showLoader(false)
+                                    getView()?.refresh(fromProfile(profile))
                                     notifyProfileChanged()
                                 }
                             },
@@ -103,14 +110,26 @@ class ProfilePresenter(private val mProfileService: ProfileService) :
         disposable?.also { mDisposables.add(it) }
     }
 
+    private fun fromProfile(profile: Profile) =
+            ProfileContract.UserInfo(
+                    name = profile.name,
+                    surname = profile.surname,
+                    email = profile.email,
+                    avatar = profile.avatar,
+                    longitude = profile.longitude,
+                    latitude = profile.latitude
+            )
+
     private fun validateInputs() {
         mNewProfile?.let { profile ->
             getView()?.let { view ->
                 view.enableNameError(profile.name.isEmpty())
                 view.enableSurnameError(profile.surname.isEmpty())
+                view.enableAddressError(mShowLocationError)
                 view.showSaveButton(
                         profile.name.isNotEmpty() &&
                                 profile.surname.isNotEmpty() &&
+                                !mShowLocationError &&
                                 profile != mCurrentProfile
                 )
             }

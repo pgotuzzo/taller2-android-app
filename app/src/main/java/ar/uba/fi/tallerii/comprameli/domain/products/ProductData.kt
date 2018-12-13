@@ -6,5 +6,7 @@ data class ProductData(val title: String,
                        val price: Float,
                        val units: Int,
                        val categories: List<String>,
+                       val longitude: Double,
+                       val latitude: Double,
                        val paymentMethods: List<String>,
                        val questions: List<Question> = ArrayList())

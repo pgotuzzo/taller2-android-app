@@ -82,4 +82,7 @@ interface AppServerRestApi {
     @POST("/orders/shipping/estimate")
     fun estimateDelivery(@Body orderToEstimate: EstimateData): Single<DeliveryEstimation>
 
+    @POST("/orders/ratings/{tracking_number}")
+    fun rateSeller(@Path("tracking_number") trackingNumber: Int, @Body rate: Rate): Completable
+
 }
