@@ -18,4 +18,6 @@ interface OrdersDao {
 
     fun rateSeller(trackingNumber: Int, rate: String): Completable
 
+    fun trackOrder(trackingNumber: Int): Single<String>
+
 }

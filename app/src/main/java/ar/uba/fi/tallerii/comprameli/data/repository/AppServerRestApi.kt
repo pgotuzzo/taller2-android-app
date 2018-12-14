@@ -85,4 +85,7 @@ interface AppServerRestApi {
     @POST("/orders/ratings/{tracking_number}")
     fun rateSeller(@Path("tracking_number") trackingNumber: Int, @Body rate: Rate): Completable
 
+    @GET("/orders/tracking/{tracking_number}")
+    fun trackOrder(@Path("tracking_number") trackingNumber: Int): Single<OrderTrackingDetails>
+
 }

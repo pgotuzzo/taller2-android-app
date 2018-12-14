@@ -25,4 +25,10 @@ class OrdersDaoImpl(private val mAppServerRestApi: AppServerRestApi) : OrdersDao
     override fun rateSeller(trackingNumber: Int, rate: String): Completable =
             mAppServerRestApi.rateSeller(trackingNumber, Rate(rate)).subscribeOn(Schedulers.io())
 
+    override fun trackOrder(trackingNumber: Int): Single<String> =
+            mAppServerRestApi
+                    .trackOrder(trackingNumber)
+                    .map { it.status }
+                    .subscribeOn(Schedulers.io())
+
 }

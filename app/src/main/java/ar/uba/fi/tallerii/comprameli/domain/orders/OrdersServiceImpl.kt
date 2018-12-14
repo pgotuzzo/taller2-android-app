@@ -7,6 +7,7 @@ import ar.uba.fi.tallerii.comprameli.data.products.ProductsDao
 import io.reactivex.Completable
 import io.reactivex.Observable
 import io.reactivex.Single
+import io.reactivex.rxkotlin.Singles
 
 class OrdersServiceImpl(private val mOrdersDao: OrdersDao,
                         private val mProductsDao: ProductsDao) : OrdersService {
@@ -49,16 +50,21 @@ class OrdersServiceImpl(private val mOrdersDao: OrdersDao,
                     .flatMapSingle { sale ->
                         mProductsDao
                                 .getProductById(sale.productId)
-                                .map { product -> orderFrom(sale, product.images) }
+                                .map { product ->
+                                    orderFrom(sale, product.images, sale.status)
+                                }
                     }
 
     override fun getPurchases(): Observable<Order> =
             mOrdersDao.getPurchases()
                     .flatMapObservable { Observable.fromIterable(it) }
                     .flatMapSingle { purchase ->
-                        mProductsDao
-                                .getProductById(purchase.productId)
-                                .map { product -> orderFrom(purchase, product.images) }
+                        Singles.zip(
+                                mProductsDao.getProductById(purchase.productId),
+                                mOrdersDao.trackOrder(purchase.trackingNumber)
+                        ) { product, trackingStatus ->
+                            orderFrom(purchase, product.images, trackingStatus)
+                        }
                     }
 
     override fun getDeliveryCost(productId: String, units: Int): Single<DeliveryEstimation> =
@@ -71,13 +77,15 @@ class OrdersServiceImpl(private val mOrdersDao: OrdersDao,
     override fun rateSeller(trackingNumber: Int, rate: String): Completable =
             mOrdersDao.rateSeller(trackingNumber, rate)
 
-    private fun orderFrom(order: ar.uba.fi.tallerii.comprameli.data.orders.Order, productImages: List<String>): Order =
+    private fun orderFrom(order: ar.uba.fi.tallerii.comprameli.data.orders.Order,
+                          productImages: List<String>,
+                          trackingStatus: String): Order =
             Order(
                     productImage = if (productImages.isEmpty()) null else productImages[0],
                     units = order.units,
                     total = order.total,
                     productName = order.productName,
-                    status = order.status,
+                    status = trackingStatus,
                     transactionId = order.transactionId,
                     deliveryIncluded = order.deliveryIncluded,
                     rate = order.rate,
